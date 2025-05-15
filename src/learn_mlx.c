@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 17:13:37 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/14 18:32:56 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/15 10:49:17 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ the 42 cursus project "so_long"
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
-#include "../lib/MLX42/include/MLX42/MLX42.h"
+#include "../MLX42/include/MLX42/MLX42.h"
 #define WIDTH 256
 #define HEIGHT 256
 
