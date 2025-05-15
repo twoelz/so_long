@@ -11,6 +11,9 @@ LIBFT = $(DIR_LIBFT)/libft.a
 # mlx settings
 LIBMLX	:= ./MLX42
 
+all: libmlx
+	@$(MAKE) $(NAME)
+
 libmlx:
 	@if [ ! -d $(LIBMLX) ]; then \
 		git clone --branch v2.4.1 --depth 1 https://github.com/codam-coding-college/MLX42.git; \
@@ -26,6 +29,9 @@ INCLUDE = -I $(DIR_LIBFT) -I $(DIR_INCLUDE) -I $(LIBMLX)/include
 SRCDIR = src
 OBJDIR = src/obj
 SRCS = learn_mlx.c \
+	error.c \
+	input.c \
+
 
 OBJS = $(SRCS:.c=.o)
 OBJS := $(addprefix $(OBJDIR)/, $(OBJS))
@@ -42,12 +48,9 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.c
 $(LIBFT):
 	@$(MAKE) -C $(DIR_LIBFT)
 
-all: libmlx $(NAME)
-
 clean:
 	$(RM) $(OBJS)
 	@$(MAKE) -C $(DIR_LIBFT) clean
-	@rm -rf $(LIBMLX)/build
 
 fclean: clean
 	$(RM) -r $(OBJDIR)
