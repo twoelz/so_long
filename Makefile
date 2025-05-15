@@ -2,19 +2,25 @@ NAME = learn_mlx
 
 # compiler settings
 CC = cc
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra -Wunreachable-code -Ofast
 
-# library (libft) settings
+# LIBFT settings
 DIR_LIBFT = libft
 LIBFT = $(DIR_LIBFT)/libft.a
-LIBS = -Llibft -lft
 
-# push swap settings
+# mlx settings
+LIBMLX	:= ./lib/MLX42
+
+libmlx:
+	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4
+
+LIBS = -Llibft -lft (LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
+
 DIR_INCLUDE = include
-INCLUDE = -I $(DIR_LIBFT) -I $(DIR_INCLUDE)
+INCLUDE = -I $(DIR_LIBFT) -I $(DIR_INCLUDE) -I $(LIBMLX)/include
 SRCDIR = src
 OBJDIR = src/obj
-SRCS = main.c \
+SRCS = learn_mlx.c \
 
 OBJS = $(SRCS:.c=.o)
 OBJS := $(addprefix $(OBJDIR)/, $(OBJS))
@@ -31,16 +37,16 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.c
 $(LIBFT):
 	@make -C $(DIR_LIBFT)
 
-all: $(NAME)
+all: libmlx $(NAME)
 
 clean:
 	$(RM) $(OBJS)
 	@make -C $(DIR_LIBFT) clean
+	@rm -rf $(LIBMLX)/build
 
 fclean: clean
 	$(RM) -r $(OBJDIR)
 	$(RM) $(NAME)
-	$(RM) $(BONUS)
 	@make -C $(DIR_LIBFT) fclean
 
 re: fclean all
@@ -55,4 +61,4 @@ debug:
 	@make -C $(DIR_LIBFT) CFLAGS="-Wall -Werror -Wextra -g3 -DDEBUG"
 	@make all
 
-.PHONY: all clean fclean re release debug
+.PHONY: all clean fclean re libmlx release debug
