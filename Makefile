@@ -28,7 +28,7 @@ DIR_INCLUDE = include
 INCLUDE = -I $(DIR_LIBFT) -I $(DIR_INCLUDE) -I $(LIBMLX)/include
 SRCDIR = src
 OBJDIR = src/obj
-SRCS = learn_mlx.c \
+SRCS = so_long.c \
 	error.c \
 	exit.c \
 	input.c \
