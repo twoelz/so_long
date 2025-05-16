@@ -1,4 +1,4 @@
-NAME = learn_mlx
+NAME = so_long
 
 # compiler settings
 CC = cc
