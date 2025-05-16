@@ -6,15 +6,26 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 17:13:37 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/15 13:21:02 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/16 03:09:25 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+bool	init_game_data(t_game_data *g)
+{
+	g->moves = 0;
+	return (true);
+}
+
+
 int	main(void)
 {
 	t_game_data	g;
+	if (!init_game_data(&g))
+	{
+		ft_putstr_fd("TODO: error message\n", STDERR_FILENO);
+	}
 	// mlx_image_t	*img;
 
 	mlx_set_setting(MLX_MAXIMIZED, false);

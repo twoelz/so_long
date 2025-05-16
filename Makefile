@@ -30,6 +30,7 @@ SRCDIR = src
 OBJDIR = src/obj
 SRCS = learn_mlx.c \
 	error.c \
+	exit.c \
 	input.c \
 
 

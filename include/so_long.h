@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 11:21:11 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/15 12:45:45 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/16 03:00:17 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct s_game_data
 {
 	mlx_t		*mlx;
 	mlx_image_t	*img;
+	int			moves;
 }	t_game_data;
 
 // input.c
@@ -54,5 +55,10 @@ void		game_keyhook(mlx_key_data_t keydata, void *param);
 
 // error.c
 void		exit_after_mlx_error(void);
+
+// exit.c
+
+void		exit_game(t_game_data *g);
+void		free_everything(t_game_data *g);
 
 #endif
