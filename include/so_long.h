@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 11:21:11 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/16 23:25:53 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/17 13:02:27 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ the 42 cursus project "so_long"
 
 # define WIDTH 1024
 # define HEIGHT 768
-
 # define TILE 96
 
 /* Z positioning of sprites */
@@ -57,8 +56,6 @@ enum
 	Z_PLAYER = 2,
 	Z_WALL = 3,
 };
-
-# define ERROR_MSG "Error\n"
 
 typedef enum e_map_error
 {
@@ -73,14 +70,24 @@ typedef enum e_map_error
 	MAP_INVALID_PATH,
 }	t_map_error;
 
+# define ERROR_MSG "Error\n"
+
+# define MAP_INVALID_EXTENSION_MSG "Invalid map extension:%s\n"
+# define MAP_MULTIPLE_EXIT_MSG "Invalid map: multiple exits found.\n"
+# define MAP_NO_EXIT_MSG "Invalid map: no exit found.\n"
+# define MAP_MULTIPLE_START_MSG ""
+# define MAP_NO_START_MSG ""
+# define MAP_NO_COLLECTIBLE_MSG ""
+# define MAP_NO_RECTANGLE_MSG ""
+# define MAP_NO_WALLED_MSG ""
+# define MAP_INVALID_PATH_MSG ""
+
 typedef struct s_game_data
 {
 	mlx_t		*mlx;
 	mlx_image_t	*img;
 	int			moves;
 }	t_game_data;
-
-
 
 // input.c
 void		game_keyhook(mlx_key_data_t keydata, void *param);
