@@ -38,7 +38,9 @@ MY_SOURCES = ft_atoi.c \
 		ft_strtrim.c \
 		ft_substr.c \
 		ft_tolower.c \
-		ft_toupper.c
+		ft_toupper.c \
+		get_next_line.c \
+		get_next_line_utils.c \
 # compiler flags
 CFLAGS = -Wall -Wextra -Werror
 # remove files without asking

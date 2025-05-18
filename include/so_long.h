@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 11:21:11 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/19 00:50:35 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/19 01:49:45 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ typedef struct s_game_data
 void	game_keyhook(mlx_key_data_t keydata, void *param);
 
 // error.c
-int		set_error_code(t_game_data *g, char *error_code);
+int		set_error_code(t_game_data *g, int error_code);
 void	exit_after_mlx_error(void);
 int		return_error(int error_code);
 
@@ -118,8 +118,10 @@ void	free_everything(t_game_data *g);
 // validate_file.c
 int		validate_extension(char *map_path, int *error_code);
 int		validate_path(char *map_path, int *error_code);
+int		validate_empty(int fd, int *error_code);
 
 // validate_map.c
 int		validate_map(t_game_data *g, char *map_path);
+int		validate_map_dimensions(t_game_data *g, char *map_path);
 
 #endif

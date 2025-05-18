@@ -6,13 +6,13 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 12:36:42 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/19 01:15:07 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/19 01:44:22 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	set_error_code(t_game_data *g, char *error_code)
+int	set_error_code(t_game_data *g, int error_code)
 {
 	g->error_code = error_code;
 	return (error_code);

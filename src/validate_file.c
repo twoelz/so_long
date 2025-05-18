@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 18:38:05 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/19 01:06:59 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/19 01:47:48 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,12 @@ int	validate_path(char *map_path, int *error_code)
 		*error_code = MAP_INVALID_PATH;
 		return (*error_code);
 	}
-	*error_code = validate_empty(map_path, error_code, fd);
+	*error_code = validate_empty(fd, error_code);
 	close(fd);
 	return (*error_code);
 }
 
-int	validate_empty(char *map_path, int *error_code, int fd)
+int	validate_empty(int fd, int *error_code)
 {
 	char	buffer;
 	ssize_t	bytes_read;

@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 21:39:05 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/19 01:22:10 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/19 01:50:04 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ int	validate_map(t_game_data *g, char *map_path)
 		return (g->error_code);
 	if (validate_map_dimensions(g, map_path))
 		return (g->error_code);
-	if (load_ber(g, map_path))
-		return (g->error_code);
+	// if (load_ber(g, map_path))
+	// 	return (g->error_code);
 	return (g->error_code);
 }
 
