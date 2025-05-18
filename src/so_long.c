@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 17:13:37 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/18 18:38:50 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/18 21:27:46 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ int	main(int argc, char **argv)
 
 	// hook registers
 	mlx_key_hook(g.mlx, &game_keyhook, &g);
-	// mlx_key_hook(g.mlx, &move_key_hook, &map);
 	// mlx_loop_hook(mlx, &game_keyhook, NULL);
 
 	// MAIN LOOP

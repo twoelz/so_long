@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 11:21:11 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/18 18:46:44 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/18 21:37:28 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ int		return_error(int error_code);
 void	exit_game(t_game_data *g);
 void	free_everything(t_game_data *g);
 
-// validate.c
+// validate_file.c
 int		validate_extension(char *map_path, int *error_code);
 int		validate_path(char *map_path, int *error_code);
 int		validate_map(t_game_data *g, char *map_path);

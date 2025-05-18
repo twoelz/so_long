@@ -32,7 +32,7 @@ SRCS = so_long.c \
 	error.c \
 	exit.c \
 	input.c \
-	validate.c \
+	validate_file.c \
 
 
 OBJS = $(SRCS:.c=.o)
