@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 11:21:11 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/18 18:17:13 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/18 18:46:44 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ the 42 cursus project "so_long"
 # include <stdlib.h>
 # include <stdio.h>
 # include <unistd.h>
+# include <fcntl.h>
 # include "MLX42/MLX42.h"
 # include "libft.h"
 
@@ -98,12 +99,16 @@ typedef struct s_game_data
 void	game_keyhook(mlx_key_data_t keydata, void *param);
 
 // error.c
-int		return_error(int error_code);
 void	exit_after_mlx_error(void);
+int		return_error(int error_code);
 
 // exit.c
-
 void	exit_game(t_game_data *g);
 void	free_everything(t_game_data *g);
+
+// validate.c
+int		validate_extension(char *map_path, int *error_code);
+int		validate_path(char *map_path, int *error_code);
+int		validate_map(t_game_data *g, char *map_path);
 
 #endif

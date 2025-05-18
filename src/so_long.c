@@ -6,33 +6,11 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 17:13:37 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/18 18:16:09 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/18 18:38:50 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-int	validate_extension(char *map_path, int *error_code)
-{
-	size_t	len;
-
-	len = ft_strlen(map_path);
-	if (len < 4 || \
-			map_path[len - 4] != '.' || \
-			map_path[len - 3] != 'b' || \
-			map_path[len - 2] != 'e' || \
-			map_path[len - 1] != 'r')
-		*error_code = MAP_INVALID_EXTENSION;
-	return (*error_code);
-}
-
-int	validate_map(t_game_data *g, char *map_path)
-{
-	if (validate_extension(map_path, &g->error_code))
-		return (g->error_code);
-	ft_putnbr_fd(g->moves, STDOUT_FILENO);
-	return (g->error_code);
-}
 
 //TODO: check if bool is needed, if anything can go wrong here (returning false)
 int	init_game_data(t_game_data *g, char *map_path)
@@ -42,7 +20,6 @@ int	init_game_data(t_game_data *g, char *map_path)
 		return (g->error_code);
 	return (g->error_code);
 }
-
 
 int	main(int argc, char **argv)
 {
