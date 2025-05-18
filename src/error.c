@@ -6,11 +6,17 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 12:36:42 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/18 17:53:36 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/19 01:15:07 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+int	set_error_code(t_game_data *g, char *error_code)
+{
+	g->error_code = error_code;
+	return (error_code);
+}
 
 //TODO: change error message according to error code (if needed)
 int	return_error(int error_code)
@@ -25,6 +31,7 @@ int	return_error(int error_code)
 	return (error_code);
 }
 
+// TODO: REMOVE fprintf and see if printing those errors are needed
 void	exit_after_mlx_error(void)
 {
 	fprintf(stderr, "%s", mlx_strerror(mlx_errno));
