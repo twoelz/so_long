@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 12:36:42 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/19 14:49:34 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/19 23:46:14 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	init_error_messages(t_game_data *g)
 	g->error_message[E_NO_EXIT] = E_NO_EXIT_MSG;
 	g->error_message[E_MULTI_START] = E_MULTI_START_MSG;
 	g->error_message[E_MULTI_EXIT] = E_MULTI_EXIT_MSG;
+	g->error_message[16] = NULL;
 }
 
 int	set_error_code(t_game_data *g, int error_code)
@@ -55,5 +56,6 @@ int	return_error(t_game_data *g)
 {
 	ft_putstr_fd(ERROR_MSG, STDOUT_FILENO);
 	ft_putstr_fd(g->error_message[g->error_code], STDOUT_FILENO);
+	free_everything(g);
 	return (g->error_code);
 }

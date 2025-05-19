@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 21:39:05 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/19 15:35:09 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/20 01:16:29 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,14 @@ void	print_ber(t_game_data *g)
 	while (y < g->height)
 	{
 		ft_putstr_fd(g->ber[y], STDOUT_FILENO);
+		ft_putchar_fd('\n', STDOUT_FILENO);
 		y++;
 	}
 }
+
 /*
 TODO: check if I need to free line after assigning the line to g->ber[i]
+TODO: remove prints
 */
 int	load_ber(t_game_data *g)
 {
@@ -44,7 +47,7 @@ int	load_ber(t_game_data *g)
 	char	*line;
 	int		i;
 
-	g->ber = malloc(g->height * sizeof(char *));
+	g->ber = ft_calloc((g->height + 1), sizeof(char *));
 	if (!g->ber)
 		return (set_error_code(g, E_ALLOC));
 	fd = open(g->ber_path, O_RDONLY);
@@ -56,15 +59,27 @@ int	load_ber(t_game_data *g)
 		line = get_next_line(fd);
 		if (!line)
 			break ;
+		if (line[0] != '\0' && line[ft_strlen(line) - 1] == '\n')
+			line[ft_strlen(line) - 1] = '\0';
 		g->ber[i] = line;
 		i++;
 	}
 	printf("loaded ber\n");
 	print_ber(g);
-	if (g->ber[g->height - 1][ft_strlen(g->ber[g->height - 1]) - 1] != '\n')
-		ft_putchar_fd('\n', STDOUT_FILENO);
 	return (g->error_code);
 }
+// int	check_rectangular(t_game_data *g)
+// {
+// 	int x;
+// 	int y;
+
+// 	x = 0;
+// 	y = 0;
+// 	while (y < g->height)
+// 	{
+		
+// 	}
+// }
 
 int	validate_map(t_game_data *g)
 {
@@ -74,8 +89,10 @@ int	validate_map(t_game_data *g)
 		return (g->error_code);
 	if (validate_minumum_size(g))
 		return (g->error_code);
-	if (load_ber(g))
-		return (g->error_code);
+	// if (load_ber(g))
+	// 	return (g->error_code);
+	// if (check_rectangular(g))
+	// 	return (g->error_code);
 	return (g->error_code);
 }
 

@@ -31,6 +31,7 @@ OBJDIR = src/obj
 SRCS = so_long.c \
 	error.c \
 	exit.c \
+	free_everything.c \
 	input.c \
 	validate_file.c \
 	validate_map.c \

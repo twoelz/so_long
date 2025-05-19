@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 11:21:11 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/19 15:09:12 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/19 23:46:22 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ typedef struct s_game_data
 	int			height;
 	int			moves;
 	int			error_code;
-	char		*error_message[16];
+	char		*error_message[17];
 	char		*ber_path;
 	char		**ber;
 }	t_game_data;
@@ -117,13 +117,14 @@ void	exit_after_mlx_error(void);
 void	init_error_messages(t_game_data *g);
 int		set_error_code(t_game_data *g, int error_code);
 void	set_error_message(char **error_message, \
-		int error_code, char *message);
+			int error_code, char *message);
 int		return_error(t_game_data *g);
-// int		return_error_continued(int error_code);
+
+// free_everything.c
+void	free_everything(t_game_data *g);
 
 // exit.c
 void	exit_game(t_game_data *g);
-void	free_everything(t_game_data *g);
 
 // validate_file.c
 int		validate_extension(char *map_path, int *error_code);
