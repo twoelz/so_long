@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 11:21:11 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/19 02:10:23 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/19 02:37:03 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,14 +67,14 @@ typedef enum e_error_codes
 	MAP_FILE_EMPTY,
 	MAP_READ_ERROR,
 	MAP_MINIMUM_SIZE,
-	MAP_MULTIPLE_EXIT,
-	MAP_NO_EXIT,
-	MAP_MULTIPLE_START,
-	MAP_NO_START,
-	MAP_NO_COLLECTIBLE,
+	MAP_INVALID_CHAR,
 	MAP_NO_RECTANGLE,
 	MAP_NO_WALLED,
-
+	MAP_NO_COLLECTIBLE,
+	MAP_NO_START,
+	MAP_NO_EXIT,
+	MAP_MULTIPLE_START,
+	MAP_MULTIPLE_EXIT,
 }	t_error_codes;
 
 # define ERROR_MSG "Error\n"
@@ -86,13 +86,14 @@ typedef enum e_error_codes
 # define MAP_FILE_EMPTY_MSG "Empty map file.\n"
 # define MAP_READ_ERROR_MSG "Reading map file failed.\n"
 # define MAP_MINIMUM_SIZE_MSG "Map smaller than minimum valid size.\n"
-# define MAP_MULTIPLE_EXIT_MSG "Invalid map: multiple exits found.\n"
-# define MAP_NO_EXIT_MSG "Invalid map: no exit found.\n"
-# define MAP_MULTIPLE_START_MSG "Invalid map: multiple start positions found.\n"
-# define MAP_NO_START_MSG "Invalid map: no start position found.\n"
-# define MAP_NO_COLLECTIBLE_MSG "Invalid map: no collectible found.\n"
+# define MAP_INVALID_CHAR_MSG "Invalid map: invalid character found.\n"
 # define MAP_NO_RECTANGLE_MSG "Invalid map: not rectangular.\n"
 # define MAP_NO_WALLED_MSG "Invalid map: not fully walled.\n"
+# define MAP_NO_COLLECTIBLE_MSG "Invalid map: no collectible found.\n"
+# define MAP_NO_START_MSG "Invalid map: no start position found.\n"
+# define MAP_NO_EXIT_MSG "Invalid map: no exit found.\n"
+# define MAP_MULTIPLE_START_MSG "Invalid map: multiple start positions found.\n"
+# define MAP_MULTIPLE_EXIT_MSG "Invalid map: multiple exits found.\n"
 
 typedef struct s_game_data
 {
@@ -111,6 +112,7 @@ void	game_keyhook(mlx_key_data_t keydata, void *param);
 int		set_error_code(t_game_data *g, int error_code);
 void	exit_after_mlx_error(void);
 int		return_error(int error_code);
+int		return_error_continued(int error_code);
 
 // exit.c
 void	exit_game(t_game_data *g);

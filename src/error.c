@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 12:36:42 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/19 02:08:24 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/19 02:35:36 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,20 +34,29 @@ int	return_error(int error_code)
 		ft_putstr_fd(MAP_READ_ERROR_MSG, STDOUT_FILENO);
 	else if (error_code == MAP_MINIMUM_SIZE)
 		ft_putstr_fd(MAP_MINIMUM_SIZE_MSG, STDOUT_FILENO);
-	else if (error_code == MAP_MULTIPLE_EXIT)
-		ft_putstr_fd(MAP_MULTIPLE_EXIT_MSG, STDOUT_FILENO);
-	else if (error_code == MAP_NO_EXIT)
-		ft_putstr_fd(MAP_NO_EXIT_MSG, STDOUT_FILENO);
-	else if (error_code == MAP_MULTIPLE_START)
-		ft_putstr_fd(MAP_MULTIPLE_START_MSG, STDOUT_FILENO);
-	else if (error_code == MAP_NO_START)
-		ft_putstr_fd(MAP_NO_START_MSG, STDOUT_FILENO);
-	else if (error_code == MAP_NO_COLLECTIBLE)
-		ft_putstr_fd(MAP_NO_COLLECTIBLE_MSG, STDOUT_FILENO);
+	else if (error_code == MAP_INVALID_CHAR)
+		ft_putstr_fd(MAP_INVALID_CHAR_MSG, STDOUT_FILENO);
 	else if (error_code == MAP_NO_RECTANGLE)
 		ft_putstr_fd(MAP_NO_RECTANGLE_MSG, STDOUT_FILENO);
 	else if (error_code == MAP_NO_WALLED)
 		ft_putstr_fd(MAP_NO_WALLED_MSG, STDOUT_FILENO);
+	else if (error_code == MAP_NO_COLLECTIBLE)
+		ft_putstr_fd(MAP_NO_COLLECTIBLE_MSG, STDOUT_FILENO);
+	else
+		return (return_error_continued(error_code));
+	return (error_code);
+}
+
+int	return_error_continued(int error_code)
+{
+	if (error_code == MAP_NO_START)
+		ft_putstr_fd(MAP_NO_START_MSG, STDOUT_FILENO);
+	else if (error_code == MAP_NO_EXIT)
+		ft_putstr_fd(MAP_NO_EXIT_MSG, STDOUT_FILENO);
+	else if (error_code == MAP_MULTIPLE_START)
+		ft_putstr_fd(MAP_MULTIPLE_START_MSG, STDOUT_FILENO);
+	else if (error_code == MAP_MULTIPLE_EXIT)
+		ft_putstr_fd(MAP_MULTIPLE_EXIT_MSG, STDOUT_FILENO);
 	return (error_code);
 }
 
