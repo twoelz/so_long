@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 11:21:11 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/19 12:23:34 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/19 12:43:13 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,15 +108,18 @@ typedef struct s_game_data
 	int				height;
 	int				moves;
 	int				error_code;
-	t_error_message	error_messages[15];
+	t_error_message	error_message[15];
 }	t_game_data;
 
 // input.c
 void	game_keyhook(mlx_key_data_t keydata, void *param);
 
 // error.c
-int		set_error_code(t_game_data *g, int error_code);
 void	exit_after_mlx_error(void);
+void	init_error_messages(t_game_data *g);
+int		set_error_code(t_game_data *g, int error_code);
+void	set_error_message(t_error_message *error_message, \
+		int error_code, char *message);
 int		return_error(t_game_data *g);
 // int		return_error_continued(int error_code);
 
