@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 11:21:11 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/19 12:43:13 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/19 14:19:59 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,6 @@ enum
 	Z_WALL = 3,
 };
 
-typedef struct s_error_message
-{
-	int		error_code;
-	char	*message;
-}	t_error_message;
-
 typedef enum e_error_codes
 {
 	E_SUCCESS,
@@ -102,13 +96,13 @@ typedef enum e_error_codes
 
 typedef struct s_game_data
 {
-	mlx_t			*mlx;
-	mlx_image_t		*img;
-	int				width;
-	int				height;
-	int				moves;
-	int				error_code;
-	t_error_message	error_message[15];
+	mlx_t		*mlx;
+	mlx_image_t	*img;
+	int			width;
+	int			height;
+	int			moves;
+	int			error_code;
+	char		*error_message[15];
 }	t_game_data;
 
 // input.c
@@ -118,7 +112,7 @@ void	game_keyhook(mlx_key_data_t keydata, void *param);
 void	exit_after_mlx_error(void);
 void	init_error_messages(t_game_data *g);
 int		set_error_code(t_game_data *g, int error_code);
-void	set_error_message(t_error_message *error_message, \
+void	set_error_message(char **error_message, \
 		int error_code, char *message);
 int		return_error(t_game_data *g);
 // int		return_error_continued(int error_code);
