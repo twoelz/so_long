@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 21:39:05 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/19 12:36:49 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/19 14:37:02 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,24 +23,29 @@ void	print_dimensions(t_game_data *g)
 	ft_putstr_fd("\n", STDOUT_FILENO);
 }
 
-int	validate_map(t_game_data *g, char *map_path)
+int	validate_map(t_game_data *g)
 {
-	if (validate_extension(map_path, &g->error_code))
+	if (validate_extension(g->ber_path, &g->error_code))
 		return (g->error_code);
-	if (validate_path(map_path, &g->error_code))
+	if (validate_path(g->ber_path, &g->error_code))
 		return (g->error_code);
-	if (validate_map_dimensions(g, map_path))
+	if (validate_minumum_size(g))
 		return (g->error_code);
 	return (g->error_code);
 }
 
 //TODO: remove print dimensions
-int	validate_map_dimensions(t_game_data *g, char *map_path)
+
+/*
+RETURNS error code (>1) if not valid
+*/
+
+int	validate_minumum_size(t_game_data *g)
 {
 	int		fd;
 	char	*line;
 
-	fd = open(map_path, O_RDONLY);
+	fd = open(g->ber_path, O_RDONLY);
 	if (fd == -1)
 		return (set_error_code(g, E_READ_ERROR));
 	line = get_next_line(fd);

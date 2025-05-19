@@ -6,31 +6,31 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 18:38:05 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/19 12:26:34 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/19 14:38:42 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	validate_extension(char *map_path, int *error_code)
+int	validate_extension(char *ber_path, int *error_code)
 {
 	size_t	len;
 
-	len = ft_strlen(map_path);
+	len = ft_strlen(ber_path);
 	if (len < 4 || \
-			map_path[len - 4] != '.' || \
-			map_path[len - 3] != 'b' || \
-			map_path[len - 2] != 'e' || \
-			map_path[len - 1] != 'r')
+			ber_path[len - 4] != '.' || \
+			ber_path[len - 3] != 'b' || \
+			ber_path[len - 2] != 'e' || \
+			ber_path[len - 1] != 'r')
 		*error_code = E_INVALID_EXT;
 	return (*error_code);
 }
 
-int	validate_path(char *map_path, int *error_code)
+int	validate_path(char *ber_path, int *error_code)
 {
 	int		fd;
 
-	fd = open(map_path, O_RDONLY);
+	fd = open(ber_path, O_RDONLY);
 	if (fd == -1)
 	{
 		*error_code = E_INVALID_PATH;

@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 17:13:37 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/19 12:38:58 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/19 14:35:58 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,14 @@
 
 
 //TODO: check if bool is needed, if anything can go wrong here (returning false)
-int	init_game_data(t_game_data *g, int argc, char *map_path)
+int	init_game_data(t_game_data *g, int argc, char *ber_path)
 {
 	ft_bzero(g, sizeof(t_game_data));
 	init_error_messages(g);
 	if (argc < 2)
 		return (set_error_code(g, E_NO_PATH_ARG));
-	if (!validate_map(g, map_path))
+	g->ber_path = ber_path;
+	if (!validate_map(g))
 		return (g->error_code);
 	return (g->error_code);
 }

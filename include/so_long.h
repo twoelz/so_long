@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 11:21:11 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/19 14:19:59 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/19 14:37:51 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,10 @@ typedef struct s_game_data
 	int			moves;
 	int			error_code;
 	char		*error_message[15];
+	char		*ber_path;
+	char		**ber;
+	bool		ber_loaded;
+	bool		images_loaded;
 }	t_game_data;
 
 // input.c
@@ -127,7 +131,7 @@ int		validate_path(char *map_path, int *error_code);
 int		validate_empty(int fd, int *error_code);
 
 // validate_map.c
-int		validate_map(t_game_data *g, char *map_path);
-int		validate_map_dimensions(t_game_data *g, char *map_path);
+int		validate_map(t_game_data *g);
+int		validate_minumum_size(t_game_data *g);
 
 #endif
