@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 21:39:05 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/19 01:50:04 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/19 12:36:49 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,8 @@ int	validate_map(t_game_data *g, char *map_path)
 		return (g->error_code);
 	if (validate_path(map_path, &g->error_code))
 		return (g->error_code);
-	if (validate_path(map_path, &g->error_code))
-		return (g->error_code);
 	if (validate_map_dimensions(g, map_path))
 		return (g->error_code);
-	// if (load_ber(g, map_path))
-	// 	return (g->error_code);
 	return (g->error_code);
 }
 
@@ -46,10 +42,10 @@ int	validate_map_dimensions(t_game_data *g, char *map_path)
 
 	fd = open(map_path, O_RDONLY);
 	if (fd == -1)
-		return (set_error_code(g, MAP_READ_ERROR));
+		return (set_error_code(g, E_READ_ERROR));
 	line = get_next_line(fd);
 	if (!line)
-		return (set_error_code(g, MAP_MINIMUM_SIZE));
+		return (set_error_code(g, E_MINIMUM_SIZE));
 	g->width = strlen(line);
 	g->height = 1;
 	while (true)
@@ -62,7 +58,7 @@ int	validate_map_dimensions(t_game_data *g, char *map_path)
 	}
 	if ((g->height < 3 || g->width < 3) || \
 			g->height + g->width < 8)
-		return (set_error_code(g, MAP_MINIMUM_SIZE));
+		return (set_error_code(g, E_MINIMUM_SIZE));
 	print_dimensions(g);
 	return (g->error_code);
 }
