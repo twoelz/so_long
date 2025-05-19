@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 12:36:42 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/19 14:19:21 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/19 14:49:34 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	exit_after_mlx_error(void)
 void	init_error_messages(t_game_data *g)
 {
 	g->error_message[E_SUCCESS] = E_SUCCESS_MSG;
+	g->error_message[E_ALLOC] = E_ALLOC_MSG;
 	g->error_message[E_NO_PATH_ARG] = E_NO_PATH_ARG_MSG;
 	g->error_message[E_INVALID_EXT] = E_INVALID_EXT_MSG;
 	g->error_message[E_INVALID_PATH] = E_INVALID_PATH_MSG;

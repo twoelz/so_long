@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 11:21:11 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/19 14:37:51 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/19 15:09:12 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ enum
 typedef enum e_error_codes
 {
 	E_SUCCESS,
+	E_ALLOC,
 	E_NO_PATH_ARG,
 	E_INVALID_EXT,
 	E_INVALID_PATH,
@@ -79,6 +80,7 @@ typedef enum e_error_codes
 
 # define ERROR_MSG "Error\n"
 # define E_SUCCESS_MSG "loading map...\n"
+# define E_ALLOC_MSG "allocation error\n"
 # define E_NO_PATH_ARG_MSG "Missing map argument.\n"
 # define E_INVALID_EXT_MSG "Invalid map extension.\n"
 # define E_INVALID_PATH_MSG "Invalid path: no map found.\n"
@@ -102,11 +104,9 @@ typedef struct s_game_data
 	int			height;
 	int			moves;
 	int			error_code;
-	char		*error_message[15];
+	char		*error_message[16];
 	char		*ber_path;
 	char		**ber;
-	bool		ber_loaded;
-	bool		images_loaded;
 }	t_game_data;
 
 // input.c
