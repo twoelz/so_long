@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 11:21:11 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/19 01:49:45 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/19 02:10:23 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,10 @@ typedef enum e_error_codes
 	INIT_GAME_SUCCESS,
 	MAP_NO_PATH_ARGUMENT,
 	MAP_INVALID_EXTENSION,
+	MAP_INVALID_PATH,
+	MAP_FILE_EMPTY,
+	MAP_READ_ERROR,
+	MAP_MINIMUM_SIZE,
 	MAP_MULTIPLE_EXIT,
 	MAP_NO_EXIT,
 	MAP_MULTIPLE_START,
@@ -70,10 +74,7 @@ typedef enum e_error_codes
 	MAP_NO_COLLECTIBLE,
 	MAP_NO_RECTANGLE,
 	MAP_NO_WALLED,
-	MAP_INVALID_PATH,
-	MAP_FILE_EMPTY,
-	MAP_READ_ERROR,
-	MAP_MINIMUM_SIZE,
+
 }	t_error_codes;
 
 # define ERROR_MSG "Error\n"
@@ -81,6 +82,10 @@ typedef enum e_error_codes
 # define MAP_SUCCESS_MSG "loading map...\n"
 # define MAP_NO_PATH_ARGUMENT_MSG "Missing map argument.\n"
 # define MAP_INVALID_EXTENSION_MSG "Invalid map extension.\n"
+# define MAP_INVALID_PATH_MSG "Invalid path: no map found.\n"
+# define MAP_FILE_EMPTY_MSG "Empty map file.\n"
+# define MAP_READ_ERROR_MSG "Reading map file failed.\n"
+# define MAP_MINIMUM_SIZE_MSG "Map smaller than minimum valid size.\n"
 # define MAP_MULTIPLE_EXIT_MSG "Invalid map: multiple exits found.\n"
 # define MAP_NO_EXIT_MSG "Invalid map: no exit found.\n"
 # define MAP_MULTIPLE_START_MSG "Invalid map: multiple start positions found.\n"
@@ -88,10 +93,6 @@ typedef enum e_error_codes
 # define MAP_NO_COLLECTIBLE_MSG "Invalid map: no collectible found.\n"
 # define MAP_NO_RECTANGLE_MSG "Invalid map: not rectangular.\n"
 # define MAP_NO_WALLED_MSG "Invalid map: not fully walled.\n"
-# define MAP_INVALID_PATH_MSG "Invalid path: no map found.\n"
-# define MAP_FILE_EMPTY_MSG "Empty map file.\n"
-# define MAP_READ_ERROR_MSG "Reading map file failed.\n"
-# define MAP_MINIMUM_SIZE_MSG "Map smaller than minimum valid size (3x5|5x3).\n"
 
 typedef struct s_game_data
 {
