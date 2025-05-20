@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 21:39:05 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/20 03:36:12 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/20 13:28:46 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 //TODO: delete print dimensions
 void	print_dimensions(t_game_data *g)
 {
-	ft_putstr_fd("width: ", STDOUT_FILENO);
-	ft_putnbr_fd(g->width, STDOUT_FILENO);
-	ft_putstr_fd("\n", STDOUT_FILENO);
-	ft_putstr_fd("height: ", STDOUT_FILENO);
-	ft_putnbr_fd(g->height, STDOUT_FILENO);
-	ft_putstr_fd("\n", STDOUT_FILENO);
+	ft_putstr("width: ");
+	ft_putnbr(g->width);
+	ft_putstr("\n");
+	ft_putstr("height: ");
+	ft_putnbr(g->height);
+	ft_putstr("\n");
 }
 
 //TODO: delete print dimensions
@@ -31,8 +31,8 @@ void	print_ber(t_game_data *g)
 	y = 0;
 	while (y < g->height)
 	{
-		ft_putstr_fd(g->ber[y], STDOUT_FILENO);
-		ft_putchar_fd('\n', STDOUT_FILENO);
+		ft_putstr(g->ber[y]);
+		ft_putchar('\n');
 		y++;
 	}
 }
@@ -92,7 +92,10 @@ int	check_chars(t_game_data *g)
 	while (y < g->height)
 	{
 		if (!found_in_str(g->ber[y][x], VALID_MAP_CHARS))
+		{
 			return (set_error_code(g, E_INVALID_CHAR));
+		}
+
 		x++;
 		if (x > g->width)
 		{
@@ -115,7 +118,7 @@ int	check_walled(t_game_data *g)
 		if (((x == 0 || x == g->width - 1 || y == 0 || y == g->height - 1) \
 			&& g->ber[y][x] != '1'))
 		{
-			ft_putchar_fd(g->ber[y][x], STDOUT_FILENO);
+			ft_putchar(g->ber[y][x]);
 			return (set_error_code(g, E_INVALID_CHAR));
 		}
 		x++;
@@ -143,8 +146,8 @@ int	validate_map(t_game_data *g)
 		return (g->error_code);
 	if (check_chars(g))
 		return (g->error_code);
-	if (check_walled(g))
-		return (g->error_code);
+	// if (check_walled(g))
+	// 	return (g->error_code);
 
 	return (g->error_code);
 }

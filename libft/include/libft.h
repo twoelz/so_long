@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 10:39:13 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/19 01:36:53 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/20 13:24:07 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <stdint.h>
 # include <string.h>
 
-// GNL
+// GET_NEXT_LINE
 # include <stdbool.h>
 # include <stdio.h>
 # ifndef GNL_BUFFER_SIZE
@@ -64,7 +64,13 @@ char	*ft_substr(char const *s, size_t start, size_t len);
 int		ft_tolower(int c);
 int		ft_toupper(int c);
 
-// GNL
+// stdout_fd
+void	ft_putchar(char c);
+void	ft_putendl(char const *s);
+void	ft_putnbr(int n);
+void	ft_putstr(char const *s);
+
+// GET_NEXT_LINE
 char	*get_next_line(int fd);
 ssize_t	newline_in_str(const char *s);
 int		free_strings(char **str1, char **str2);

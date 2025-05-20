@@ -25,7 +25,7 @@ libmlx:
 LIBS = -Llibft -lft $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
 
 DIR_INCLUDE = include
-INCLUDE = -I $(DIR_LIBFT) -I $(DIR_INCLUDE) -I $(LIBMLX)/include
+INCLUDE = -I $(DIR_LIBFT) -I $(DIR_LIBFT)/include -I $(DIR_INCLUDE) -I $(LIBMLX)/include
 SRCDIR = src
 OBJDIR = src/obj
 SRCS = so_long.c \
