@@ -36,7 +36,7 @@ SRCS = so_long.c \
 	input.c \
 	print_stuff.c \
 	validate_file.c \
-	validate_map.c \
+	validate_map_1.c \
 	utils/str_utils.c \
 
 OBJS = $(SRCS:.c=.o)
