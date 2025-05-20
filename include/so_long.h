@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 11:21:11 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/20 13:47:17 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/20 20:09:00 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,23 +81,23 @@ typedef enum e_error_codes
 	E_MULTI_EXIT,
 }	t_error_codes;
 
-# define ERROR_MSG "Error\n"
-# define E_SUCCESS_MSG "loading map...\n"
-# define E_ALLOC_MSG "allocation error\n"
-# define E_NO_PATH_ARG_MSG "Missing map argument.\n"
-# define E_INVALID_EXT_MSG "Invalid map extension.\n"
-# define E_INVALID_PATH_MSG "Invalid path: no map found.\n"
-# define E_FILE_EMPTY_MSG "Empty map file.\n"
-# define E_READ_ERROR_MSG "Reading map file failed.\n"
-# define E_MINIMUM_SIZE_MSG "Map smaller than minimum valid size.\n"
-# define E_INVALID_CHAR_MSG "Invalid map: invalid character found.\n"
-# define E_NO_RECTANGLE_MSG "Invalid map: not rectangular.\n"
-# define E_NO_WALLED_MSG "Invalid map: not fully walled.\n"
-# define E_NO_COLLECT_MSG "Invalid map: no collectible found.\n"
-# define E_NO_START_MSG "Invalid map: no start position found.\n"
-# define E_NO_EXIT_MSG "Invalid map: no exit found.\n"
-# define E_MULTI_START_MSG "Invalid map: multiple start positions found.\n"
-# define E_MULTI_EXIT_MSG "Invalid map: multiple exits found.\n"
+# define ERROR_MSG "Error"
+# define E_SUCCESS_MSG "loading map..."
+# define E_ALLOC_MSG "allocation error"
+# define E_NO_PATH_ARG_MSG "Missing map argument."
+# define E_INVALID_EXT_MSG "Invalid map extension."
+# define E_INVALID_PATH_MSG "Invalid path: no map found."
+# define E_FILE_EMPTY_MSG "Empty map file."
+# define E_READ_ERROR_MSG "Reading map file failed."
+# define E_MINIMUM_SIZE_MSG "Map smaller than minimum valid size."
+# define E_INVALID_CHAR_MSG "Invalid map: invalid character found."
+# define E_NO_RECTANGLE_MSG "Invalid map: not rectangular."
+# define E_NO_WALLED_MSG "Invalid map: not fully walled."
+# define E_NO_COLLECT_MSG "Invalid map: no collectible found."
+# define E_NO_START_MSG "Invalid map: no start position found."
+# define E_NO_EXIT_MSG "Invalid map: no exit found."
+# define E_MULTI_START_MSG "Invalid map: multiple start positions found."
+# define E_MULTI_EXIT_MSG "Invalid map: multiple exits found."
 
 typedef struct s_game_data
 {
@@ -112,8 +112,17 @@ typedef struct s_game_data
 	char		**ber;
 }	t_game_data;
 
+typedef struct s_point
+{
+	int	x;
+	int	y;
+}	t_point;
+
 // input.c
 void	game_keyhook(mlx_key_data_t keydata, void *param);
+
+// coordinates.c
+void	next_point(t_point *p, int width);
 
 // error.c
 void	exit_after_mlx_error(void);
@@ -128,6 +137,10 @@ void	free_everything(t_game_data *g);
 
 // exit.c
 void	exit_game(t_game_data *g);
+
+// print_stuff.c
+void	print_dimensions(t_game_data *g);
+void	print_ber(t_game_data *g);
 
 // validate_file.c
 int		validate_extension(char *map_path, int *error_code);

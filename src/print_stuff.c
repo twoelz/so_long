@@ -1,53 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_everything.c                                  :+:      :+:    :+:   */
+/*   print_stuff.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/19 23:33:11 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/20 14:22:21 by tda-roch         ###   ########.fr       */
+/*   Created: 2025/05/20 20:07:28 by tda-roch          #+#    #+#             */
+/*   Updated: 2025/05/20 20:07:52 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	safe_free_int(int **ptr)
+//TODO: delete print dimensions
+void	print_dimensions(t_game_data *g)
 {
-	if (ptr && *ptr)
-	{
-		free(*ptr);
-		*ptr = NULL;
-	}
+	ft_printf("width: %d\nheight: %d\n", g->width, g->height);
 }
 
-void	safe_free_char(char **ptr)
+//TODO: delete print dimensions
+void	print_ber(t_game_data *g)
 {
-	if (ptr && *ptr)
+	int	y;
+
+	y = 0;
+	while (y < g->height)
 	{
-		free(*ptr);
-		*ptr = NULL;
+		ft_putendl(g->ber[y]);
+		y++;
 	}
-}
-
-void	safe_free_2d_char(char ***ptr)
-{
-	size_t	i;
-
-	if (ptr && *ptr)
-	{
-		i = 0;
-		while ((*ptr)[i])
-		{
-			safe_free_char(&(*ptr)[i]);
-			i++;
-		}
-		free(*ptr);
-		*ptr = NULL;
-	}
-}
-
-void	free_everything(t_game_data *g)
-{
-	safe_free_2d_char(&g->ber);
 }

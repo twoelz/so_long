@@ -29,10 +29,12 @@ INCLUDE = -I $(DIR_LIBFT) -I $(DIR_LIBFT)/include -I $(DIR_INCLUDE) -I $(LIBMLX)
 SRCDIR = src
 OBJDIR = src/obj
 SRCS = so_long.c \
+	coordinates.c \
 	error.c \
 	exit.c \
 	free_everything.c \
 	input.c \
+	print_stuff.c \
 	validate_file.c \
 	validate_map.c \
 	utils/str_utils.c \

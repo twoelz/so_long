@@ -6,31 +6,11 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 21:39:05 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/20 13:54:57 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/20 20:09:45 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-//TODO: delete print dimensions
-void	print_dimensions(t_game_data *g)
-{
-	ft_printf("width: %d\nheight: %d\n", g->width, g->height);
-}
-
-//TODO: delete print dimensions
-void	print_ber(t_game_data *g)
-{
-	int	y;
-
-	y = 0;
-	while (y < g->height)
-	{
-		ft_putstr(g->ber[y]);
-		ft_putchar('\n');
-		y++;
-	}
-}
 
 /*
 TODO: check if I need to free line after assigning the line to g->ber[i]
@@ -79,49 +59,30 @@ int	check_rectangular(t_game_data *g)
 
 int	check_chars(t_game_data *g)
 {
-	int	x;
-	int	y;
+	t_point	p;
 
-	x = 0;
-	y = 0;
-	while (y < g->height)
+	ft_bzero(&p, sizeof(p));
+	while (p.y < g->height)
 	{
-		if (!found_in_str(g->ber[y][x], VALID_MAP_CHARS))
-		{
+		if (!found_in_str(g->ber[p.y][p.x], VALID_MAP_CHARS))
 			return (set_error_code(g, E_INVALID_CHAR));
-		}
-
-		x++;
-		if (x > g->width)
-		{
-			x = 0;
-			y++;
-		}
+		next_point(&p, g->width);
 	}
 	return (g->error_code);
 }
 
 int	check_walled(t_game_data *g)
 {
-	int	x;
-	int	y;
+	t_point	p;
 
-	x = 0;
-	y = 0;
-	while (y < g->height)
+	ft_bzero(&p, sizeof(p));
+	while (p.y < g->height)
 	{
-		if (((x == 0 || x == g->width - 1 || y == 0 || y == g->height - 1) \
-			&& g->ber[y][x] != '1'))
-		{
-			ft_putchar(g->ber[y][x]);
-			return (set_error_code(g, E_INVALID_CHAR));
-		}
-		x++;
-		if (x > g->width)
-		{
-			x = 0;
-			y++;
-		}
+		if (((p.x == 0 || p.x == g->width - 1 \
+				|| p.y == 0 || p.y == g->height - 1) \
+				&& g->ber[p.y][p.x] != '1'))
+			return (set_error_code(g, E_NO_WALLED));
+		next_point(&p, g->width);
 	}
 	return (g->error_code);
 }
@@ -141,9 +102,8 @@ int	validate_map(t_game_data *g)
 		return (g->error_code);
 	if (check_chars(g))
 		return (g->error_code);
-	// if (check_walled(g))
-	// 	return (g->error_code);
-
+	if (check_walled(g))
+		return (g->error_code);
 	return (g->error_code);
 }
 

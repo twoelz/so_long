@@ -6,16 +6,18 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 03:04:06 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/20 03:04:26 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/20 20:03:38 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdbool.h>
+
 /*
-gets a char to be found and a string.
-returns 1 if found.
-if not found, returns (0)
+takes a char to be found and a string.
+returns true if found,
+false if not
 */
-int	found_in_str(char c_to_find, char *str)
+bool	found_in_str(char c_to_find, char *str)
 {
 	int	c_index;
 
@@ -23,8 +25,8 @@ int	found_in_str(char c_to_find, char *str)
 	while (str[c_index] != '\0')
 	{
 		if (str[c_index] == c_to_find)
-			return (1);
+			return (true);
 		c_index++;
 	}
-	return (0);
+	return (false);
 }

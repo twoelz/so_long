@@ -1,53 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_everything.c                                  :+:      :+:    :+:   */
+/*   coordinates.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/19 23:33:11 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/20 14:22:21 by tda-roch         ###   ########.fr       */
+/*   Created: 2025/05/20 19:15:38 by tda-roch          #+#    #+#             */
+/*   Updated: 2025/05/20 19:22:36 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	safe_free_int(int **ptr)
+/*
+Given a point (x/y coordinate struct) and a fixed width,
+updates the pointer to the next coordinate.
+Note1: this works for fixed-width coordinate maps only.
+Note2: caller must check for map height (maximum y)
+*/
+void	next_point(t_point *p, int width)
 {
-	if (ptr && *ptr)
+	p->x++;
+	if (p->x >= width)
 	{
-		free(*ptr);
-		*ptr = NULL;
+		p->x = 0;
+		p->y++;
 	}
-}
-
-void	safe_free_char(char **ptr)
-{
-	if (ptr && *ptr)
-	{
-		free(*ptr);
-		*ptr = NULL;
-	}
-}
-
-void	safe_free_2d_char(char ***ptr)
-{
-	size_t	i;
-
-	if (ptr && *ptr)
-	{
-		i = 0;
-		while ((*ptr)[i])
-		{
-			safe_free_char(&(*ptr)[i]);
-			i++;
-		}
-		free(*ptr);
-		*ptr = NULL;
-	}
-}
-
-void	free_everything(t_game_data *g)
-{
-	safe_free_2d_char(&g->ber);
 }
