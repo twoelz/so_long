@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 21:39:05 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/20 22:00:21 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/20 22:09:26 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ int	validate_map(t_game_data *g)
 	if (check_chars(g))
 		return (g->error_code);
 	if (check_walled(g))
+		return (g->error_code);
+	if (validate_map_items(g))
 		return (g->error_code);
 	return (g->error_code);
 }

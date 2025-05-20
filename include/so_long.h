@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 11:21:11 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/20 22:03:22 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/20 22:51:33 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,14 @@ typedef enum e_error_codes
 # define E_MULTI_START_MSG "Invalid map: multiple start positions found."
 # define E_MULTI_EXIT_MSG "Invalid map: multiple exits found."
 
+typedef struct s_map_items
+{
+	size_t		spaces;
+	size_t		collectibles;
+	size_t		exits;
+	size_t		players;
+}	t_map_items;
+
 typedef struct s_game_data
 {
 	mlx_t		*mlx;
@@ -110,6 +118,7 @@ typedef struct s_game_data
 	char		*error_message[17];
 	char		*ber_path;
 	char		**ber;
+	t_map_items	items;
 }	t_game_data;
 
 typedef struct s_point
@@ -155,6 +164,10 @@ int		check_path(char *map_path, int *error_code);
 int		check_minumum_size(t_game_data *g);
 
 // validate_map_items.c
+int		validate_map_items(t_game_data *g);
+void	count_map_items(t_game_data *g);
+int		check_missing_items(t_game_data *g);
+int		check_excessive_items(t_game_data *g);
 
 
 // utils/str_utils.c
