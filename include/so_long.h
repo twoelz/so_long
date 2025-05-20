@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 11:21:11 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/20 20:09:00 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/20 20:44:50 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,5 +153,6 @@ int		validate_minumum_size(t_game_data *g);
 
 // utils/str_utils.c
 int		found_in_str(char c_to_find, char *str);
+size_t	ft_strlen_exclude_newline(const char *str);
 
 #endif

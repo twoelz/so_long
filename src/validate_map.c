@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 21:39:05 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/20 20:09:45 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/20 20:45:02 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,27 +105,6 @@ int	validate_map(t_game_data *g)
 	if (check_walled(g))
 		return (g->error_code);
 	return (g->error_code);
-}
-
-
-/*
-counts and returns the number of characters in a string excluding newlines
-*/
-size_t	ft_strlen_exclude_newline(const char *str)
-{
-	size_t	i;
-	size_t	exclude_nl_len;
-
-	i = 0;
-	exclude_nl_len = 0;
-	while (str[i] != '\0')
-	{
-		if (str[i] != '\n')
-			exclude_nl_len++;
-		i++;
-	}
-
-	return (exclude_nl_len);
 }
 
 int	validate_minumum_size(t_game_data *g)
