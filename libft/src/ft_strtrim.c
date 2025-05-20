@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 17:18:29 by tda-roch          #+#    #+#             */
-/*   Updated: 2024/10/18 12:08:02 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/20 13:53:47 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 returns 1 if char passed if to be found in str passed.
 otherwise, returns 0
 */
-static int	c_in_str(char const c, char const *str)
+static int	char_in_str(char const c, char const *str)
 {
 	size_t	i;
 
@@ -35,7 +35,7 @@ static size_t	get_t_start(char const *s1, char const *set, size_t const slen)
 	size_t	i;
 
 	i = 0;
-	while (i < slen && c_in_str(s1[i], set))
+	while (i < slen && char_in_str(s1[i], set))
 		i++;
 	return (i);
 }
@@ -49,7 +49,7 @@ static size_t	get_t_end(char const *s1, char const *set, size_t const slen)
 	if (!slen)
 		return (trim_end);
 	i = slen - 1;
-	while (c_in_str(s1[i], set))
+	while (char_in_str(s1[i], set))
 	{
 		trim_end++;
 		if (i)

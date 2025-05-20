@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 10:39:13 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/20 13:24:07 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/20 13:48:20 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@
 # include <stdint.h>
 # include <string.h>
 
+// FT_PRINTF
+# include "ft_printf.h"
+
 // GET_NEXT_LINE
 # include <stdbool.h>
 # include <stdio.h>
@@ -28,6 +31,15 @@
 # define GNL_SUCCESS 1
 # define GNL_ERROR -1
 # define GNL_LAST_LINE 0
+
+// FT_PRINTF
+
+// # include <stdarg.h>
+
+// typedef unsigned int	t_uint;
+// typedef unsigned char	t_uchar;
+
+// LIBFT: BASIC
 
 int		ft_atoi(const char *nptr);
 void	ft_bzero(void *s, size_t n);
@@ -64,7 +76,7 @@ char	*ft_substr(char const *s, size_t start, size_t len);
 int		ft_tolower(int c);
 int		ft_toupper(int c);
 
-// stdout_fd
+// STDOUT_FD
 void	ft_putchar(char c);
 void	ft_putendl(char const *s);
 void	ft_putnbr(int n);

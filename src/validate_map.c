@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 21:39:05 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/20 13:28:46 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/20 13:54:57 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,7 @@
 //TODO: delete print dimensions
 void	print_dimensions(t_game_data *g)
 {
-	ft_putstr("width: ");
-	ft_putnbr(g->width);
-	ft_putstr("\n");
-	ft_putstr("height: ");
-	ft_putnbr(g->height);
-	ft_putstr("\n");
+	ft_printf("width: %d\nheight: %d\n", g->width, g->height);
 }
 
 //TODO: delete print dimensions
