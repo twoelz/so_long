@@ -1,16 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   validate_map.c                                     :+:      :+:    :+:   */
+/*   validate_map_1.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 21:39:05 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/20 20:48:20 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/20 21:01:37 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+int	validate_map(t_game_data *g)
+{
+	if (check_extension(g->ber_path, &g->error_code))
+		return (g->error_code);
+	if (check_path(g->ber_path, &g->error_code))
+		return (g->error_code);
+	if (check_minumum_size(g))
+		return (g->error_code);
+	if (load_ber(g))
+		return (g->error_code);
+	if (check_rectangular(g))
+		return (g->error_code);
+	if (check_chars(g))
+		return (g->error_code);
+	if (check_walled(g))
+		return (g->error_code);
+	return (g->error_code);
+}
 
 /*
 TODO: check if I need to free line after assigning the line to g->ber[i]
@@ -84,53 +103,5 @@ int	check_walled(t_game_data *g)
 			return (set_error_code(g, E_NO_WALLED));
 		next_point(&p, g->width);
 	}
-	return (g->error_code);
-}
-
-
-int	validate_map(t_game_data *g)
-{
-	if (check_extension(g->ber_path, &g->error_code))
-		return (g->error_code);
-	if (check_path(g->ber_path, &g->error_code))
-		return (g->error_code);
-	if (check_minumum_size(g))
-		return (g->error_code);
-	if (load_ber(g))
-		return (g->error_code);
-	if (check_rectangular(g))
-		return (g->error_code);
-	if (check_chars(g))
-		return (g->error_code);
-	if (check_walled(g))
-		return (g->error_code);
-	return (g->error_code);
-}
-
-int	check_minumum_size(t_game_data *g)
-{
-	int		fd;
-	char	*line;
-
-	fd = open(g->ber_path, O_RDONLY);
-	if (fd == -1)
-		return (set_error_code(g, E_READ_ERROR));
-	line = get_next_line(fd);
-	if (!line)
-		return (set_error_code(g, E_MINIMUM_SIZE));
-	g->width = ft_strlen_exclude_newline(line);
-	g->height = 1;
-	while (true)
-	{
-		line = get_next_line(fd);
-		if (!line)
-			break ;
-		g->height++;
-		free(line);
-	}
-	if ((g->height < 3 || g->width < 3) || \
-			g->height + g->width < 8)
-		return (set_error_code(g, E_MINIMUM_SIZE));
-	print_dimensions(g);
 	return (g->error_code);
 }
