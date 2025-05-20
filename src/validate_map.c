@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 21:39:05 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/20 20:45:02 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/20 20:48:20 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,11 +90,11 @@ int	check_walled(t_game_data *g)
 
 int	validate_map(t_game_data *g)
 {
-	if (validate_extension(g->ber_path, &g->error_code))
+	if (check_extension(g->ber_path, &g->error_code))
 		return (g->error_code);
-	if (validate_path(g->ber_path, &g->error_code))
+	if (check_path(g->ber_path, &g->error_code))
 		return (g->error_code);
-	if (validate_minumum_size(g))
+	if (check_minumum_size(g))
 		return (g->error_code);
 	if (load_ber(g))
 		return (g->error_code);
@@ -107,7 +107,7 @@ int	validate_map(t_game_data *g)
 	return (g->error_code);
 }
 
-int	validate_minumum_size(t_game_data *g)
+int	check_minumum_size(t_game_data *g)
 {
 	int		fd;
 	char	*line;

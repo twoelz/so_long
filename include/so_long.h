@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 11:21:11 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/20 20:44:50 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/20 20:51:32 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,13 +143,13 @@ void	print_dimensions(t_game_data *g);
 void	print_ber(t_game_data *g);
 
 // validate_file.c
-int		validate_extension(char *map_path, int *error_code);
-int		validate_path(char *map_path, int *error_code);
+int		check_extension(char *map_path, int *error_code);
+int		check_path(char *map_path, int *error_code);
 int		validate_empty(int fd, int *error_code);
 
 // validate_map.c
 int		validate_map(t_game_data *g);
-int		validate_minumum_size(t_game_data *g);
+int		check_minumum_size(t_game_data *g);
 
 // utils/str_utils.c
 int		found_in_str(char c_to_find, char *str);

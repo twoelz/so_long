@@ -6,13 +6,13 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 18:38:05 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/20 02:42:29 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/20 20:48:04 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	validate_extension(char *ber_path, int *error_code)
+int	check_extension(char *ber_path, int *error_code)
 {
 	size_t	len;
 
@@ -26,7 +26,7 @@ int	validate_extension(char *ber_path, int *error_code)
 	return (*error_code);
 }
 
-int	validate_path(char *ber_path, int *error_code)
+int	check_path(char *ber_path, int *error_code)
 {
 	int		fd;
 
