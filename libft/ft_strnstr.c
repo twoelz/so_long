@@ -6,14 +6,14 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 18:24:01 by tda-roch          #+#    #+#             */
-/*   Updated: 2024/10/18 11:57:27 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/20 02:56:42 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 /*
-locates the first occurrence of the null-terminated string little in the 
+locates the first occurrence of the null-terminated string little in the
 string big, where not more than len characters are searched.  Characters that
 appear after a ‘\0’ character are not searched.
 RETURN VALUES

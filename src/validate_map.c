@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 21:39:05 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/20 01:16:29 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/20 03:36:12 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,22 +64,70 @@ int	load_ber(t_game_data *g)
 		g->ber[i] = line;
 		i++;
 	}
-	printf("loaded ber\n");
 	print_ber(g);
 	return (g->error_code);
 }
-// int	check_rectangular(t_game_data *g)
-// {
-// 	int x;
-// 	int y;
 
-// 	x = 0;
-// 	y = 0;
-// 	while (y < g->height)
-// 	{
-		
-// 	}
-// }
+int	check_rectangular(t_game_data *g)
+{
+	int	y;
+
+	y = 0;
+	while (y < g->height)
+	{
+		if ((int)ft_strlen(g->ber[y]) != g->width)
+			return (set_error_code(g, E_NO_RECTANGLE));
+		y++;
+	}
+	return (g->error_code);
+}
+
+int	check_chars(t_game_data *g)
+{
+	int	x;
+	int	y;
+
+	x = 0;
+	y = 0;
+	while (y < g->height)
+	{
+		if (!found_in_str(g->ber[y][x], VALID_MAP_CHARS))
+			return (set_error_code(g, E_INVALID_CHAR));
+		x++;
+		if (x > g->width)
+		{
+			x = 0;
+			y++;
+		}
+	}
+	return (g->error_code);
+}
+
+int	check_walled(t_game_data *g)
+{
+	int	x;
+	int	y;
+
+	x = 0;
+	y = 0;
+	while (y < g->height)
+	{
+		if (((x == 0 || x == g->width - 1 || y == 0 || y == g->height - 1) \
+			&& g->ber[y][x] != '1'))
+		{
+			ft_putchar_fd(g->ber[y][x], STDOUT_FILENO);
+			return (set_error_code(g, E_INVALID_CHAR));
+		}
+		x++;
+		if (x > g->width)
+		{
+			x = 0;
+			y++;
+		}
+	}
+	return (g->error_code);
+}
+
 
 int	validate_map(t_game_data *g)
 {
@@ -89,10 +137,15 @@ int	validate_map(t_game_data *g)
 		return (g->error_code);
 	if (validate_minumum_size(g))
 		return (g->error_code);
-	// if (load_ber(g))
-	// 	return (g->error_code);
-	// if (check_rectangular(g))
-	// 	return (g->error_code);
+	if (load_ber(g))
+		return (g->error_code);
+	if (check_rectangular(g))
+		return (g->error_code);
+	if (check_chars(g))
+		return (g->error_code);
+	if (check_walled(g))
+		return (g->error_code);
+
 	return (g->error_code);
 }
 

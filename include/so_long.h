@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 11:21:11 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/19 23:46:22 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/20 03:15:13 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,9 @@ the 42 cursus project "so_long"
 # define WIDTH 1024
 # define HEIGHT 768
 # define TILE 96
+
+/* valid map chars */
+# define VALID_MAP_CHARS "01CEP"
 
 /* Z positioning of sprites */
 enum
@@ -134,5 +137,8 @@ int		validate_empty(int fd, int *error_code);
 // validate_map.c
 int		validate_map(t_game_data *g);
 int		validate_minumum_size(t_game_data *g);
+
+// utils/str_utils.c
+int		found_in_str(char c_to_find, char *str);
 
 #endif

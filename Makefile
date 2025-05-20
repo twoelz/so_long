@@ -35,6 +35,7 @@ SRCS = so_long.c \
 	input.c \
 	validate_file.c \
 	validate_map.c \
+	utils/str_utils.c \
 
 OBJS = $(SRCS:.c=.o)
 OBJS := $(addprefix $(OBJDIR)/, $(OBJS))
