@@ -6,12 +6,12 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 21:39:05 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/20 22:09:26 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/21 02:08:21 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
+// TODO: remove print_ber
 int	validate_map(t_game_data *g)
 {
 	if (check_extension(g->ber_path, &g->error_code))
@@ -20,8 +20,9 @@ int	validate_map(t_game_data *g)
 		return (g->error_code);
 	if (check_minumum_size(g))
 		return (g->error_code);
-	if (load_ber(g))
+	if (load_ber(g, &g->ber))
 		return (g->error_code);
+	print_ber(g, &g->ber);
 	if (check_rectangular(g))
 		return (g->error_code);
 	if (check_chars(g))
@@ -37,14 +38,14 @@ int	validate_map(t_game_data *g)
 TODO: check if I need to free line after assigning the line to g->ber[i]
 TODO: remove prints
 */
-int	load_ber(t_game_data *g)
+int	load_ber(t_game_data *g, char ***ber)
 {
 	int		fd;
 	char	*line;
 	int		i;
 
-	g->ber = ft_calloc((g->height + 1), sizeof(char *));
-	if (!g->ber)
+	*ber = ft_calloc((g->height + 1), sizeof(char *));
+	if (!*ber)
 		return (set_error_code(g, E_ALLOC));
 	fd = open(g->ber_path, O_RDONLY);
 	if (fd == -1)
@@ -57,10 +58,9 @@ int	load_ber(t_game_data *g)
 			break ;
 		if (line[0] != '\0' && line[ft_strlen(line) - 1] == '\n')
 			line[ft_strlen(line) - 1] = '\0';
-		g->ber[i] = line;
+		(*ber)[i] = line;
 		i++;
 	}
-	print_ber(g);
 	return (g->error_code);
 }
 

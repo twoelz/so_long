@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 11:21:11 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/20 22:51:33 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/21 02:49:37 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ typedef enum e_error_codes
 	E_NO_EXIT,
 	E_MULTI_START,
 	E_MULTI_EXIT,
+	E_NO_REACH_COLLECT,
+	E_NO_REACH_EXIT,
 }	t_error_codes;
 
 # define ERROR_MSG "Error"
@@ -98,6 +100,14 @@ typedef enum e_error_codes
 # define E_NO_EXIT_MSG "Invalid map: no exit found."
 # define E_MULTI_START_MSG "Invalid map: multiple start positions found."
 # define E_MULTI_EXIT_MSG "Invalid map: multiple exits found."
+# define E_NO_REACH_COLLECT_MSG "Invalid map: unreacheable collectible."
+# define E_NO_REACH_EXIT_MSG "Invalid map: unreacheable exit."
+
+typedef struct s_point
+{
+	int	x;
+	int	y;
+}	t_point;
 
 typedef struct s_map_items
 {
@@ -115,17 +125,14 @@ typedef struct s_game_data
 	int			height;
 	int			moves;
 	int			error_code;
-	char		*error_message[17];
+	char		*error_message[19];
 	char		*ber_path;
 	char		**ber;
+	t_point		player;
 	t_map_items	items;
 }	t_game_data;
 
-typedef struct s_point
-{
-	int	x;
-	int	y;
-}	t_point;
+
 
 // input.c
 void	game_keyhook(mlx_key_data_t keydata, void *param);
@@ -143,17 +150,19 @@ int		return_error(t_game_data *g);
 
 // free_everything.c
 void	free_everything(t_game_data *g);
+void	safe_free_2d_char(char ***ptr);
 
 // exit.c
 void	exit_game(t_game_data *g);
 
 // print_stuff.c
 void	print_dimensions(t_game_data *g);
-void	print_ber(t_game_data *g);
+void	print_ber(t_game_data *g, char ***ber);
+void	print_player_coordinates(t_game_data *g);
 
 // validate_map.c
 int		validate_map(t_game_data *g);
-int		load_ber(t_game_data *g);
+int		load_ber(t_game_data *g, char ***ber);
 int		check_rectangular(t_game_data *g);
 int		check_chars(t_game_data *g);
 int		check_walled(t_game_data *g);
@@ -165,9 +174,8 @@ int		check_minumum_size(t_game_data *g);
 
 // validate_map_items.c
 int		validate_map_items(t_game_data *g);
-void	count_map_items(t_game_data *g);
-int		check_missing_items(t_game_data *g);
-int		check_excessive_items(t_game_data *g);
+void	count_map_items(t_game_data *g, t_map_items *items, char ***ber);
+int		check_number_of_items(t_game_data *g);
 
 
 // utils/str_utils.c
