@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 19:15:38 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/21 12:05:57 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/21 12:21:37 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,6 @@ void	set_player_coordinates(t_game_data *g)
 
 void	fill_reachable(t_game_data *g, char **ber, int x, int y)
 {
-	// if (x < 0 || y < 0 || x >= g->width || y >= g->height)
-	// 	return ;
 	if (ber[y][x] == '1')
 		return ;
 	ber[y][x] = '1';

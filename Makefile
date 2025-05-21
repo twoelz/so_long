@@ -34,6 +34,7 @@ SRCS = so_long.c \
 	exit.c \
 	free_everything.c \
 	input.c \
+	moves.c \
 	print_stuff.c \
 	validate_map.c \
 	validate_map_file.c \

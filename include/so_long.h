@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 11:21:11 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/21 12:06:45 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/21 13:01:39 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,9 +157,17 @@ void	safe_free_2d_char(char ***ptr);
 // exit.c
 void	exit_game(t_game_data *g);
 
+// moves.c
+void	move_left(t_game_data *g);
+void	move_right(t_game_data *g);
+void	move_up(t_game_data *g);
+void	move_down(t_game_data *g);
+void	process_position(t_game_data *g);
+
 // print_stuff.c
 void	print_dimensions(t_game_data *g);
 void	print_ber(t_game_data *g, char ***ber);
+void	print_updated_ber(t_game_data *g);
 void	print_player_coordinates(t_game_data *g);
 
 // validate_map.c
@@ -178,6 +186,7 @@ int		check_minumum_size(t_game_data *g);
 int		validate_map_items(t_game_data *g);
 void	count_map_items(t_game_data *g, t_map_items *items, char ***ber);
 int		check_number_of_items(t_game_data *g);
+int		check_reachable_items(t_game_data *g);
 
 
 // utils/str_utils.c

@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 11:42:19 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/20 14:52:01 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/21 13:03:46 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ void	game_keyhook(mlx_key_data_t k, void *param)
 	if (k.action == MLX_PRESS || k.action == MLX_REPEAT)
 	{
 		if (k.key == MLX_KEY_A)
-			ft_putendl("go left");
+			move_left(g);
 		else if (k.key == MLX_KEY_D)
-			ft_putendl("go right");
+			move_right(g);
 		else if (k.key == MLX_KEY_W)
-			ft_putendl("go up");
+			move_up(g);
 		else if (k.key == MLX_KEY_S)
-			ft_putendl("go down");
+			move_down(g);
 		else if (k.key == MLX_KEY_ESCAPE)
 			return (exit_game(g));
 		else

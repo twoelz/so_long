@@ -6,27 +6,11 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 20:56:46 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/21 12:08:03 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/21 12:26:22 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-int	check_reachable_items(t_game_data *g)
-{
-	t_map_items	items;
-	char		**ber;
-
-	load_ber(g, &ber);
-	fill_reachable(g, ber, g->player.x, g->player.y);
-	count_map_items(g, &items, &ber);
-	safe_free_2d_char(&ber);
-	if (items.collectibles)
-		return (set_error_code(g, E_NO_REACH_COLLECT));
-	if (items.exits)
-		return (set_error_code(g, E_NO_REACH_EXIT));
-	return (g->error_code);
-}
 
 int	validate_map_items(t_game_data *g)
 {
@@ -34,7 +18,6 @@ int	validate_map_items(t_game_data *g)
 	if (check_number_of_items(g))
 		return (g->error_code);
 	set_player_coordinates(g);
-	print_player_coordinates(g);
 	if (check_reachable_items(g))
 		return (g->error_code);
 	return (g->error_code);
@@ -77,5 +60,21 @@ int	check_number_of_items(t_game_data *g)
 		return (set_error_code(g, E_MULTI_EXIT));
 	if (items->players > 1)
 		return (set_error_code(g, E_MULTI_START));
+	return (g->error_code);
+}
+
+int	check_reachable_items(t_game_data *g)
+{
+	t_map_items	items;
+	char		**ber;
+
+	load_ber(g, &ber);
+	fill_reachable(g, ber, g->player.x, g->player.y);
+	count_map_items(g, &items, &ber);
+	safe_free_2d_char(&ber);
+	if (items.collectibles)
+		return (set_error_code(g, E_NO_REACH_COLLECT));
+	if (items.exits)
+		return (set_error_code(g, E_NO_REACH_EXIT));
 	return (g->error_code);
 }
