@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 11:21:11 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/21 04:26:11 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/21 12:06:45 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,6 +139,8 @@ void	game_keyhook(mlx_key_data_t keydata, void *param);
 
 // coordinates.c
 void	next_point(t_point *p, int width);
+void	set_player_coordinates(t_game_data *g);
+void	fill_reachable(t_game_data *g, char **ber, int x, int y);
 
 // error.c
 void	exit_after_mlx_error(void);

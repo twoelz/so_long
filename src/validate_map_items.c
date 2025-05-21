@@ -6,41 +6,11 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 20:56:46 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/21 04:16:15 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/21 12:08:03 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-void	fill_reacheable(t_game_data *g, char **ber, int x, int y)
-{
-	if (x < 0 || y < 0 || x >= g->width || y >= g->height)
-		return ;
-	if (ber[y][x] == '1')
-		return ;
-	ber[y][x] = '1';
-	fill_reacheable(g, ber, x + 1, y);
-	fill_reacheable(g, ber, x - 1, y);
-	fill_reacheable(g, ber, x, y + 1);
-	fill_reacheable(g, ber, x, y - 1);
-}
-
-void	set_player_coordinates(t_game_data *g)
-{
-	t_point	p;
-
-	ft_bzero(&p, sizeof(p));
-	while (p.y < g->height)
-	{
-		if (g->ber[p.y][p.x] == 'P')
-		{
-			g->player.x = p.x;
-			g->player.y = p.y;
-			return ;
-		}
-		next_point(&p, g->width);
-	}
-}
 
 int	check_reachable_items(t_game_data *g)
 {
@@ -48,8 +18,7 @@ int	check_reachable_items(t_game_data *g)
 	char		**ber;
 
 	load_ber(g, &ber);
-	print_ber(g, &ber);
-	fill_reacheable(g, ber, g->player.x, g->player.y);
+	fill_reachable(g, ber, g->player.x, g->player.y);
 	count_map_items(g, &items, &ber);
 	safe_free_2d_char(&ber);
 	if (items.collectibles)

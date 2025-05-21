@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 21:39:05 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/21 04:20:24 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/21 12:00:03 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	load_ber(t_game_data *g, char ***ber)
 {
 	int		fd;
 	char	*line;
-	int		i;
+	int		y;
 
 	*ber = ft_calloc((g->height + 1), sizeof(char *));
 	if (!*ber)
@@ -50,7 +50,7 @@ int	load_ber(t_game_data *g, char ***ber)
 	fd = open(g->ber_path, O_RDONLY);
 	if (fd == -1)
 		return (set_error_code(g, E_READ_ERROR));
-	i = 0;
+	y = 0;
 	while (true)
 	{
 		line = get_next_line(fd);
@@ -58,10 +58,10 @@ int	load_ber(t_game_data *g, char ***ber)
 			break ;
 		if (line[0] != '\0' && line[ft_strlen(line) - 1] == '\n')
 			line[ft_strlen(line) - 1] = '\0';
-		(*ber)[i] = line;
-		i++;
+		(*ber)[y] = line;
+		y++;
 	}
-	ber[i] = NULL;
+	ber[y] = NULL;
 	close(fd);
 	return (g->error_code);
 }
