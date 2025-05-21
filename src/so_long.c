@@ -6,13 +6,11 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 17:13:37 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/19 14:35:58 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/21 03:03:04 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-
 
 //TODO: check if bool is needed, if anything can go wrong here (returning false)
 int	init_game_data(t_game_data *g, int argc, char *ber_path)

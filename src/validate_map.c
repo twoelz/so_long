@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 21:39:05 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/21 02:08:21 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/21 04:20:24 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ int	load_ber(t_game_data *g, char ***ber)
 		(*ber)[i] = line;
 		i++;
 	}
+	ber[i] = NULL;
+	close(fd);
 	return (g->error_code);
 }
 
