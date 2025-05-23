@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 20:07:28 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/21 12:48:54 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/23 03:41:42 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@ void	print_updated_ber(t_game_data *g)
 		c = g->ber[p.y][p.x];
 		if (p.x == g->player.x && p.y == g->player.y)
 			c = 'P';
-		else if (c == 'P')
-			c = '0';
 		ft_putchar(c);
 		if (p.x == g->width - 1)
 			ft_putchar('\n');

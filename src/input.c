@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 11:42:19 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/21 13:03:46 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/23 03:47:21 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	game_keyhook(mlx_key_data_t k, void *param)
 			return (exit_game(g));
 		else
 			return ;
-		g->moves++;
-		ft_printf("%d moves\n", g->moves);
+
 	}
 }

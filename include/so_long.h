@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 11:21:11 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/21 13:01:39 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/23 03:52:10 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,11 +158,13 @@ void	safe_free_2d_char(char ***ptr);
 void	exit_game(t_game_data *g);
 
 // moves.c
+
 void	move_left(t_game_data *g);
 void	move_right(t_game_data *g);
 void	move_up(t_game_data *g);
 void	move_down(t_game_data *g);
 void	process_position(t_game_data *g);
+void	hit_wall(void);
 
 // print_stuff.c
 void	print_dimensions(t_game_data *g);

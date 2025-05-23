@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 20:56:46 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/21 12:26:22 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/23 00:27:01 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	validate_map_items(t_game_data *g)
 	set_player_coordinates(g);
 	if (check_reachable_items(g))
 		return (g->error_code);
+	g->ber[g->player.y][g->player.x] = '0';
 	return (g->error_code);
 }
 
