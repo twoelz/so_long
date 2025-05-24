@@ -6,24 +6,11 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 17:13:37 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/21 03:03:04 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/24 12:57:52 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-//TODO: check if bool is needed, if anything can go wrong here (returning false)
-int	init_game_data(t_game_data *g, int argc, char *ber_path)
-{
-	ft_bzero(g, sizeof(t_game_data));
-	init_error_messages(g);
-	if (argc < 2)
-		return (set_error_code(g, E_NO_PATH_ARG));
-	g->ber_path = ber_path;
-	if (!validate_map(g))
-		return (g->error_code);
-	return (g->error_code);
-}
 
 int	main(int argc, char **argv)
 {
@@ -56,4 +43,36 @@ int	main(int argc, char **argv)
 	mlx_loop(g.mlx);
 	mlx_terminate(g.mlx);
 	return (EXIT_SUCCESS);
+}
+
+//TODO: check if bool is needed, if anything can go wrong here (returning false)
+int	init_game_data(t_game_data *g, int argc, char *ber_path)
+{
+	ft_bzero(g, sizeof(t_game_data));
+	init_error_messages(g);
+	if (argc < 2)
+		return (set_error_code(g, E_NO_PATH_ARG));
+	g->ber_path = ber_path;
+	if (!validate_map(g))
+		return (g->error_code);
+	return (g->error_code);
+}
+
+void	process_position(t_game_data *g)
+{
+	ft_printf("%d moves\n", g->moves);
+	if (g->ber[g->player.y][g->player.x] == 'C')
+	{
+		g->ber[g->player.y][g->player.x] = '0';
+		g->items.collectibles--;
+	}
+	print_updated_ber(g);
+	if (g->ber[g->player.y][g->player.x] == 'E' && g->items.collectibles <= 0)
+		exit_game_reached(g);
+}
+
+void	exit_game_reached(t_game_data *g)
+{
+	ft_putendl(EXIT_REACHED_MSG);
+	exit_game(g);
 }

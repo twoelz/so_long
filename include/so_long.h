@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 11:21:11 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/23 03:52:10 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/24 12:56:51 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,9 @@ typedef enum e_error_codes
 	E_NO_REACH_EXIT,
 }	t_error_codes;
 
+/* ERROR MESSAGES */
 # define ERROR_MSG "Error"
-# define E_SUCCESS_MSG "loading map..."
+# define E_SUCCESS_MSG ""
 # define E_ALLOC_MSG "allocation error"
 # define E_NO_PATH_ARG_MSG "Missing map argument."
 # define E_INVALID_EXT_MSG "Invalid map extension."
@@ -102,6 +103,17 @@ typedef enum e_error_codes
 # define E_MULTI_EXIT_MSG "Invalid map: multiple exits found."
 # define E_NO_REACH_COLLECT_MSG "Invalid map: unreacheable collectible."
 # define E_NO_REACH_EXIT_MSG "Invalid map: unreacheable exit."
+
+/* GAME MESSAGES */
+# define MOVED_LEFT_MSG "moved left"
+# define MOVED_RIGHT_MSG "moved right"
+# define MOVED_UP_MSG "moved up"
+# define MOVED_DOWN_MSG "moved down"
+# define EXIT_REACHED_MSG "Set sail, we are going hooome!!!"
+# define HIT_WALL_MSG "CAN'T GO, HIT WALL!"
+
+/* CLEAR TERMINAL ANSI SEQUENCE */
+# define CLEAR_TERMINAL_SEQUENCE "\033[3J\033[H\033[2J"
 
 typedef struct s_point
 {
@@ -133,6 +145,11 @@ typedef struct s_game_data
 }	t_game_data;
 
 
+// so_long.c
+void	exit_game_reached(t_game_data *g);
+int		init_game_data(t_game_data *g, int argc, char *ber_path);
+void	process_position(t_game_data *g);
+
 
 // input.c
 void	game_keyhook(mlx_key_data_t keydata, void *param);
@@ -163,14 +180,14 @@ void	move_left(t_game_data *g);
 void	move_right(t_game_data *g);
 void	move_up(t_game_data *g);
 void	move_down(t_game_data *g);
-void	process_position(t_game_data *g);
-void	hit_wall(void);
+void	hit_wall(t_game_data *g);
 
 // print_stuff.c
 void	print_dimensions(t_game_data *g);
 void	print_ber(t_game_data *g, char ***ber);
 void	print_updated_ber(t_game_data *g);
 void	print_player_coordinates(t_game_data *g);
+void	clear_terminal(void);
 
 // validate_map.c
 int		validate_map(t_game_data *g);

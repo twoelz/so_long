@@ -6,13 +6,12 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 11:42:19 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/23 03:47:21 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/24 12:52:08 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-// TODO: replace ft_putstr_fd with ft_putstr or ft_printf?
 void	game_keyhook(mlx_key_data_t k, void *param)
 {
 	t_game_data	*g;
@@ -20,6 +19,7 @@ void	game_keyhook(mlx_key_data_t k, void *param)
 	g = (t_game_data *)param;
 	if (k.action == MLX_PRESS || k.action == MLX_REPEAT)
 	{
+		clear_terminal();
 		if (k.key == MLX_KEY_A)
 			move_left(g);
 		else if (k.key == MLX_KEY_D)
@@ -32,6 +32,5 @@ void	game_keyhook(mlx_key_data_t k, void *param)
 			return (exit_game(g));
 		else
 			return ;
-
 	}
 }

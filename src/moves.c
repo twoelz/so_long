@@ -6,61 +6,54 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 12:42:28 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/23 03:50:34 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/24 12:58:35 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	hit_wall(void)
+void	hit_wall(t_game_data *g)
 {
-	ft_putendl("CAN'T GO, HIT WALL!");
+	process_position(g);
+	ft_putendl(HIT_WALL_MSG);
 }
 
 void	move_left(t_game_data *g)
 {
 	if (g->ber[g->player.y][g->player.x - 1] == '1')
-		return (hit_wall());
+		return (hit_wall(g));
+	g->moves++;
 	g->player.x -= 1;
 	process_position(g);
-	ft_putendl("moved left");
+	ft_putendl(MOVED_LEFT_MSG);
 }
 
 void	move_right(t_game_data *g)
 {
 	if (g->ber[g->player.y][g->player.x + 1] == '1')
-		return (hit_wall());
+		return (hit_wall(g));
+	g->moves++;
 	g->player.x += 1;
 	process_position(g);
-	ft_putendl("moved right");
+	ft_putendl(MOVED_RIGHT_MSG);
 }
 
 void	move_up(t_game_data *g)
 {
 	if (g->ber[g->player.y - 1][g->player.x] == '1')
-		return (ft_putendl("CAN'T GO, HIT WALL!"));
+		return (hit_wall(g));
+	g->moves++;
 	g->player.y -= 1;
 	process_position(g);
-	ft_putendl("moved up");
+	ft_putendl(MOVED_UP_MSG);
 }
 
 void	move_down(t_game_data *g)
 {
 	if (g->ber[g->player.y + 1][g->player.x] == '1')
-		return (hit_wall());
+		return (hit_wall(g));
+	g->moves++;
 	g->player.y += 1;
 	process_position(g);
-	ft_putendl("moved down");
-}
-
-void	process_position(t_game_data *g)
-{
-	g->moves++;
-	ft_printf("%d moves\n", g->moves);
-	if (g->ber[g->player.y][g->player.x] == 'C')
-	{
-		g->ber[g->player.y][g->player.x] = '0';
-		g->items.collectibles--;
-	}
-	print_updated_ber(g);
+	ft_putendl(MOVED_DOWN_MSG);
 }
