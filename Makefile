@@ -33,6 +33,7 @@ SRCS = so_long.c \
 	error.c \
 	exit.c \
 	free_everything.c \
+	images.c \
 	input.c \
 	moves.c \
 	print_stuff.c \

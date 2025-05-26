@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 11:21:11 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/24 12:56:51 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/26 15:07:45 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,15 @@ the 42 cursus project "so_long"
 # include "MLX42/MLX42.h"
 # include "libft.h"
 
-/* game dimensions */
+/* game tile png paths */
+# define TILE_PLAYER "./media/vela.png"
+# define TILE_WALL "./media/pebbles.png"
+# define TILE_SPACE "./media/brush_water.png"
+# define TILE_COLLECTIBLE "./media/cetus.png"
+# define TILE_EXIT_CLOSED "./media/pyxis_closed.png"
+# define TILE_EXIT_OPEN "./media/pyxis_open.png"
 
+/* game dimensions */
 # define WIDTH 1024
 # define HEIGHT 768
 # define TILE 96
@@ -129,6 +136,16 @@ typedef struct s_map_items
 	size_t		players;
 }	t_map_items;
 
+typedef struct s_tiles
+{
+	mlx_image_t	*player;
+	mlx_image_t	*wall;
+	mlx_image_t	*space;
+	mlx_image_t	*collectible;
+	mlx_image_t	*exit_closed;
+	mlx_image_t	*exit_open;
+}	t_tiles;
+
 typedef struct s_game_data
 {
 	mlx_t		*mlx;
@@ -141,18 +158,14 @@ typedef struct s_game_data
 	char		*ber_path;
 	char		**ber;
 	t_point		player;
-	t_map_items	items;
+	t_map_items	item;
+	t_tiles		tile;
 }	t_game_data;
-
 
 // so_long.c
 void	exit_game_reached(t_game_data *g);
 int		init_game_data(t_game_data *g, int argc, char *ber_path);
 void	process_position(t_game_data *g);
-
-
-// input.c
-void	game_keyhook(mlx_key_data_t keydata, void *param);
 
 // coordinates.c
 void	next_point(t_point *p, int width);
@@ -160,22 +173,30 @@ void	set_player_coordinates(t_game_data *g);
 void	fill_reachable(t_game_data *g, char **ber, int x, int y);
 
 // error.c
-void	exit_after_mlx_error(void);
+
 void	init_error_messages(t_game_data *g);
 int		set_error_code(t_game_data *g, int error_code);
 void	set_error_message(char **error_message, \
 			int error_code, char *message);
 int		return_error(t_game_data *g);
 
+// exit.c
+void	exit_game(t_game_data *g);
+void	exit_mlx_init_error(t_game_data *g);
+void	exit_mlx_error(t_game_data *g);
+
 // free_everything.c
 void	free_everything(t_game_data *g);
 void	safe_free_2d_char(char ***ptr);
 
-// exit.c
-void	exit_game(t_game_data *g);
+// images.c
+void	add_all_game_images(t_game_data *g);
+void	png_to_image(t_game_data *g, mlx_image_t **image, char *png_path);
+
+// input.c
+void	game_keyhook(mlx_key_data_t keydata, void *param);
 
 // moves.c
-
 void	move_left(t_game_data *g);
 void	move_right(t_game_data *g);
 void	move_up(t_game_data *g);

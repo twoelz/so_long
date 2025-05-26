@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 20:56:46 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/23 00:27:01 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/26 13:23:27 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	validate_map_items(t_game_data *g)
 {
-	count_map_items(g, &g->items, &g->ber);
+	count_map_items(g, &g->item, &g->ber);
 	if (check_number_of_items(g))
 		return (g->error_code);
 	set_player_coordinates(g);
@@ -50,7 +50,7 @@ int	check_number_of_items(t_game_data *g)
 {
 	t_map_items	*items;
 
-	items = &g->items;
+	items = &g->item;
 	if (!items->collectibles)
 		return (set_error_code(g, E_NO_COLLECT));
 	if (!items->exits)

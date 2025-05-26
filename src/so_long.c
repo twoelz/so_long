@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 17:13:37 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/24 12:57:52 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/26 14:56:04 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,16 @@ int	main(int argc, char **argv)
 	// mlx_image_t	*img;
 
 	mlx_set_setting(MLX_MAXIMIZED, false);
-	g.mlx = mlx_init(WIDTH, HEIGHT, "so long", true);
+	g.mlx = mlx_init(g.width * TILE, g.height * TILE, "so long", true);
 	if (!g.mlx)
-		exit_after_mlx_error();
+		exit_mlx_init_error(&g);
 
 	/* Do stuff */
+	add_all_game_images(&g);
 
 	g.img = mlx_new_image(g.mlx, 256, 256);
 	if (!g.img || (mlx_image_to_window(g.mlx, g.img, 0, 0) < 0))
-		exit_after_mlx_error();
+		exit_mlx_init_error(&g);
 
 	// Even after the image is being displayed, we can still modify the buffer.
 	mlx_put_pixel(g.img, 0, 0, 0xFF0000FF);
@@ -64,10 +65,10 @@ void	process_position(t_game_data *g)
 	if (g->ber[g->player.y][g->player.x] == 'C')
 	{
 		g->ber[g->player.y][g->player.x] = '0';
-		g->items.collectibles--;
+		g->item.collectibles--;
 	}
 	print_updated_ber(g);
-	if (g->ber[g->player.y][g->player.x] == 'E' && g->items.collectibles <= 0)
+	if (g->ber[g->player.y][g->player.x] == 'E' && g->item.collectibles <= 0)
 		exit_game_reached(g);
 }
 
