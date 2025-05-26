@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 17:13:37 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/26 14:56:04 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/26 22:15:09 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,12 @@ int	main(int argc, char **argv)
 		exit_mlx_init_error(&g);
 
 	/* Do stuff */
-	add_all_game_images(&g);
+	load_game_images(&g);
+	add_game_tiles(&g);
 
 	g.img = mlx_new_image(g.mlx, 256, 256);
 	if (!g.img || (mlx_image_to_window(g.mlx, g.img, 0, 0) < 0))
-		exit_mlx_init_error(&g);
+		exit_mlx_error(&g);
 
 	// Even after the image is being displayed, we can still modify the buffer.
 	mlx_put_pixel(g.img, 0, 0, 0xFF0000FF);

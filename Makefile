@@ -37,6 +37,7 @@ SRCS = so_long.c \
 	input.c \
 	moves.c \
 	print_stuff.c \
+	tile_image_change.c \
 	validate_map.c \
 	validate_map_file.c \
 	validate_map_items.c \

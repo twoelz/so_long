@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 11:21:11 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/26 15:07:45 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/26 22:27:00 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,11 +190,19 @@ void	free_everything(t_game_data *g);
 void	safe_free_2d_char(char ***ptr);
 
 // images.c
-void	add_all_game_images(t_game_data *g);
+void	load_game_images(t_game_data *g);
+void	add_game_tiles(t_game_data *g);
+void	add_game_tile(t_game_data *g, int x, int y);
 void	png_to_image(t_game_data *g, mlx_image_t **image, char *png_path);
 
 // input.c
 void	game_keyhook(mlx_key_data_t keydata, void *param);
+
+// tile_image_change.c
+void	move_player_image_up(t_game_data *g);
+void	move_player_image_down(t_game_data *g);
+void	move_player_image_left(t_game_data *g);
+void	move_player_image_right(t_game_data *g);
 
 // moves.c
 void	move_left(t_game_data *g);
