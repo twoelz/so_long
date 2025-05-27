@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 18:08:22 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/27 07:20:38 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/27 09:25:18 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,13 @@ void	load_game_images(t_game_data *g)
 	png_to_image(g, &g->tile.collectible, TILE_COLLECTIBLE);
 	png_to_image(g, &g->tile.exit_closed, TILE_EXIT_CLOSED);
 	png_to_image(g, &g->tile.exit_open, TILE_EXIT_OPEN);
-	png_to_image(g, &g->tile.player, TILE_PLAYER);
 	png_to_image(g, &g->tile.wall, TILE_WALL);
+	png_to_image(g, &g->tile.player_right, TILE_PLAYER_RIGHT);
+	png_to_image(g, &g->tile.player_left, TILE_PLAYER_LEFT);
+	png_to_image(g, &g->tile.player_up_right, TILE_PLAYER_UP_RIGHT);
+	png_to_image(g, &g->tile.player_up_left, TILE_PLAYER_UP_LEFT);
+	png_to_image(g, &g->tile.player_down_right, TILE_PLAYER_DOWN_RIGHT);
+	png_to_image(g, &g->tile.player_down_left, TILE_PLAYER_DOWN_LEFT);
 }
 
 void	png_to_image(t_game_data *g, mlx_image_t **image, char *png_path)
@@ -57,7 +62,19 @@ void	add_game_tiles(t_game_data *g)
 		mlx_set_instance_depth(&g->tile.collectible->instances[i++], \
 				Z_COLLECTIBLE);
 	mlx_set_instance_depth(&g->tile.exit_closed->instances[0], Z_EXIT);
-	mlx_set_instance_depth(&g->tile.player->instances[0], Z_PLAYER);
+	mlx_set_instance_depth(&g->tile.exit_open->instances[0], Z_EXIT);
+	mlx_set_instance_depth(&g->tile.player_right->instances[0], Z_PLAYER);
+	mlx_set_instance_depth(&g->tile.player_left->instances[0], Z_PLAYER);
+	mlx_set_instance_depth(&g->tile.player_up_right->instances[0], Z_PLAYER);
+	mlx_set_instance_depth(&g->tile.player_up_left->instances[0], Z_PLAYER);
+	mlx_set_instance_depth(&g->tile.player_down_right->instances[0], Z_PLAYER);
+	mlx_set_instance_depth(&g->tile.player_down_left->instances[0], Z_PLAYER);
+	g->tile.exit_open->enabled = false;
+	g->tile.player_left->enabled = false;
+	g->tile.player_up_left->enabled = false;
+	g->tile.player_up_right->enabled = false;
+	g->tile.player_down_left->enabled = false;
+	g->tile.player_down_right->enabled = false;
 }
 
 void	add_game_tile(t_game_data *g, int x, int y)
@@ -72,11 +89,21 @@ void	add_game_tile(t_game_data *g, int x, int y)
 	if (c == '1')
 		try_image_to_window(g, g->tile.wall, x * TILE, y * TILE);
 	else if (c == 'E')
+	{
 		try_image_to_window(g, g->tile.exit_closed, x * TILE, y * TILE);
+		try_image_to_window(g, g->tile.exit_open, x * TILE, y * TILE);
+	}
 	else if (c == 'C')
 		try_image_to_window(g, g->tile.collectible, x * TILE, y * TILE);
 	else if (c == 'P')
-		try_image_to_window(g, g->tile.player, x * TILE, y * TILE);
+	{
+		try_image_to_window(g, g->tile.player_left, x * TILE, y * TILE);
+		try_image_to_window(g, g->tile.player_right, x * TILE, y * TILE);
+		try_image_to_window(g, g->tile.player_up_right, x * TILE, y * TILE);
+		try_image_to_window(g, g->tile.player_up_left, x * TILE, y * TILE);
+		try_image_to_window(g, g->tile.player_down_right, x * TILE, y * TILE);
+		try_image_to_window(g, g->tile.player_down_left, x * TILE, y * TILE);
+	}
 }
 
 void	try_image_to_window(t_game_data *g, mlx_image_t *image, int x, int y)

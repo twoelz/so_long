@@ -6,33 +6,10 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 11:21:11 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/27 07:21:16 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/27 09:48:34 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
- * Main MLX handle, carries important data in regards to the program.
- * @param window The window itself.
- * @param context Abstracted opengl data.
- * @param width The width of the window.
- * @param height The height of the window.
- * @param delta_time The time difference between the previous frame and the
-   current frame.
-
-typedef struct mlx
-{
-	void*		window;
-	void*		context;
-	int32_t		width;
-	int32_t		height;
-	double		delta_time;
-}	mlx_t;
-*/
-
-/*
-this file is just to test creating an mlx project, as a prerequisite for
-the 42 cursus project "so_long"
-*/
 #ifndef SO_LONG_H
 # define SO_LONG_H
 # include <stdlib.h>
@@ -43,7 +20,12 @@ the 42 cursus project "so_long"
 # include "libft.h"
 
 /* game tile png paths */
-# define TILE_PLAYER "./media/vela.png"
+# define TILE_PLAYER_RIGHT "./media/vela_right.png"
+# define TILE_PLAYER_LEFT "./media/vela_left.png"
+# define TILE_PLAYER_UP_RIGHT "./media/vela_up_right.png"
+# define TILE_PLAYER_UP_LEFT "./media/vela_up_left.png"
+# define TILE_PLAYER_DOWN_RIGHT "./media/vela_down_right.png"
+# define TILE_PLAYER_DOWN_LEFT "./media/vela_down_left.png"
 # define TILE_WALL "./media/pebbles.png"
 # define TILE_SPACE "./media/brush_water.png"
 # define TILE_COLLECTIBLE "./media/cetus.png"
@@ -58,14 +40,14 @@ the 42 cursus project "so_long"
 /* valid map chars */
 # define VALID_MAP_CHARS "01CEP"
 
-/* Z positioning of sprites */
+/* Z position of tiles */
 enum
 {
-	Z_WALL,
 	Z_SPACE,
 	Z_COLLECTIBLE,
 	Z_EXIT,
 	Z_PLAYER,
+	Z_WALL,
 };
 
 typedef enum e_error_codes
@@ -138,12 +120,17 @@ typedef struct s_map_items
 
 typedef struct s_tiles
 {
-	mlx_image_t	*player;
 	mlx_image_t	*wall;
 	mlx_image_t	*space;
 	mlx_image_t	*collectible;
 	mlx_image_t	*exit_closed;
 	mlx_image_t	*exit_open;
+	mlx_image_t	*player_right;
+	mlx_image_t	*player_left;
+	mlx_image_t	*player_up_right;
+	mlx_image_t	*player_up_left;
+	mlx_image_t	*player_down_right;
+	mlx_image_t	*player_down_left;
 }	t_tiles;
 
 typedef struct s_game_data
@@ -160,6 +147,7 @@ typedef struct s_game_data
 	t_point		player;
 	t_map_items	item;
 	t_tiles		tile;
+	bool		looking_left;
 }	t_game_data;
 
 // so_long.c
@@ -205,6 +193,7 @@ void	move_player_image_up(t_game_data *g);
 void	move_player_image_down(t_game_data *g);
 void	move_player_image_left(t_game_data *g);
 void	move_player_image_right(t_game_data *g);
+void	disable_player_images(t_game_data *g);
 
 // moves.c
 void	move_left(t_game_data *g);
