@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 17:13:37 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/27 20:30:25 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/27 21:35:28 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ void	process_position(t_game_data *g)
 			|| g->tile.collectible->instances[i].y != g->player.y * g->tilesiz)
 			i++;
 		g->tile.collectible->instances[i].enabled = false;
+		g->collected = true;
 		if (g->item.collectibles <= 0)
 		{
 			g->tile.exit_closed->enabled = false;
@@ -103,8 +104,13 @@ void	process_position(t_game_data *g)
 		exit_game_reached(g);
 }
 
+/*
+TODO: exit on time?
+*/
 void	exit_game_reached(t_game_data *g)
 {
+	g->game_over = true;
+	g->tile.exit_open->enabled = false;
 	ft_putendl(EXIT_REACHED_MSG);
-	exit_game(g);
+	ft_putendl(GAME_OVER_MSG);
 }

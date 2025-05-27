@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 11:42:19 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/27 20:39:45 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/27 21:47:49 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ void	game_key_hook(mlx_key_data_t k, void *param)
 	{
 		if (k.key == MLX_KEY_ESCAPE)
 			close_game(g);
-		clear_terminal();
+		if (g->game_over)
+			return ;
+		clear_move_info(g);
 		if (k.key == MLX_KEY_A)
 			move_left(g);
 		else if (k.key == MLX_KEY_D)
@@ -32,6 +34,10 @@ void	game_key_hook(mlx_key_data_t k, void *param)
 			move_down(g);
 		else
 			return ;
+		if (!g->game_over && !g->hit_wall && g->item.collectibles <= 0)
+			ft_putendl(EXIT_OPEN_MSG);
+		if (g->collected)
+			ft_putendl(COLLECTED_MSG);
 	}
 }
 

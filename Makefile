@@ -35,6 +35,7 @@ SRCS = so_long.c \
 	free_everything.c \
 	input.c \
 	moves.c \
+	moves_helper.c \
 	print_stuff.c \
 	tile_image_change.c \
 	tile_images_add.c \

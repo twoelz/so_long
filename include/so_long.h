@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 11:21:11 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/27 20:37:54 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/27 21:47:22 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,11 @@ typedef enum e_error_codes
 # define MOVED_RIGHT_MSG "moved right"
 # define MOVED_UP_MSG "moved up"
 # define MOVED_DOWN_MSG "moved down"
-# define EXIT_REACHED_MSG "Set sail, we are going hooome!!!"
-# define HIT_WALL_MSG "You found the shore...\nKeep sailing, dear Vela!"
+# define COLLECTED_MSG "collected cetus!"
+# define EXIT_OPEN_MSG "pyxis is open, let's catch it!"
+# define EXIT_REACHED_MSG "set sail, we are going hooome!!!\n"
+# define GAME_OVER_MSG "\ngame over. press ESC or close window to exit\n"
+# define HIT_WALL_MSG "you found the shore...\nkeep sailing, dear Vela!"
 # define CLOSE_GAME_MSG "goodbye!"
 
 /* CLEAR TERMINAL ANSI SEQUENCE */
@@ -152,6 +155,9 @@ typedef struct s_game_data
 	t_map_items	item;
 	t_tiles		tile;
 	bool		looking_left;
+	bool		hit_wall;
+	bool		collected;
+	bool		game_over;
 }	t_game_data;
 
 // so_long.c
@@ -212,13 +218,15 @@ void	move_left(t_game_data *g);
 void	move_right(t_game_data *g);
 void	move_up(t_game_data *g);
 void	move_down(t_game_data *g);
+
+// moves_helper.c
+void	clear_move_info(t_game_data *g);
 void	hit_wall(t_game_data *g);
 
 // print_stuff.c
 void	print_ber(t_game_data *g, char ***ber);
 void	print_updated_ber(t_game_data *g);
 void	print_player_coordinates(t_game_data *g);
-void	clear_terminal(void);
 
 // validate_map.c
 int		validate_map(t_game_data *g);

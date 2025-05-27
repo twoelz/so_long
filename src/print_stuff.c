@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 20:07:28 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/27 20:09:47 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/27 21:45:26 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,4 @@ void	print_player_coordinates(t_game_data *g)
 {
 	ft_printf("-player coordinates-\n|   x:%d   |\n|   y:%d   |\n", \
 		g->player.x, g->player.y);
-}
-
-void	clear_terminal(void)
-{
-	ft_putstr(CLEAR_TERMINAL_SEQUENCE);
-	ft_putstr(CLEAR_TERMINAL_SEQUENCE);
 }
