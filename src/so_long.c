@@ -6,12 +6,16 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 17:13:37 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/27 19:48:56 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/27 20:30:25 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+/*
+TODO: Clicking on the cross on the window’s frame must close the window and 
+quit the program in a clean way.
+*/
 int	main(int argc, char **argv)
 {
 	t_game_data	g;
@@ -25,7 +29,8 @@ int	main(int argc, char **argv)
 	resize_if_needed(&g);
 	load_game_images(&g);
 	add_game_tiles(&g);
-	mlx_key_hook(g.mlx, &game_keyhook, &g);
+	mlx_key_hook(g.mlx, &game_key_hook, &g);
+	mlx_close_hook(g.mlx, &game_close_button_hook, &g);
 	mlx_loop(g.mlx);
 	mlx_terminate(g.mlx);
 	return (EXIT_SUCCESS);
@@ -92,7 +97,8 @@ void	process_position(t_game_data *g)
 			g->tile.exit_open->enabled = true;
 		}
 	}
-	print_updated_ber(g);
+	if (PRINT_BER)
+		print_updated_ber(g);
 	if (g->ber[g->player.y][g->player.x] == 'E' && g->item.collectibles <= 0)
 		exit_game_reached(g);
 }

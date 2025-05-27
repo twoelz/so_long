@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 11:21:11 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/27 19:51:23 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/27 20:37:54 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,9 +100,12 @@ typedef enum e_error_codes
 # define MOVED_DOWN_MSG "moved down"
 # define EXIT_REACHED_MSG "Set sail, we are going hooome!!!"
 # define HIT_WALL_MSG "You found the shore...\nKeep sailing, dear Vela!"
+# define CLOSE_GAME_MSG "goodbye!"
 
 /* CLEAR TERMINAL ANSI SEQUENCE */
 # define CLEAR_TERMINAL_SEQUENCE "\033[3J\033[H\033[2J"
+
+# define PRINT_BER false
 
 typedef struct s_point
 {
@@ -174,13 +177,15 @@ int		return_error(t_game_data *g);
 void	exit_game(t_game_data *g);
 void	exit_mlx_init_error(t_game_data *g);
 void	exit_mlx_error(t_game_data *g);
+void	close_game(t_game_data *g);
 
 // free_everything.c
 void	free_everything(t_game_data *g);
 void	safe_free_2d_char(char ***ptr);
 
 // input.c
-void	game_keyhook(mlx_key_data_t keydata, void *param);
+void	game_key_hook(mlx_key_data_t keydata, void *param);
+void	game_close_button_hook(void *param);
 
 // tile_image_change.c
 void	move_player_image_up(t_game_data *g);
@@ -210,7 +215,6 @@ void	move_down(t_game_data *g);
 void	hit_wall(t_game_data *g);
 
 // print_stuff.c
-void	print_dimensions(t_game_data *g);
 void	print_ber(t_game_data *g, char ***ber);
 void	print_updated_ber(t_game_data *g);
 void	print_player_coordinates(t_game_data *g);

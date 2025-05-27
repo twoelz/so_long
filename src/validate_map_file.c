@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 18:38:05 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/27 19:38:02 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/27 20:11:42 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,5 @@ int	check_minumum_size(t_game_data *g)
 	close(fd);
 	if ((g->height < 3 || g->width < 3) || g->height + g->width < 8)
 		return (set_error_code(g, E_MINIMUM_SIZE));
-	print_dimensions(g);
 	return (g->error_code);
 }

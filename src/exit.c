@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 02:46:19 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/27 19:53:00 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/27 20:38:20 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,11 @@ void	exit_mlx_error(t_game_data *g)
 {
 	ft_putendl("mlx error");
 	fprintf(stderr, "%s", mlx_strerror(mlx_errno));
+	exit_game(g);
+}
+
+void	close_game(t_game_data *g)
+{
+	ft_putendl(CLOSE_GAME_MSG);
 	exit_game(g);
 }
