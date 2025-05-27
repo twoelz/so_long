@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 18:08:22 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/26 22:29:17 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/27 05:43:25 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	add_game_tile(t_game_data *g, int x, int y)
 		if (mlx_image_to_window(g->mlx, g->tile.space, x * TILE, y * TILE) < 0)
 			exit_mlx_error(g);
 	}
-	if (c == 'W')
+	if (c == '1')
 	{
 		if (mlx_image_to_window(g->mlx, g->tile.wall, x * TILE, y * TILE) < 0)
 			exit_mlx_error(g);
@@ -61,6 +61,12 @@ void	add_game_tile(t_game_data *g, int x, int y)
 	else if (c == 'E')
 	{
 		if (mlx_image_to_window(g->mlx, g->tile.exit_closed, \
+				x * TILE, y * TILE) < 0)
+			exit_mlx_error(g);
+	}
+	else if (c == 'P')
+	{
+		if (mlx_image_to_window(g->mlx, g->tile.player, \
 				x * TILE, y * TILE) < 0)
 			exit_mlx_error(g);
 	}
