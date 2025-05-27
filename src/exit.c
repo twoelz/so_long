@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 02:46:19 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/26 15:18:01 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/27 19:53:00 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ void	exit_mlx_init_error(t_game_data *g)
 {
 	ft_putendl("mlx initialization error");
 	fprintf(stderr, "%s", mlx_strerror(mlx_errno));
-	// free_everything(g);
-	// exit(EXIT_FAILURE);
 	exit_game(g);
 }
 

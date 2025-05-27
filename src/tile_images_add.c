@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 10:01:22 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/27 10:08:40 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/27 19:51:44 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,28 +68,28 @@ void	add_game_tile(t_game_data *g, int x, int y)
 	if (g->player.x == x && g->player.y == y)
 		c = 'P';
 	if (found_in_str(c, "EC0P"))
-		try_image_to_window(g, g->tile.space, x * TILE, y * TILE);
+		tile_win(g, g->tile.space, x * g->tilesiz, y * g->tilesiz);
 	if (c == '1')
-		try_image_to_window(g, g->tile.wall, x * TILE, y * TILE);
+		tile_win(g, g->tile.wall, x * g->tilesiz, y * g->tilesiz);
 	else if (c == 'E')
 	{
-		try_image_to_window(g, g->tile.exit_closed, x * TILE, y * TILE);
-		try_image_to_window(g, g->tile.exit_open, x * TILE, y * TILE);
+		tile_win(g, g->tile.exit_closed, x * g->tilesiz, y * g->tilesiz);
+		tile_win(g, g->tile.exit_open, x * g->tilesiz, y * g->tilesiz);
 	}
 	else if (c == 'C')
-		try_image_to_window(g, g->tile.collectible, x * TILE, y * TILE);
+		tile_win(g, g->tile.collectible, x * g->tilesiz, y * g->tilesiz);
 	else if (c == 'P')
 	{
-		try_image_to_window(g, g->tile.player_left, x * TILE, y * TILE);
-		try_image_to_window(g, g->tile.player_right, x * TILE, y * TILE);
-		try_image_to_window(g, g->tile.player_up_right, x * TILE, y * TILE);
-		try_image_to_window(g, g->tile.player_up_left, x * TILE, y * TILE);
-		try_image_to_window(g, g->tile.player_down_right, x * TILE, y * TILE);
-		try_image_to_window(g, g->tile.player_down_left, x * TILE, y * TILE);
+		tile_win(g, g->tile.player_left, x * g->tilesiz, y * g->tilesiz);
+		tile_win(g, g->tile.player_right, x * g->tilesiz, y * g->tilesiz);
+		tile_win(g, g->tile.player_up_right, x * g->tilesiz, y * g->tilesiz);
+		tile_win(g, g->tile.player_up_left, x * g->tilesiz, y * g->tilesiz);
+		tile_win(g, g->tile.player_down_right, x * g->tilesiz, y * g->tilesiz);
+		tile_win(g, g->tile.player_down_left, x * g->tilesiz, y * g->tilesiz);
 	}
 }
 
-void	try_image_to_window(t_game_data *g, mlx_image_t *image, int x, int y)
+void	tile_win(t_game_data *g, mlx_image_t *image, int x, int y)
 {
 	if (mlx_image_to_window(g->mlx, image, x, y) < 0)
 		exit_mlx_error(g);

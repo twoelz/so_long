@@ -6,13 +6,11 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 12:36:42 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/26 14:45:02 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/27 19:53:30 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-
 
 void	init_error_messages(t_game_data *g)
 {

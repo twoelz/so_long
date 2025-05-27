@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 03:04:06 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/20 20:44:28 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/27 19:55:10 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,5 @@ size_t	ft_strlen_exclude_newline(const char *str)
 			exclude_nl_len++;
 		i++;
 	}
-
 	return (exclude_nl_len);
 }

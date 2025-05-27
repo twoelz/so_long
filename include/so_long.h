@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 11:21:11 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/27 10:12:06 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/27 19:51:23 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
 /* game dimensions */
 # define WIDTH 1024
 # define HEIGHT 768
-# define TILE 96
+# define TILESIZ 96
 
 /* valid map chars */
 # define VALID_MAP_CHARS "01CEP"
@@ -99,7 +99,7 @@ typedef enum e_error_codes
 # define MOVED_UP_MSG "moved up"
 # define MOVED_DOWN_MSG "moved down"
 # define EXIT_REACHED_MSG "Set sail, we are going hooome!!!"
-# define HIT_WALL_MSG "CAN'T GO, HIT WALL!"
+# define HIT_WALL_MSG "You found the shore...\nKeep sailing, dear Vela!"
 
 /* CLEAR TERMINAL ANSI SEQUENCE */
 # define CLEAR_TERMINAL_SEQUENCE "\033[3J\033[H\033[2J"
@@ -139,6 +139,7 @@ typedef struct s_game_data
 	mlx_image_t	*img;
 	int			width;
 	int			height;
+	int			tilesiz;
 	int			moves;
 	int			error_code;
 	char		*error_message[19];
@@ -154,6 +155,7 @@ typedef struct s_game_data
 void	exit_game_reached(t_game_data *g);
 int		init_game_data(t_game_data *g, int argc, char *ber_path);
 void	process_position(t_game_data *g);
+void	resize_if_needed(t_game_data *g);
 
 // coordinates.c
 void	next_point(t_point *p, int width);
@@ -191,10 +193,9 @@ void	disable_player_images(t_game_data *g);
 
 void	add_game_tiles(t_game_data *g);
 void	add_game_tile(t_game_data *g, int x, int y);
-void	try_image_to_window(t_game_data *g, mlx_image_t *image, int x, int y);
+void	tile_win(t_game_data *g, mlx_image_t *image, int x, int y);
 void	z_position_tiles(t_game_data *g);
 void	disable_invisible_tiles(t_game_data *g);
-
 
 // tile_images_load.c
 
@@ -232,7 +233,6 @@ int		validate_map_items(t_game_data *g);
 void	count_map_items(t_game_data *g, t_map_items *items, char ***ber);
 int		check_number_of_items(t_game_data *g);
 int		check_reachable_items(t_game_data *g);
-
 
 // utils/str_utils.c
 int		found_in_str(char c_to_find, char *str);

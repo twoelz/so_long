@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 20:07:28 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/24 12:50:09 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/27 19:52:31 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void	print_updated_ber(t_game_data *g)
 	char	c;
 
 	ft_bzero(&p, sizeof(p));
-
 	while (p.y < g->height)
 	{
 		c = g->ber[p.y][p.x];
@@ -58,5 +57,6 @@ void	print_player_coordinates(t_game_data *g)
 
 void	clear_terminal(void)
 {
+	ft_putstr(CLEAR_TERMINAL_SEQUENCE);
 	ft_putstr(CLEAR_TERMINAL_SEQUENCE);
 }
