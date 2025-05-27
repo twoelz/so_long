@@ -1,49 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   images.c                                           :+:      :+:    :+:   */
+/*   tile_images_add.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/24 18:08:22 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/27 09:25:18 by tda-roch         ###   ########.fr       */
+/*   Created: 2025/05/27 10:01:22 by tda-roch          #+#    #+#             */
+/*   Updated: 2025/05/27 10:08:40 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	load_game_images(t_game_data *g)
-{
-	png_to_image(g, &g->tile.space, TILE_SPACE);
-	png_to_image(g, &g->tile.collectible, TILE_COLLECTIBLE);
-	png_to_image(g, &g->tile.exit_closed, TILE_EXIT_CLOSED);
-	png_to_image(g, &g->tile.exit_open, TILE_EXIT_OPEN);
-	png_to_image(g, &g->tile.wall, TILE_WALL);
-	png_to_image(g, &g->tile.player_right, TILE_PLAYER_RIGHT);
-	png_to_image(g, &g->tile.player_left, TILE_PLAYER_LEFT);
-	png_to_image(g, &g->tile.player_up_right, TILE_PLAYER_UP_RIGHT);
-	png_to_image(g, &g->tile.player_up_left, TILE_PLAYER_UP_LEFT);
-	png_to_image(g, &g->tile.player_down_right, TILE_PLAYER_DOWN_RIGHT);
-	png_to_image(g, &g->tile.player_down_left, TILE_PLAYER_DOWN_LEFT);
-}
-
-void	png_to_image(t_game_data *g, mlx_image_t **image, char *png_path)
-{
-	mlx_texture_t	*texture;
-
-	texture = mlx_load_png(png_path);
-	if (!texture)
-		exit_mlx_error(g);
-	*image = mlx_texture_to_image(g->mlx, texture);
-	if (!image)
-		exit_mlx_error(g);
-	mlx_delete_texture(texture);
-}
-
 void	add_game_tiles(t_game_data *g)
 {
 	t_point	p;
-	size_t 	i;
 
 	ft_bzero(&p, sizeof(p));
 	while (p.y < g->height)
@@ -51,6 +22,14 @@ void	add_game_tiles(t_game_data *g)
 		add_game_tile(g, p.x, p.y);
 		next_point(&p, g->width);
 	}
+	z_position_tiles(g);
+	disable_invisible_tiles(g);
+}
+
+void	z_position_tiles(t_game_data *g)
+{
+	size_t	i;
+
 	i = 0;
 	while (i < g->tile.space->count)
 		mlx_set_instance_depth(&g->tile.space->instances[i++], Z_SPACE);
@@ -69,6 +48,10 @@ void	add_game_tiles(t_game_data *g)
 	mlx_set_instance_depth(&g->tile.player_up_left->instances[0], Z_PLAYER);
 	mlx_set_instance_depth(&g->tile.player_down_right->instances[0], Z_PLAYER);
 	mlx_set_instance_depth(&g->tile.player_down_left->instances[0], Z_PLAYER);
+}
+
+void	disable_invisible_tiles(t_game_data *g)
+{
 	g->tile.exit_open->enabled = false;
 	g->tile.player_left->enabled = false;
 	g->tile.player_up_left->enabled = false;

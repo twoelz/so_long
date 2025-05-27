@@ -33,11 +33,12 @@ SRCS = so_long.c \
 	error.c \
 	exit.c \
 	free_everything.c \
-	images.c \
 	input.c \
 	moves.c \
 	print_stuff.c \
 	tile_image_change.c \
+	tile_images_add.c \
+	tile_images_load.c \
 	validate_map.c \
 	validate_map_file.c \
 	validate_map_items.c \

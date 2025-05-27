@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 11:21:11 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/27 09:48:34 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/27 10:12:06 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,14 +177,6 @@ void	exit_mlx_error(t_game_data *g);
 void	free_everything(t_game_data *g);
 void	safe_free_2d_char(char ***ptr);
 
-// images.c
-
-void	add_game_tiles(t_game_data *g);
-void	add_game_tile(t_game_data *g, int x, int y);
-void	load_game_images(t_game_data *g);
-void	png_to_image(t_game_data *g, mlx_image_t **image, char *png_path);
-void	try_image_to_window(t_game_data *g, mlx_image_t *image, int x, int y);
-
 // input.c
 void	game_keyhook(mlx_key_data_t keydata, void *param);
 
@@ -194,6 +186,20 @@ void	move_player_image_down(t_game_data *g);
 void	move_player_image_left(t_game_data *g);
 void	move_player_image_right(t_game_data *g);
 void	disable_player_images(t_game_data *g);
+
+// tile_images_add.c
+
+void	add_game_tiles(t_game_data *g);
+void	add_game_tile(t_game_data *g, int x, int y);
+void	try_image_to_window(t_game_data *g, mlx_image_t *image, int x, int y);
+void	z_position_tiles(t_game_data *g);
+void	disable_invisible_tiles(t_game_data *g);
+
+
+// tile_images_load.c
+
+void	load_game_images(t_game_data *g);
+void	png_to_image(t_game_data *g, mlx_image_t **image, char *png_path);
 
 // moves.c
 void	move_left(t_game_data *g);
