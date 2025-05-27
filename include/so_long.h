@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 11:21:11 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/26 22:27:00 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/27 07:21:16 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,11 @@ the 42 cursus project "so_long"
 /* Z positioning of sprites */
 enum
 {
-	Z_SPACE = 0,
-	Z_COLLECTIBLE = 1,
-	Z_EXIT = 1,
-	Z_PLAYER = 2,
-	Z_WALL = 3,
+	Z_WALL,
+	Z_SPACE,
+	Z_COLLECTIBLE,
+	Z_EXIT,
+	Z_PLAYER,
 };
 
 typedef enum e_error_codes
@@ -190,10 +190,12 @@ void	free_everything(t_game_data *g);
 void	safe_free_2d_char(char ***ptr);
 
 // images.c
-void	load_game_images(t_game_data *g);
+
 void	add_game_tiles(t_game_data *g);
 void	add_game_tile(t_game_data *g, int x, int y);
+void	load_game_images(t_game_data *g);
 void	png_to_image(t_game_data *g, mlx_image_t **image, char *png_path);
+void	try_image_to_window(t_game_data *g, mlx_image_t *image, int x, int y);
 
 // input.c
 void	game_keyhook(mlx_key_data_t keydata, void *param);
