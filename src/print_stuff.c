@@ -6,13 +6,12 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 20:07:28 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/27 21:45:26 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/28 16:55:02 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-//TODO: delete print ber
 void	print_ber(t_game_data *g, char ***ber)
 {
 	int	y;

@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 02:46:19 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/27 20:38:20 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/28 16:54:54 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,21 +20,17 @@ void	exit_game(t_game_data *g)
 	exit(EXIT_FAILURE);
 }
 
-// TODO: REMOVE fprintf and see if printing those errors are needed
-// TODO: add appropriate MSG from header.
 void	exit_mlx_init_error(t_game_data *g)
 {
 	ft_putendl("mlx initialization error");
-	fprintf(stderr, "%s", mlx_strerror(mlx_errno));
+	ft_putendl(mlx_strerror(mlx_errno));
 	exit_game(g);
 }
 
-// TODO: REMOVE fprintf and see if printing those errors are needed
-// TODO: add appropriate MSG from header.
 void	exit_mlx_error(t_game_data *g)
 {
 	ft_putendl("mlx error");
-	fprintf(stderr, "%s", mlx_strerror(mlx_errno));
+	ft_putendl(mlx_strerror(mlx_errno));
 	exit_game(g);
 }
 

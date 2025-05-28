@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 12:36:42 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/27 19:53:30 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/28 16:51:27 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ void	set_error_message(char **error_message, int error_code, char *message)
 	error_message[error_code] = message;
 }
 
-//TODO: change error message according to error code (if needed)
 int	return_error(t_game_data *g)
 {
 	ft_putendl(ERROR_MSG);

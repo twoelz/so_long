@@ -6,12 +6,12 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 21:39:05 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/27 20:07:28 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/28 17:14:44 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-// TODO: remove print_ber
+
 int	validate_map(t_game_data *g)
 {
 	if (check_extension(g->ber_path, &g->error_code))
@@ -35,10 +35,6 @@ int	validate_map(t_game_data *g)
 	return (g->error_code);
 }
 
-/*
-TODO: check if I need to free line after assigning the line to g->ber[i]
-TODO: remove prints
-*/
 int	load_ber(t_game_data *g, char ***ber)
 {
 	int		fd;

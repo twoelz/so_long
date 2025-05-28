@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 11:21:11 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/27 21:47:22 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/28 17:09:59 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,8 +100,9 @@ typedef enum e_error_codes
 # define MOVED_DOWN_MSG "moved down"
 # define COLLECTED_MSG "collected cetus!"
 # define EXIT_OPEN_MSG "pyxis is open, let's catch it!"
+# define EXIT_CLOSED_MSG "pyxis is closed. go catch all the ceti!"
 # define EXIT_REACHED_MSG "set sail, we are going hooome!!!\n"
-# define GAME_OVER_MSG "\ngame over. press ESC or close window to exit\n"
+# define GAME_OVER_MSG "game over. press ESC or close window to exit"
 # define HIT_WALL_MSG "you found the shore...\nkeep sailing, dear Vela!"
 # define CLOSE_GAME_MSG "goodbye!"
 
@@ -154,6 +155,7 @@ typedef struct s_game_data
 	t_point		player;
 	t_map_items	item;
 	t_tiles		tile;
+	bool		print_ber;
 	bool		looking_left;
 	bool		hit_wall;
 	bool		collected;
@@ -164,7 +166,7 @@ typedef struct s_game_data
 void	exit_game_reached(t_game_data *g);
 int		init_game_data(t_game_data *g, int argc, char *ber_path);
 void	process_position(t_game_data *g);
-void	resize_if_needed(t_game_data *g);
+void	resize_window(t_game_data *g);
 
 // coordinates.c
 void	next_point(t_point *p, int width);

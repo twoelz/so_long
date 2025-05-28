@@ -6,16 +6,12 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 17:13:37 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/27 21:35:28 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/28 17:15:06 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-/*
-TODO: Clicking on the cross on the window’s frame must close the window and 
-quit the program in a clean way.
-*/
 int	main(int argc, char **argv)
 {
 	t_game_data	g;
@@ -23,10 +19,10 @@ int	main(int argc, char **argv)
 	if (init_game_data(&g, argc, argv[1]))
 		return (return_error(&g));
 	mlx_set_setting(MLX_MAXIMIZED, false);
-	g.mlx = mlx_init(g.width * TILESIZ, g.height * TILESIZ, "so long", true);
+	g.mlx = mlx_init(g.width, g.height, "so long", true);
 	if (!g.mlx)
 		exit_mlx_init_error(&g);
-	resize_if_needed(&g);
+	resize_window(&g);
 	load_game_images(&g);
 	add_game_tiles(&g);
 	mlx_key_hook(g.mlx, &game_key_hook, &g);
@@ -36,7 +32,6 @@ int	main(int argc, char **argv)
 	return (EXIT_SUCCESS);
 }
 
-//TODO: check if bool is needed, if anything can go wrong here (returning false)
 int	init_game_data(t_game_data *g, int argc, char *ber_path)
 {
 	ft_bzero(g, sizeof(t_game_data));
@@ -46,11 +41,10 @@ int	init_game_data(t_game_data *g, int argc, char *ber_path)
 	g->ber_path = ber_path;
 	if (validate_map(g))
 		return (g->error_code);
-	ft_printf("got after validating map\n");
 	return (g->error_code);
 }
 
-void	resize_if_needed(t_game_data *g)
+void	resize_window(t_game_data *g)
 {
 	int	width;
 	int	height;
@@ -59,7 +53,6 @@ void	resize_if_needed(t_game_data *g)
 	divide = 1;
 	g->tilesiz = TILESIZ;
 	mlx_get_monitor_size(0, &width, &height);
-	ft_printf("monitor width: %d\nmonitor height: %d\n", width, height);
 	while (g->width * (TILESIZ / divide) > width || \
 			g->height * (TILESIZ / divide) > height)
 	{
@@ -67,12 +60,9 @@ void	resize_if_needed(t_game_data *g)
 			break ;
 		divide *= 2;
 	}
-	if (divide > 1)
-	{
-		g->tilesiz = TILESIZ / divide;
-		g->mlx->width = g->width * g->tilesiz;
-		g->mlx->height = g->height * g->tilesiz;
-	}
+	g->tilesiz = TILESIZ / divide;
+	g->mlx->width = g->width * g->tilesiz;
+	g->mlx->height = g->height * g->tilesiz;
 	mlx_set_window_size(g->mlx, g->width * g->tilesiz, \
 						g->height * g->tilesiz);
 }
@@ -100,6 +90,8 @@ void	process_position(t_game_data *g)
 	}
 	if (PRINT_BER)
 		print_updated_ber(g);
+	if (g->ber[g->player.y][g->player.x] == 'E' && g->item.collectibles > 0)
+		ft_putendl(EXIT_CLOSED_MSG);
 	if (g->ber[g->player.y][g->player.x] == 'E' && g->item.collectibles <= 0)
 		exit_game_reached(g);
 }
