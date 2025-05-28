@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 02:46:19 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/28 16:54:54 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/28 19:26:51 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,8 @@
 
 void	exit_game(t_game_data *g)
 {
+	my_mlx_cleanup(g);
 	free_everything(g);
-	mlx_close_window(g->mlx);
-	mlx_terminate(g->mlx);
 	exit(EXIT_FAILURE);
 }
 
@@ -39,3 +38,7 @@ void	close_game(t_game_data *g)
 	ft_putendl(CLOSE_GAME_MSG);
 	exit_game(g);
 }
+
+
+
+

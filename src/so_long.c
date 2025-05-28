@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 17:13:37 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/28 17:15:06 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/28 19:44:45 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,14 @@ int	main(int argc, char **argv)
 	mlx_key_hook(g.mlx, &game_key_hook, &g);
 	mlx_close_hook(g.mlx, &game_close_button_hook, &g);
 	mlx_loop(g.mlx);
-	mlx_terminate(g.mlx);
+	my_mlx_cleanup(&g);
 	return (EXIT_SUCCESS);
 }
 
 int	init_game_data(t_game_data *g, int argc, char *ber_path)
 {
 	ft_bzero(g, sizeof(t_game_data));
+	g->tile.initialized = false;
 	init_error_messages(g);
 	if (argc < 2)
 		return (set_error_code(g, E_NO_PATH_ARG));
@@ -106,3 +107,4 @@ void	exit_game_reached(t_game_data *g)
 	ft_putendl(EXIT_REACHED_MSG);
 	ft_putendl(GAME_OVER_MSG);
 }
+

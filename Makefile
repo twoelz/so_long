@@ -36,6 +36,7 @@ SRCS = so_long.c \
 	input.c \
 	moves.c \
 	moves_helper.c \
+	my_mlx_cleanup.c \
 	print_stuff.c \
 	tile_image_change.c \
 	tile_images_add.c \

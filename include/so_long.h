@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 11:21:11 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/28 17:09:59 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/28 19:36:24 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,7 @@ typedef struct s_map_items
 
 typedef struct s_tiles
 {
+	bool		initialized;
 	mlx_image_t	*wall;
 	mlx_image_t	*space;
 	mlx_image_t	*collectible;
@@ -143,7 +144,9 @@ typedef struct s_tiles
 typedef struct s_game_data
 {
 	mlx_t		*mlx;
-	mlx_image_t	*img;
+	t_tiles		tile;
+	t_point		player;
+	t_map_items	item;
 	int			width;
 	int			height;
 	int			tilesiz;
@@ -152,9 +155,6 @@ typedef struct s_game_data
 	char		*error_message[19];
 	char		*ber_path;
 	char		**ber;
-	t_point		player;
-	t_map_items	item;
-	t_tiles		tile;
 	bool		print_ber;
 	bool		looking_left;
 	bool		hit_wall;
@@ -224,6 +224,10 @@ void	move_down(t_game_data *g);
 // moves_helper.c
 void	clear_move_info(t_game_data *g);
 void	hit_wall(t_game_data *g);
+
+// my_mlx_cleanup.c
+void	my_mlx_cleanup(t_game_data *g);
+void	my_tiles_cleanup(t_game_data *g);
 
 // print_stuff.c
 void	print_ber(t_game_data *g, char ***ber);
