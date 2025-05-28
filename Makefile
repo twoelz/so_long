@@ -82,4 +82,11 @@ debug:
 	@$(MAKE) -C $(DIR_LIBFT) CFLAGS="-Wall -Werror -Wextra -g3 -DDEBUG"
 	@$(MAKE) all
 
+debug_sanitize: CFLAGS += -g3 -DDEBUG -fsanitize=address
+debug_sanitize:
+	@$(MAKE) -C $(DIR_LIBFT) clean
+	@$(MAKE) -C $(DIR_LIBFT) CFLAGS="-Wall -Werror -Wextra -g3 -DDEBUG -fsanitize=address"
+	$(MAKE) clean
+	$(MAKE) LIBS="-Llibft -lft $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm -fsanitize=address"
+
 .PHONY: all clean fclean re libmlx release debug
