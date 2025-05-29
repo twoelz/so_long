@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 11:21:11 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/29 14:59:01 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/29 18:14:25 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,28 +19,33 @@
 # include "MLX42/MLX42.h"
 # include "libft.h"
 
-/* game tile png paths */
-# define TILE_PLAYER_RIGHT "./media/vela_right.png"
-# define TILE_PLAYER_LEFT "./media/vela_left.png"
-# define TILE_PLAYER_UP_RIGHT "./media/vela_up_right.png"
-# define TILE_PLAYER_UP_LEFT "./media/vela_up_left.png"
-# define TILE_PLAYER_DOWN_RIGHT "./media/vela_down_right.png"
-# define TILE_PLAYER_DOWN_LEFT "./media/vela_down_left.png"
-# define TILE_WALL "./media/pebbles.png"
-# define TILE_SPACE "./media/brush_water.png"
-# define TILE_COLLECTIBLE "./media/cetus.png"
-# define TILE_EXIT_CLOSED "./media/pyxis_closed.png"
-# define TILE_EXIT_OPEN "./media/pyxis_open.png"
+/*
+*game tile png paths*
+ 	all images are replaceable/customizeable.
+	however all images must be 96x96 png files.
+*/
+# define TILE_PLAYER_RIGHT "./media/player/vela_right.png"
+# define TILE_PLAYER_LEFT "./media/player/vela_left.png"
+# define TILE_PLAYER_UP_RIGHT "./media/player/vela_up_right.png"
+# define TILE_PLAYER_UP_LEFT "./media/player/vela_up_left.png"
+# define TILE_PLAYER_DOWN_RIGHT "./media/player/vela_down_right.png"
+# define TILE_PLAYER_DOWN_LEFT "./media/player/vela_down_left.png"
+# define TILE_WALL "./media/wall/Ground_18-96x96.png"
+# define TILE_SPACE "./media/space/brush_water.png"
+# define TILE_COLLECTIBLE "./media/collectible/cetus.png"
+# define TILE_EXIT_CLOSED "./media/exit_closed/pyxis_closed.png"
+# define TILE_EXIT_OPEN "./media/exit_open/pyxis_open.png"
 
 /*TODO: REMOVE BONUS DEFINE (IS_BONUS)*/
 # define IS_BONUS true
 
-/*printing of ber maps toggled on and of by pressing the P key*/
-# define PRINT_BER true
+/* print ber map at start: ber printed once during validation if true */
+# define PRINT_BER_AT_START true
+
+/* print ber map during gameplay: also toggled by pressing the P key*/
+# define PRINT_BER false
 
 /* game dimensions */
-# define WIDTH 1024
-# define HEIGHT 768
 # define TILESIZ 96
 
 /* valid map chars */
@@ -56,6 +61,7 @@ enum
 	Z_WALL,
 };
 
+/* error codes. each have a corresponding error message */
 typedef enum e_error_codes
 {
 	E_SUCCESS,
@@ -78,10 +84,6 @@ typedef enum e_error_codes
 	E_NO_REACH_EXIT,
 }	t_error_codes;
 
-/* MLX ERROR MESSAGES */
-# define E_MLX_ERROR_MSG "mlx error"
-# define E_MLX_INIT_ERROR_MSG "mlx initialization error"
-
 /* ERROR MESSAGES */
 # define E_ERROR_MSG "Error"
 # define E_SUCCESS_MSG ""
@@ -103,7 +105,16 @@ typedef enum e_error_codes
 # define E_NO_REACH_COLLECT_MSG "Invalid map: unreacheable collectible."
 # define E_NO_REACH_EXIT_MSG "Invalid map: unreacheable exit."
 
-/* GAME MESSAGES */
+/* MLX ERROR MESSAGES */
+# define E_MLX_ERROR_MSG "mlx error"
+# define E_MLX_INIT_ERROR_MSG "mlx initialization error"
+
+/*
+GAME MESSAGES
+	these are all possible game messages.
+	these can easily be customized if game theme is changed.
+	current theme is CODAM coalitions (vela, pyxis, cetus).
+*/
 # define MOVED_LEFT_MSG "moved left"
 # define MOVED_RIGHT_MSG "moved right"
 # define MOVED_UP_MSG "moved up"
@@ -113,18 +124,24 @@ typedef enum e_error_codes
 # define EXIT_CLOSED_MSG "pyxis is closed. go catch all the ceti!"
 # define EXIT_REACHED_MSG "set sail, we are going hooome!!!\n"
 # define GAME_OVER_MSG "game over. press ESC or close window to exit"
+# define AUTO_CLOSE_MSG "\n --> closing automatically in 10 seconds..."
 # define HIT_WALL_MSG "you found the shore...\nkeep sailing, dear Vela!"
 # define CLOSE_GAME_MSG "goodbye!"
 
-/* CLEAR TERMINAL ANSI SEQUENCE */
+/*
+CLEAR TERMINAL ANSI SEQUENCE
+	used to clean terminal before each move
+*/
 # define CLEAR_TERMINAL_SEQUENCE "\033[3J\033[H\033[2J"
 
+/* t_point: for xy coordinates in the ber map */
 typedef struct s_point
 {
 	int	x;
 	int	y;
 }	t_point;
 
+/* t_map_items: keeps count of number of item types in ber map */
 typedef struct s_map_items
 {
 	size_t		spaces;
@@ -133,6 +150,7 @@ typedef struct s_map_items
 	size_t		players;
 }	t_map_items;
 
+/* t_tiles: all tile mlx_image used in game */
 typedef struct s_tiles
 {
 	bool		initialized;
@@ -149,6 +167,7 @@ typedef struct s_tiles
 	mlx_image_t	*player_down_left;
 }	t_tiles;
 
+/* all game data */
 typedef struct s_game_data
 {
 	mlx_t		*mlx;
@@ -168,7 +187,10 @@ typedef struct s_game_data
 	bool		hit_wall;
 	bool		collected;
 	bool		game_over;
+	double		game_over_time;
 }	t_game_data;
+
+/* FILES */
 
 // so_long.c
 void	exit_game_reached(t_game_data *g);
@@ -182,7 +204,6 @@ void	set_player_coordinates(t_game_data *g);
 void	fill_reachable(t_game_data *g, char **ber, int x, int y);
 
 // error.c
-
 void	init_error_messages(t_game_data *g);
 int		set_error_code(t_game_data *g, int error_code);
 void	set_error_message(char **error_message, \
@@ -191,13 +212,15 @@ int		return_error(t_game_data *g);
 
 // exit.c
 void	exit_game(t_game_data *g);
-void	exit_mlx_init_error(t_game_data *g);
-void	exit_mlx_error(t_game_data *g);
+void	exit_mlx_error(t_game_data *g, bool init);
 void	close_game(t_game_data *g);
 
 // free_everything.c
 void	free_everything(t_game_data *g);
 void	safe_free_2d_char(char ***ptr);
+
+// game_loop.c
+void	game_loop_hook(void *param);
 
 // input.c
 void	game_key_hook(mlx_key_data_t keydata, void *param);
@@ -211,7 +234,6 @@ void	move_player_image_right(t_game_data *g);
 void	disable_player_images(t_game_data *g);
 
 // tile_images_add.c
-
 void	add_game_tiles(t_game_data *g);
 void	add_game_tile(t_game_data *g, int x, int y);
 void	tile_win(t_game_data *g, mlx_image_t *image, int x, int y);
@@ -219,7 +241,6 @@ void	z_position_tiles(t_game_data *g);
 void	disable_invisible_tiles(t_game_data *g);
 
 // tile_images_load.c
-
 void	load_game_images(t_game_data *g);
 void	png_to_image(t_game_data *g, mlx_image_t **image, char *png_path);
 

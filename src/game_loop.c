@@ -1,41 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   game_loop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/16 02:46:19 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/29 15:33:50 by tda-roch         ###   ########.fr       */
+/*   Created: 2025/05/29 15:51:12 by tda-roch          #+#    #+#             */
+/*   Updated: 2025/05/29 15:56:14 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	exit_game(t_game_data *g)
+void	game_loop_hook(void *param)
 {
-	my_mlx_cleanup(g);
-	free_everything(g);
-	exit(EXIT_FAILURE);
+	t_game_data	*g;
+
+	g = (t_game_data *)param;
+	if (g->game_over)
+	{
+		if (mlx_get_time() - g->game_over_time > 10)
+			close_game(g);
+	}
 }
-
-void	exit_mlx_error(t_game_data *g, bool init)
-{
-	ft_putendl(E_ERROR_MSG);
-	if (init)
-		ft_putendl(E_MLX_INIT_ERROR_MSG);
-	else
-		ft_putendl(E_MLX_ERROR_MSG);
-	ft_putendl(mlx_strerror(mlx_errno));
-	exit_game(g);
-}
-
-void	close_game(t_game_data *g)
-{
-	ft_putendl(CLOSE_GAME_MSG);
-	exit_game(g);
-}
-
-
-
-

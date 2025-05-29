@@ -33,6 +33,7 @@ SRCS = so_long.c \
 	error.c \
 	exit.c \
 	free_everything.c \
+	game_loop.c \
 	input.c \
 	moves.c \
 	moves_helper.c \

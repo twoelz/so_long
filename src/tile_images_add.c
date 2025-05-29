@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 10:01:22 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/27 19:51:44 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/29 15:31:24 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,5 +92,5 @@ void	add_game_tile(t_game_data *g, int x, int y)
 void	tile_win(t_game_data *g, mlx_image_t *image, int x, int y)
 {
 	if (mlx_image_to_window(g->mlx, image, x, y) < 0)
-		exit_mlx_error(g);
+		exit_mlx_error(g, false);
 }

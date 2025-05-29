@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 18:08:22 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/28 20:14:11 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/29 15:31:44 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@ void	png_to_image(t_game_data *g, mlx_image_t **image, char *png_path)
 
 	texture = mlx_load_png(png_path);
 	if (!texture)
-		exit_mlx_error(g);
+		exit_mlx_error(g, false);
 	*image = mlx_texture_to_image(g->mlx, texture);
 	if (!image)
-		exit_mlx_error(g);
+		exit_mlx_error(g, false);
 	mlx_delete_texture(texture);
 	if (TILESIZ != g->tilesiz)
 		mlx_resize_image(*image, g->tilesiz, g->tilesiz);

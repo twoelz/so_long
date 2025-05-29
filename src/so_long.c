@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 17:13:37 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/29 14:59:54 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/29 16:01:27 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,13 @@ int	main(int argc, char **argv)
 	mlx_set_setting(MLX_MAXIMIZED, false);
 	g.mlx = mlx_init(g.width, g.height, "so long", true);
 	if (!g.mlx)
-		exit_mlx_init_error(&g);
+		exit_mlx_error(&g, true);
 	resize_window(&g);
 	load_game_images(&g);
 	add_game_tiles(&g);
 	mlx_key_hook(g.mlx, &game_key_hook, &g);
 	mlx_close_hook(g.mlx, &game_close_button_hook, &g);
+	mlx_loop_hook(g.mlx, &game_loop_hook, &g);
 	mlx_loop(g.mlx);
 	my_mlx_cleanup(&g);
 	return (EXIT_SUCCESS);
@@ -101,9 +102,11 @@ TODO: exit on time?
 */
 void	exit_game_reached(t_game_data *g)
 {
+	g->game_over_time = mlx_get_time();
 	g->game_over = true;
 	g->tile.exit_open->enabled = false;
 	ft_putendl(EXIT_REACHED_MSG);
 	ft_putendl(GAME_OVER_MSG);
+	ft_putendl(AUTO_CLOSE_MSG);
 }
 
