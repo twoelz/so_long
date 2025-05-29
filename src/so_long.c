@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 17:13:37 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/28 19:44:45 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/29 14:59:54 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	init_game_data(t_game_data *g, int argc, char *ber_path)
 {
 	ft_bzero(g, sizeof(t_game_data));
 	g->tile.initialized = false;
+	g->print_ber = PRINT_BER;
 	init_error_messages(g);
 	if (argc < 2)
 		return (set_error_code(g, E_NO_PATH_ARG));
@@ -62,8 +63,6 @@ void	resize_window(t_game_data *g)
 		divide *= 2;
 	}
 	g->tilesiz = TILESIZ / divide;
-	g->mlx->width = g->width * g->tilesiz;
-	g->mlx->height = g->height * g->tilesiz;
 	mlx_set_window_size(g->mlx, g->width * g->tilesiz, \
 						g->height * g->tilesiz);
 }
@@ -89,7 +88,7 @@ void	process_position(t_game_data *g)
 			g->tile.exit_open->enabled = true;
 		}
 	}
-	if (PRINT_BER)
+	if (g->print_ber)
 		print_updated_ber(g);
 	if (g->ber[g->player.y][g->player.x] == 'E' && g->item.collectibles > 0)
 		ft_putendl(EXIT_CLOSED_MSG);

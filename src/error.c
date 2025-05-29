@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 12:36:42 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/28 16:51:27 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/29 14:39:15 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	set_error_message(char **error_message, int error_code, char *message)
 
 int	return_error(t_game_data *g)
 {
-	ft_putendl(ERROR_MSG);
+	ft_putendl(E_ERROR_MSG);
 	ft_putendl(g->error_message[g->error_code]);
 	free_everything(g);
 	return (g->error_code);

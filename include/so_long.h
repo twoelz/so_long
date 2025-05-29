@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 11:21:11 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/28 19:36:24 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/05/29 14:59:01 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,12 @@
 # define TILE_COLLECTIBLE "./media/cetus.png"
 # define TILE_EXIT_CLOSED "./media/pyxis_closed.png"
 # define TILE_EXIT_OPEN "./media/pyxis_open.png"
+
+/*TODO: REMOVE BONUS DEFINE (IS_BONUS)*/
+# define IS_BONUS true
+
+/*printing of ber maps toggled on and of by pressing the P key*/
+# define PRINT_BER true
 
 /* game dimensions */
 # define WIDTH 1024
@@ -72,8 +78,12 @@ typedef enum e_error_codes
 	E_NO_REACH_EXIT,
 }	t_error_codes;
 
+/* MLX ERROR MESSAGES */
+# define E_MLX_ERROR_MSG "mlx error"
+# define E_MLX_INIT_ERROR_MSG "mlx initialization error"
+
 /* ERROR MESSAGES */
-# define ERROR_MSG "Error"
+# define E_ERROR_MSG "Error"
 # define E_SUCCESS_MSG ""
 # define E_ALLOC_MSG "allocation error"
 # define E_NO_PATH_ARG_MSG "Missing map argument."
@@ -108,8 +118,6 @@ typedef enum e_error_codes
 
 /* CLEAR TERMINAL ANSI SEQUENCE */
 # define CLEAR_TERMINAL_SEQUENCE "\033[3J\033[H\033[2J"
-
-# define PRINT_BER false
 
 typedef struct s_point
 {
