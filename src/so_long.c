@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 17:13:37 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/29 16:01:27 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/06/02 01:31:50 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,9 @@ int	main(int argc, char **argv)
 int	init_game_data(t_game_data *g, int argc, char *ber_path)
 {
 	ft_bzero(g, sizeof(t_game_data));
-	g->tile.initialized = false;
+	ft_bzero(&g->tile, sizeof(t_tiles));
+	// g->tile.initialized = false;
+	// g->tile.count_collect = 0;
 	g->print_ber = PRINT_BER;
 	init_error_messages(g);
 	if (argc < 2)
@@ -44,6 +46,12 @@ int	init_game_data(t_game_data *g, int argc, char *ber_path)
 	g->ber_path = ber_path;
 	if (validate_map(g))
 		return (g->error_code);
+	if (IS_BONUS && init_bonus(g))
+		return (g->error_code);
+	g->tile.collect = malloc((g->item.total_collect + 1) \
+		* sizeof(mlx_image_t *));
+	if (!g->tile.collect)
+		return (E_ALLOC);
 	return (g->error_code);
 }
 
@@ -68,34 +76,6 @@ void	resize_window(t_game_data *g)
 						g->height * g->tilesiz);
 }
 
-void	process_position(t_game_data *g)
-{
-	size_t	i;
-
-	ft_printf("%d moves\n", g->moves);
-	if (g->ber[g->player.y][g->player.x] == 'C')
-	{
-		g->ber[g->player.y][g->player.x] = '0';
-		g->item.collectibles--;
-		i = 0;
-		while (g->tile.collectible->instances[i].x != g->player.x * g->tilesiz \
-			|| g->tile.collectible->instances[i].y != g->player.y * g->tilesiz)
-			i++;
-		g->tile.collectible->instances[i].enabled = false;
-		g->collected = true;
-		if (g->item.collectibles <= 0)
-		{
-			g->tile.exit_closed->enabled = false;
-			g->tile.exit_open->enabled = true;
-		}
-	}
-	if (g->print_ber)
-		print_updated_ber(g);
-	if (g->ber[g->player.y][g->player.x] == 'E' && g->item.collectibles > 0)
-		ft_putendl(EXIT_CLOSED_MSG);
-	if (g->ber[g->player.y][g->player.x] == 'E' && g->item.collectibles <= 0)
-		exit_game_reached(g);
-}
 
 /*
 TODO: exit on time?

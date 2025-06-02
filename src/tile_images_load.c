@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 18:08:22 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/29 15:31:44 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/06/02 00:45:45 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 
 void	load_game_images(t_game_data *g)
 {
+	size_t	i;
+
 	g->tile.initialized = true;
 	png_to_image(g, &g->tile.space, TILE_SPACE);
-	png_to_image(g, &g->tile.collectible, TILE_COLLECTIBLE);
 	png_to_image(g, &g->tile.exit_closed, TILE_EXIT_CLOSED);
 	png_to_image(g, &g->tile.exit_open, TILE_EXIT_OPEN);
 	png_to_image(g, &g->tile.wall, TILE_WALL);
@@ -26,6 +27,13 @@ void	load_game_images(t_game_data *g)
 	png_to_image(g, &g->tile.player_up_left, TILE_PLAYER_UP_LEFT);
 	png_to_image(g, &g->tile.player_down_right, TILE_PLAYER_DOWN_RIGHT);
 	png_to_image(g, &g->tile.player_down_left, TILE_PLAYER_DOWN_LEFT);
+	i = 0;
+	while (i < g->item.collect)
+	{
+		png_to_image(g, &g->tile.collect[i], TILE_COLLECTIBLE);
+		i++;
+	}
+	g->tile.collect[i] = NULL;
 }
 
 void	png_to_image(t_game_data *g, mlx_image_t **image, char *png_path)

@@ -39,6 +39,7 @@ SRCS = so_long.c \
 	moves_helper.c \
 	my_mlx_cleanup.c \
 	print_stuff.c \
+	process_position.c \
 	tile_image_change.c \
 	tile_images_add.c \
 	tile_images_load.c \
@@ -46,6 +47,10 @@ SRCS = so_long.c \
 	validate_map_file.c \
 	validate_map_items.c \
 	utils/str_utils.c \
+
+# TODO: PUT THESE JUST FOR MAKING BONUS
+SRCS += bonus/game_loop_bonus.c \
+	bonus/init_bonus.c \
 
 OBJS = $(SRCS:.c=.o)
 OBJS := $(addprefix $(OBJDIR)/, $(OBJS))

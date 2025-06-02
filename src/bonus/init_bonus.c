@@ -1,30 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game_loop.c                                        :+:      :+:    :+:   */
+/*   init_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/29 15:51:12 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/29 22:57:38 by tda-roch         ###   ########.fr       */
+/*   Created: 2025/06/01 22:34:27 by tda-roch          #+#    #+#             */
+/*   Updated: 2025/06/02 00:46:08 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	game_loop_hook(void *param)
+int	init_bonus(t_game_data *g)
 {
-	t_game_data	*g;
-
-	g = (t_game_data *)param;
-	if (g->game_over)
-		game_over_loop(g);
-	if (IS_BONUS)
-		game_loop_bonus(g);
-}
-
-void	game_over_loop(t_game_data *g)
-{
-	if (mlx_get_time() - g->game_over_time > 10)
-		close_game(g);
+	g->bonus.remove_collect = ft_calloc(g->item.total_collect + 1,
+			sizeof(bool));
+	if (!g->bonus.remove_collect)
+		return (set_error_code(g, E_ALLOC));
+	g->bonus.remove_collect_time = ft_calloc(g->item.total_collect + 1,
+			sizeof(double));
+	if (!g->bonus.remove_collect_time)
+		return (set_error_code(g, E_ALLOC));
+	return (E_SUCCESS);
 }

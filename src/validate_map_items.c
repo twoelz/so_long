@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 20:56:46 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/27 19:37:19 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/06/02 00:46:08 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,16 @@ void	count_map_items(t_game_data *g, t_map_items *items, char ***ber)
 		item = (*ber)[p.y][p.x];
 		if (item == '0')
 			items->spaces++;
-		if (item == 'C')
-			items->collectibles++;
 		if (item == 'E')
 			items->exits++;
 		if (item == 'P')
 			items->players++;
+		if (item == 'C')
+		{
+			items->collect++;
+			items->total_collect++;
+		}
+
 		next_point(&p, g->width);
 	}
 }
@@ -51,7 +55,7 @@ int	check_number_of_items(t_game_data *g)
 	t_map_items	*items;
 
 	items = &g->item;
-	if (!items->collectibles)
+	if (!items->collect)
 		return (set_error_code(g, E_NO_COLLECT));
 	if (!items->exits)
 		return (set_error_code(g, E_NO_EXIT));
@@ -73,7 +77,7 @@ int	check_reachable_items(t_game_data *g)
 	fill_reachable(g, ber, g->player.x, g->player.y);
 	count_map_items(g, &items, &ber);
 	safe_free_2d_char(&ber);
-	if (items.collectibles)
+	if (items.collect)
 		return (set_error_code(g, E_NO_REACH_COLLECT));
 	if (items.exits)
 		return (set_error_code(g, E_NO_REACH_EXIT));

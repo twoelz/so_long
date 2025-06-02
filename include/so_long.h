@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 11:21:11 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/29 18:14:25 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/06/02 02:16:00 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@
 enum
 {
 	Z_SPACE,
+	Z_REMOVE,
 	Z_COLLECTIBLE,
 	Z_EXIT,
 	Z_PLAYER,
@@ -145,18 +146,19 @@ typedef struct s_point
 typedef struct s_map_items
 {
 	size_t		spaces;
-	size_t		collectibles;
 	size_t		exits;
 	size_t		players;
+	size_t		collect;
+	size_t		total_collect;
 }	t_map_items;
 
 /* t_tiles: all tile mlx_image used in game */
 typedef struct s_tiles
 {
 	bool		initialized;
+	size_t		count_collect;
 	mlx_image_t	*wall;
 	mlx_image_t	*space;
-	mlx_image_t	*collectible;
 	mlx_image_t	*exit_closed;
 	mlx_image_t	*exit_open;
 	mlx_image_t	*player_right;
@@ -165,7 +167,16 @@ typedef struct s_tiles
 	mlx_image_t	*player_up_left;
 	mlx_image_t	*player_down_right;
 	mlx_image_t	*player_down_left;
+	mlx_image_t	**collect;
 }	t_tiles;
+
+/* REMOVE FROM NON-BONUS VERSION */
+/* bonus data */
+typedef struct s_bonus
+{
+	bool		remove_collect;
+	double		*remove_collect_time;
+}	t_bonus;
 
 /* all game data */
 typedef struct s_game_data
@@ -188,6 +199,7 @@ typedef struct s_game_data
 	bool		collected;
 	bool		game_over;
 	double		game_over_time;
+	t_bonus		bonus;
 }	t_game_data;
 
 /* FILES */
@@ -195,7 +207,6 @@ typedef struct s_game_data
 // so_long.c
 void	exit_game_reached(t_game_data *g);
 int		init_game_data(t_game_data *g, int argc, char *ber_path);
-void	process_position(t_game_data *g);
 void	resize_window(t_game_data *g);
 
 // coordinates.c
@@ -221,10 +232,17 @@ void	safe_free_2d_char(char ***ptr);
 
 // game_loop.c
 void	game_loop_hook(void *param);
+void	game_over_loop(t_game_data *g);
 
 // input.c
 void	game_key_hook(mlx_key_data_t keydata, void *param);
 void	game_close_button_hook(void *param);
+
+// process_position.c
+void	process_position(t_game_data *g);
+void	process_collect(t_game_data *g);
+size_t	find_collect_instance(t_game_data *g);
+
 
 // tile_image_change.c
 void	move_player_image_up(t_game_data *g);
@@ -284,5 +302,15 @@ int		check_reachable_items(t_game_data *g);
 // utils/str_utils.c
 int		found_in_str(char c_to_find, char *str);
 size_t	ft_strlen_exclude_newline(const char *str);
+
+/*
+TODO: REMOVE BELOW FROM NON-BONUS ONE
+*/
+
+// bonus/game_loop_bonus.c
+void	game_loop_bonus(void *param);
+
+// bonus/init_bonus.c
+int		init_bonus(t_game_data *g);
 
 #endif

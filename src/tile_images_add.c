@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 10:01:22 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/29 15:31:24 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/06/02 01:36:24 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ void	z_position_tiles(t_game_data *g)
 	while (i < g->tile.wall->count)
 		mlx_set_instance_depth(&g->tile.wall->instances[i++], Z_WALL);
 	i = 0;
-	while (i < g->tile.collectible->count)
-		mlx_set_instance_depth(&g->tile.collectible->instances[i++], \
+	while (i < g->item.total_collect)
+		mlx_set_instance_depth(&g->tile.collect[i++]->instances[0], \
 				Z_COLLECTIBLE);
 	mlx_set_instance_depth(&g->tile.exit_closed->instances[0], Z_EXIT);
 	mlx_set_instance_depth(&g->tile.exit_open->instances[0], Z_EXIT);
@@ -71,14 +71,14 @@ void	add_game_tile(t_game_data *g, int x, int y)
 		tile_win(g, g->tile.space, x * g->tilesiz, y * g->tilesiz);
 	if (c == '1')
 		tile_win(g, g->tile.wall, x * g->tilesiz, y * g->tilesiz);
-	else if (c == 'E')
-	{
+	if (c == 'E')
 		tile_win(g, g->tile.exit_closed, x * g->tilesiz, y * g->tilesiz);
+	if (c == 'E')
 		tile_win(g, g->tile.exit_open, x * g->tilesiz, y * g->tilesiz);
-	}
-	else if (c == 'C')
-		tile_win(g, g->tile.collectible, x * g->tilesiz, y * g->tilesiz);
-	else if (c == 'P')
+	if (c == 'C')
+		tile_win(g, g->tile.collect[g->tile.count_collect++], \
+			x * g->tilesiz, y * g->tilesiz);
+	if (c == 'P')
 	{
 		tile_win(g, g->tile.player_left, x * g->tilesiz, y * g->tilesiz);
 		tile_win(g, g->tile.player_right, x * g->tilesiz, y * g->tilesiz);
