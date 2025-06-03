@@ -6,12 +6,21 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 10:40:22 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/06/03 10:57:07 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/06/03 19:29:25 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <stdbool.h>
+
+void	safe_free(void **ptr)
+{
+	if (ptr && *ptr)
+	{
+		free(*ptr);
+		*ptr = NULL;
+	}
+}
 
 void	safe_free_double(double **ptr)
 {

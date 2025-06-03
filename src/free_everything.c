@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 23:33:11 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/06/03 13:01:33 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/06/03 19:33:08 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,7 @@
 void	free_everything(t_game_data *g)
 {
 	safe_free_2d_char(&g->ber);
+	safe_free((void **)&g->tile.collect);
 	if (g->is_bonus)
-	{
-		safe_free_t_point(&g->bonus.collect_point);
-		safe_free_double(&g->bonus.remove_collect_time);
-	}
-}
-
-void	safe_free_t_point(t_point **ptr)
-{
-	if (ptr && *ptr)
-	{
-		free(*ptr);
-		*ptr = NULL;
-	}
+		free_everything_bonus(g);
 }

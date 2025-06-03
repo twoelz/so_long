@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 11:21:11 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/06/03 13:40:14 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/06/03 23:14:25 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -300,6 +300,7 @@ int		check_number_of_items(t_game_data *g);
 int		check_reachable_items(t_game_data *g);
 
 // utils/free_utils.c
+void	safe_free(void **ptr);
 void	safe_free_2d_char(char ***ptr);
 void	safe_free_bool(bool **ptr);
 void	safe_free_char(char **ptr);
@@ -310,6 +311,7 @@ int		found_in_str(char c_to_find, char *str);
 size_t	ft_strlen_exclude_newline(const char *str);
 
 // mock_bonus/mock_bonus.c EMPTY FUNCTIONS
+void	free_everything_bonus(t_game_data *g);
 void	game_loop_bonus(void *param);
 int		init_bonus(t_game_data *g);
 void	record_item_positions(t_game_data *g);

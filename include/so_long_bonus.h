@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 11:33:11 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/06/03 13:37:44 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/06/03 19:35:11 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,8 @@ void	adjust_remove_collect(t_game_data *g, size_t i);
 // bonus/init_bonus.c
 int		init_bonus(t_game_data *g);
 void	record_item_positions(t_game_data *g);
+
+// bonus/free_everything_bonus.c
+void	free_everything_bonus(t_game_data *g);
 
 #endif

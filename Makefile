@@ -59,6 +59,7 @@ SRCS = main.c \
 SRCS += $(COMMON_SRCS)
 
 BONUS_SRCS = bonus/main_bonus.c \
+	bonus/free_everything_bonus.c \
 	bonus/game_loop_bonus.c \
 	bonus/init_bonus.c
 BONUS_SRCS += $(COMMON_SRCS)

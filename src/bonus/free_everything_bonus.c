@@ -1,37 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mock_bonus.c                                       :+:      :+:    :+:   */
+/*   free_everything_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/03 13:24:17 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/06/03 19:34:19 by tda-roch         ###   ########.fr       */
+/*   Created: 2025/06/03 19:26:30 by tda-roch          #+#    #+#             */
+/*   Updated: 2025/06/03 19:33:41 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
-
-/*empty bonus functions*/
-
-int	init_bonus(t_game_data *g)
-{
-	(void)g;
-	return (0);
-}
-
-void	record_item_positions(t_game_data *g)
-{
-	(void)g;
-}
-
-void	game_loop_bonus(void *param)
-{
-	(void)param;
-}
+#include "so_long_bonus.h"
 
 void	free_everything_bonus(t_game_data *g)
 {
-	(void)g;
+	safe_free((void **)&g->bonus.collect_point);
+	safe_free_double(&g->bonus.remove_collect_time);
 }
-
