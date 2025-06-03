@@ -1,30 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game_loop.c                                        :+:      :+:    :+:   */
+/*   so_long_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/29 15:51:12 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/06/03 13:28:03 by tda-roch         ###   ########.fr       */
+/*   Created: 2025/06/03 11:33:11 by tda-roch          #+#    #+#             */
+/*   Updated: 2025/06/03 13:37:44 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#ifndef SO_LONG_BONUS_H
+# define SO_LONG_BONUS_H
+# include "so_long.h"
 
-void	game_loop_hook(void *param)
-{
-	t_game_data	*g;
+// bonus/game_loop_bonus.c
+void	game_loop_bonus(void *param);
+void	loop_remove_collect(t_game_data *g);
+void	adjust_remove_exit(t_game_data *g);
+void	adjust_remove_collect(t_game_data *g, size_t i);
 
-	g = (t_game_data *)param;
-	if (g->game_over)
-		game_over_loop(g);
-	if (g->is_bonus)
-		game_loop_bonus(g);
-}
+// bonus/init_bonus.c
+int		init_bonus(t_game_data *g);
+void	record_item_positions(t_game_data *g);
 
-void	game_over_loop(t_game_data *g)
-{
-	if (mlx_get_time() - g->game_over_time > 10)
-		close_game(g);
-}
+#endif

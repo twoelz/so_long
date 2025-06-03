@@ -6,24 +6,25 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 22:34:27 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/06/03 02:57:47 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/06/03 12:59:51 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 int	init_bonus(t_game_data *g)
 {
-	g->bonus.remove_collect = ft_calloc(g->item.total_collect + 1,
-			sizeof(bool));
-	if (!g->bonus.remove_collect)
-		return (set_error_code(g, E_ALLOC));
 	g->bonus.remove_collect_time = ft_calloc(g->item.total_collect + 1,
 			sizeof(double));
+	if (!g->bonus.remove_collect_time)
+		return (set_error_code(g, E_ALLOC));
+	g->bonus.remove_collect_time[g->item.total_collect] = -1;
 	g->bonus.collect_point = ft_calloc(g->item.total_collect + 1,
 			sizeof(t_point));
 	if (!g->bonus.remove_collect_time)
 		return (set_error_code(g, E_ALLOC));
+	g->bonus.collect_point[g->item.total_collect].x = -1;
+	g->bonus.collect_point[g->item.total_collect].y = -1;
 	g->bonus.remove_exit = false;
 	return (E_SUCCESS);
 }

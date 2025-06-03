@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 11:21:11 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/06/03 03:00:56 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/06/03 13:40:14 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,6 @@
 # define TILE_COLLECTIBLE "./media/collectible/cetus.png"
 # define TILE_EXIT_CLOSED "./media/exit_closed/pyxis_closed.png"
 # define TILE_EXIT_OPEN "./media/exit_open/pyxis_open.png"
-
-/*TODO: REMOVE BONUS DEFINE (IS_BONUS)*/
-# define IS_BONUS true
 
 /* print ber map at start: ber printed once during validation if true */
 # define PRINT_BER_AT_START true
@@ -170,7 +167,6 @@ typedef struct s_tiles
 	mlx_image_t	**collect;
 }	t_tiles;
 
-/* REMOVE FROM NON-BONUS VERSION */
 /* bonus data */
 typedef struct s_bonus
 {
@@ -202,12 +198,14 @@ typedef struct s_game_data
 	bool		collected;
 	bool		game_over;
 	double		game_over_time;
+	bool		is_bonus;
 	t_bonus		bonus;
 }	t_game_data;
 
 /* FILES */
 
 // so_long.c
+int		so_long(int argc, char **argv, bool is_bonus);
 void	exit_game_reached(t_game_data *g);
 int		init_game_data(t_game_data *g, int argc, char *ber_path);
 void	resize_window(t_game_data *g);
@@ -231,7 +229,7 @@ void	close_game(t_game_data *g);
 
 // free_everything.c
 void	free_everything(t_game_data *g);
-void	safe_free_2d_char(char ***ptr);
+void	safe_free_t_point(t_point **ptr);
 
 // game_loop.c
 void	game_loop_hook(void *param);
@@ -245,7 +243,6 @@ void	game_close_button_hook(void *param);
 void	process_position(t_game_data *g);
 void	process_collect(t_game_data *g);
 size_t	find_collect_instance(t_game_data *g);
-
 
 // tile_image_change.c
 void	move_player_image_up(t_game_data *g);
@@ -302,18 +299,19 @@ void	count_map_items(t_game_data *g, t_map_items *items, char ***ber);
 int		check_number_of_items(t_game_data *g);
 int		check_reachable_items(t_game_data *g);
 
+// utils/free_utils.c
+void	safe_free_2d_char(char ***ptr);
+void	safe_free_bool(bool **ptr);
+void	safe_free_char(char **ptr);
+void	safe_free_double(double **ptr);
+
 // utils/str_utils.c
 int		found_in_str(char c_to_find, char *str);
 size_t	ft_strlen_exclude_newline(const char *str);
 
-/*
-TODO: REMOVE BELOW FROM NON-BONUS ONE
-*/
-
-// bonus/game_loop_bonus.c
+// mock_bonus/mock_bonus.c EMPTY FUNCTIONS
 void	game_loop_bonus(void *param);
-
-// bonus/init_bonus.c
 int		init_bonus(t_game_data *g);
 void	record_item_positions(t_game_data *g);
 #endif
+

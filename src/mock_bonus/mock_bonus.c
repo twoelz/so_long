@@ -1,30 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game_loop.c                                        :+:      :+:    :+:   */
+/*   mock_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/29 15:51:12 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/06/03 13:28:03 by tda-roch         ###   ########.fr       */
+/*   Created: 2025/06/03 13:24:17 by tda-roch          #+#    #+#             */
+/*   Updated: 2025/06/03 13:39:35 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	game_loop_hook(void *param)
-{
-	t_game_data	*g;
+/*empty bonus functions*/
 
-	g = (t_game_data *)param;
-	if (g->game_over)
-		game_over_loop(g);
-	if (g->is_bonus)
-		game_loop_bonus(g);
+int	init_bonus(t_game_data *g)
+{
+	(void)g;
+	return (0);
 }
 
-void	game_over_loop(t_game_data *g)
+void	record_item_positions(t_game_data *g)
 {
-	if (mlx_get_time() - g->game_over_time > 10)
-		close_game(g);
+	(void)g;
+}
+
+void	game_loop_bonus(void *param)
+{
+	(void)param;
 }

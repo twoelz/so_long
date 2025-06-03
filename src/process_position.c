@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 00:48:26 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/06/02 02:26:19 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/06/03 13:01:57 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	process_collect(t_game_data *g)
 	g->ber[g->player.y][g->player.x] = '0';
 	g->item.collect--;
 	i = find_collect_instance(g);
-	if (IS_BONUS)
+	if (g->is_bonus)
 	{
 		mlx_set_instance_depth(&g->tile.collect[i]->instances[0], \
 				Z_REMOVE);

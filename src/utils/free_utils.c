@@ -1,31 +1,57 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_everything.c                                  :+:      :+:    :+:   */
+/*   free_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/19 23:33:11 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/06/03 13:01:33 by tda-roch         ###   ########.fr       */
+/*   Created: 2025/06/03 10:40:22 by tda-roch          #+#    #+#             */
+/*   Updated: 2025/06/03 10:57:07 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include <stdlib.h>
+#include <stdbool.h>
 
-void	free_everything(t_game_data *g)
-{
-	safe_free_2d_char(&g->ber);
-	if (g->is_bonus)
-	{
-		safe_free_t_point(&g->bonus.collect_point);
-		safe_free_double(&g->bonus.remove_collect_time);
-	}
-}
-
-void	safe_free_t_point(t_point **ptr)
+void	safe_free_double(double **ptr)
 {
 	if (ptr && *ptr)
 	{
+		free(*ptr);
+		*ptr = NULL;
+	}
+}
+
+void	safe_free_bool(bool **ptr)
+{
+	if (ptr && *ptr)
+	{
+		free(*ptr);
+		*ptr = NULL;
+	}
+}
+
+void	safe_free_char(char **ptr)
+{
+	if (ptr && *ptr)
+	{
+		free(*ptr);
+		*ptr = NULL;
+	}
+}
+
+void	safe_free_2d_char(char ***ptr)
+{
+	size_t	i;
+
+	if (ptr && *ptr)
+	{
+		i = 0;
+		while ((*ptr)[i])
+		{
+			safe_free_char(&(*ptr)[i]);
+			i++;
+		}
 		free(*ptr);
 		*ptr = NULL;
 	}

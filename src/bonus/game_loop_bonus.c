@@ -6,11 +6,42 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 22:56:42 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/06/03 03:34:41 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/06/03 12:59:56 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
+
+void	game_loop_bonus(void *param)
+{
+	t_game_data	*g;
+
+	g = (t_game_data *)param;
+	if (g->bonus.remove_collect)
+		loop_remove_collect(g);
+	if (g->bonus.remove_exit)
+		adjust_remove_exit(g);
+}
+
+void	loop_remove_collect(t_game_data *g)
+{
+	size_t	i;
+	bool	removed;
+
+	i = 0;
+	removed = true;
+	while (i < g->item.total_collect)
+	{
+		if (g->tile.collect[i]->instances[0].z == Z_REMOVE)
+		{
+			removed = false;
+			adjust_remove_collect(g, i);
+		}
+		i++;
+	}
+	if (removed)
+		g->bonus.remove_collect = false;
+}
 
 void	adjust_remove_exit(t_game_data *g)
 {
@@ -67,35 +98,3 @@ void	adjust_remove_collect(t_game_data *g, size_t i)
 		g->bonus.collect_point[i].y + (g->tilesiz - size) / 2);
 	mlx_set_instance_depth(&g->tile.collect[i]->instances[0], Z_REMOVE);
 }
-
-void	loop_remove_collect(t_game_data *g)
-{
-	size_t	i;
-	bool	removed;
-
-	i = 0;
-	removed = true;
-	while (i < g->item.total_collect)
-	{
-		if (g->tile.collect[i]->instances[0].z == Z_REMOVE)
-		{
-			removed = false;
-			adjust_remove_collect(g, i);
-		}
-		i++;
-	}
-	if (removed)
-		g->bonus.remove_collect = false;
-}
-
-void	game_loop_bonus(void *param)
-{
-	t_game_data	*g;
-
-	g = (t_game_data *)param;
-	if (g->bonus.remove_collect)
-		loop_remove_collect(g);
-	if (g->bonus.remove_exit)
-		adjust_remove_exit(g);
-}
-
