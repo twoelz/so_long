@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 17:13:37 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/06/02 01:31:50 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/06/03 03:01:43 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ int	main(int argc, char **argv)
 	resize_window(&g);
 	load_game_images(&g);
 	add_game_tiles(&g);
+	if (IS_BONUS)
+		record_item_positions(&g);
 	mlx_key_hook(g.mlx, &game_key_hook, &g);
 	mlx_close_hook(g.mlx, &game_close_button_hook, &g);
 	mlx_loop_hook(g.mlx, &game_loop_hook, &g);
@@ -84,9 +86,14 @@ void	exit_game_reached(t_game_data *g)
 {
 	g->game_over_time = mlx_get_time();
 	g->game_over = true;
-	g->tile.exit_open->enabled = false;
 	ft_putendl(EXIT_REACHED_MSG);
 	ft_putendl(GAME_OVER_MSG);
 	ft_putendl(AUTO_CLOSE_MSG);
+	if (IS_BONUS)
+	{
+		g->bonus.remove_exit = true;
+		return ;
+	}
+	g->tile.exit_open->enabled = false;
 }
 

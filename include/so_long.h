@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 11:21:11 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/06/02 02:16:00 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/06/03 03:00:56 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,7 +175,10 @@ typedef struct s_tiles
 typedef struct s_bonus
 {
 	bool		remove_collect;
+	bool		remove_exit;
 	double		*remove_collect_time;
+	t_point		exit_point;
+	t_point		*collect_point;
 }	t_bonus;
 
 /* all game data */
@@ -312,5 +315,5 @@ void	game_loop_bonus(void *param);
 
 // bonus/init_bonus.c
 int		init_bonus(t_game_data *g);
-
+void	record_item_positions(t_game_data *g);
 #endif
