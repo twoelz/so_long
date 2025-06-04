@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 11:21:11 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/06/04 01:26:12 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/06/04 17:54:21 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 # define TILE_PLAYER_DOWN_RIGHT "./media/player/vela_down_right.png"
 # define TILE_PLAYER_DOWN_LEFT "./media/player/vela_down_left.png"
 # define TILE_WALL "./media/wall/Ground_18-96x96.png"
-# define TILE_SPACE "./media/space/brush_water.png"
+# define TILE_SPACE "./media/space/ocean4.png"
 # define TILE_COLLECTIBLE "./media/collectible/cetus.png"
 # define TILE_EXIT_CLOSED "./media/exit_closed/pyxis_closed.png"
 # define TILE_EXIT_OPEN "./media/exit_open/pyxis_open.png"
