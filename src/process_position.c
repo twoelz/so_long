@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 00:48:26 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/06/03 13:01:57 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/06/04 01:26:32 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,10 @@
 
 void	process_position(t_game_data *g)
 {
-	ft_printf("%d moves\n", g->moves);
+	if (g->is_bonus)
+		process_position_bonus(g);
+	else
+		ft_printf("%d moves\n", g->moves);
 	if (g->ber[g->player.y][g->player.x] == 'C')
 		process_collect(g);
 	if (g->print_ber)

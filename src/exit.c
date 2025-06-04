@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 02:46:19 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/06/03 00:28:41 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/06/04 02:11:59 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,8 @@
 
 void	exit_game(t_game_data *g)
 {
-	ft_putendl("before my mlx cleanup");
 	my_mlx_cleanup(g);
-	ft_putendl("after my mlx cleanup");
 	free_everything(g);
-	ft_putendl("after free everything");
 	exit(EXIT_FAILURE);
 }
 

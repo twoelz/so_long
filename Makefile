@@ -61,7 +61,8 @@ SRCS += $(COMMON_SRCS)
 BONUS_SRCS = bonus/main_bonus.c \
 	bonus/free_everything_bonus.c \
 	bonus/game_loop_bonus.c \
-	bonus/init_bonus.c
+	bonus/process_position_bonus.c \
+	bonus/so_long_bonus.c
 BONUS_SRCS += $(COMMON_SRCS)
 
 OBJS = $(SRCS:.c=.o)

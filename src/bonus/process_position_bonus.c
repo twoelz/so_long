@@ -1,40 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mock_bonus.c                                       :+:      :+:    :+:   */
+/*   process_position_bonus.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/03 13:24:17 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/06/04 01:27:56 by tda-roch         ###   ########.fr       */
+/*   Created: 2025/06/04 01:24:51 by tda-roch          #+#    #+#             */
+/*   Updated: 2025/06/04 02:01:17 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
-/*empty bonus functions*/
-
-int	init_game_data_bonus(t_game_data *g)
-{
-	(void)g;
-	return (0);
-}
-
-void	so_long_bonus(t_game_data *g)
-{
-	(void)g;
-}
-
-void	game_loop_bonus(void *param)
-{
-	(void)param;
-}
-
-void	free_everything_bonus(t_game_data *g)
-{
-	(void)g;
-}
 void	process_position_bonus(t_game_data *g)
 {
-	(void)g;
+	add_to_buf_bonus(g, ft_itoa(g->moves));
+	add_to_buf_bonus(g, " moves");
+	print_buf_bonus(g);
 }

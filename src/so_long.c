@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 17:13:37 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/06/03 13:02:16 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/06/03 23:33:45 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	so_long(int argc, char **argv, bool is_bonus)
 	load_game_images(&g);
 	add_game_tiles(&g);
 	if (g.is_bonus)
-		record_item_positions(&g);
+		so_long_bonus(&g);
 	mlx_key_hook(g.mlx, &game_key_hook, &g);
 	mlx_close_hook(g.mlx, &game_close_button_hook, &g);
 	mlx_loop_hook(g.mlx, &game_loop_hook, &g);
@@ -47,8 +47,11 @@ int	init_game_data(t_game_data *g, int argc, char *ber_path)
 	g->ber_path = ber_path;
 	if (validate_map(g))
 		return (g->error_code);
-	if (g->is_bonus && init_bonus(g))
-		return (g->error_code);
+	if (g->is_bonus)
+	{
+		if (init_game_data_bonus(g))
+			return (g->error_code);
+	}
 	g->tile.collect = ft_calloc((g->item.total_collect + 1), \
 		sizeof(mlx_image_t *));
 	if (!g->tile.collect)

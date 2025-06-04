@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 11:21:11 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/06/03 23:14:25 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/06/04 01:26:12 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,8 @@ CLEAR TERMINAL ANSI SEQUENCE
 */
 # define CLEAR_TERMINAL_SEQUENCE "\033[3J\033[H\033[2J"
 
+# define BONUS_BUFFER_SIZE 4096
+
 /* t_point: for xy coordinates in the ber map */
 typedef struct s_point
 {
@@ -175,6 +177,9 @@ typedef struct s_bonus
 	double		*remove_collect_time;
 	t_point		exit_point;
 	t_point		*collect_point;
+	mlx_image_t	*text_image;
+	char		buf[BONUS_BUFFER_SIZE];
+	size_t		buf_end;
 }	t_bonus;
 
 /* all game data */
@@ -311,9 +316,11 @@ int		found_in_str(char c_to_find, char *str);
 size_t	ft_strlen_exclude_newline(const char *str);
 
 // mock_bonus/mock_bonus.c EMPTY FUNCTIONS
+void	so_long_bonus(t_game_data *g);
 void	free_everything_bonus(t_game_data *g);
 void	game_loop_bonus(void *param);
-int		init_bonus(t_game_data *g);
-void	record_item_positions(t_game_data *g);
+int		init_game_data_bonus(t_game_data *g);
+void	process_position_bonus(t_game_data *g);
+
 #endif
 
