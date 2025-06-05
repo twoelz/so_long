@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 11:21:11 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/06/05 09:38:49 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/06/05 13:25:36 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,13 @@
 /* game dimensions */
 # define TILESIZ 96
 
-/* valid map chars */
+/* valid map chars for mandatory version*/
 # define VALID_MAP_CHARS "01CEP"
+
+/* All NON_WALL_CHARS,
+	includes ENEMY_PATROL_CHARS or VMF - for bonus version.
+	-	V(villain), M(monster) or F(fiend) */
+# define NON_WALL_CHARS "0CEPVMF"
 
 /* Z position of tiles */
 enum
@@ -55,8 +60,11 @@ enum
 	Z_REMOVE,
 	Z_COLLECTIBLE,
 	Z_EXIT,
+	Z_ENEMY,
 	Z_PLAYER,
 	Z_WALL,
+	Z_MESSAGES,
+	Z_OVERLAY,
 };
 
 /* error codes. each have a corresponding error message */
@@ -132,7 +140,7 @@ CLEAR TERMINAL ANSI SEQUENCE
 */
 # define CLEAR_TERMINAL_SEQUENCE "\033[3J\033[H\033[2J"
 
-# define BONUS_BUFFER_SIZE 4096
+// # define BONUS_BUFFER_SIZE 4096
 
 /* t_point: for xy coordinates in the ber map */
 typedef struct s_point
@@ -170,23 +178,6 @@ typedef struct s_tiles
 	mlx_image_t	**collect;
 }	t_tiles;
 
-/* bonus data */
-typedef struct s_bonus
-{
-	bool		remove_collect;
-	bool		remove_exit;
-	double		*remove_collect_time;
-	t_point		exit_point;
-	t_point		*collect_point;
-	mlx_image_t	*space_1;
-	mlx_image_t	*space_2;
-	mlx_image_t	*space_3;
-	mlx_image_t	*villain;
-	mlx_image_t	*text_image;
-	char		buf[BONUS_BUFFER_SIZE];
-	size_t		buf_end;
-}	t_bonus;
-
 /* all game data */
 typedef struct s_game_data
 {
@@ -209,7 +200,7 @@ typedef struct s_game_data
 	bool		game_over;
 	double		game_over_time;
 	bool		is_bonus;
-	t_bonus		bonus;
+	void		*bonus;
 }	t_game_data;
 
 /* FILES */
@@ -286,7 +277,7 @@ void	hit_wall(t_game_data *g);
 
 // my_mlx_cleanup.c
 void	my_mlx_cleanup(t_game_data *g);
-void	my_tiles_cleanup(t_game_data *g);
+void	mandatory_tiles_cleanup(t_game_data *g);
 
 // print_stuff.c
 void	print_ber(t_game_data *g, char ***ber);
@@ -322,15 +313,18 @@ void	safe_free_double(double **ptr);
 int		found_in_str(char c_to_find, char *str);
 size_t	ft_strlen_exclude_newline(const char *str);
 
-// mock_bonus/mock_bonus.c EMPTY FUNCTIONS
+// mock_bonus/mock_bonus.c = empty functions / stubs
 void	so_long_bonus(t_game_data *g);
+void	exit_game_reached_bonus(t_game_data *g);
 void	free_everything_bonus(t_game_data *g);
+void	bonus_tiles_cleanup(t_game_data *g);
 void	add_game_tile_bonus(t_game_data *g, int x, int y, char c);
+void	z_position_tiles_bonus(t_game_data *g);
 void	game_loop_bonus(void *param);
 int		init_game_data_bonus(t_game_data *g);
 void	load_game_images_bonus(t_game_data *g);
 void	check_chars_bonus(t_game_data *g);
 void	process_position_bonus(t_game_data *g);
+void	process_collect_bonus(t_game_data *g, size_t i);
 
 #endif
-

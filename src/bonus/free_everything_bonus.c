@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 19:26:30 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/06/03 19:33:41 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/06/05 11:17:51 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,21 @@
 
 void	free_everything_bonus(t_game_data *g)
 {
-	safe_free((void **)&g->bonus.collect_point);
-	safe_free_double(&g->bonus.remove_collect_time);
+	t_bonus	*b;
+
+	b = (t_bonus *)g->bonus;
+	if (b)
+	{
+		safe_free((void **)&b->collect_point);
+		safe_free_double(&b->remove_collect_time);
+		safe_free((void **)&g->bonus);
+	}
+}
+
+void	bonus_tiles_cleanup(t_game_data *g)
+{
+	t_bonus	*b;
+
+	b = (t_bonus *)g->bonus;
+	mlx_delete_image(g->mlx, b->text_image);
 }

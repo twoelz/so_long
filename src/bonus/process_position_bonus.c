@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 01:24:51 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/06/04 02:01:17 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/06/05 12:33:33 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,22 @@
 
 void	process_position_bonus(t_game_data *g)
 {
-	add_to_buf_bonus(g, ft_itoa(g->moves));
-	add_to_buf_bonus(g, " moves");
-	print_buf_bonus(g);
+	t_bonus	*b;
+
+	b = (t_bonus *)g->bonus;
+	add_to_buf_bonus(b, ft_itoa(g->moves));
+	add_to_buf_bonus(b, " moves");
+	print_buf_bonus(g, b);
 }
+
+void	process_collect_bonus(t_game_data *g, size_t i)
+{
+	t_bonus	*b;
+
+	b = (t_bonus *)g->bonus;
+	mlx_set_instance_depth(&g->tile.collect[i]->instances[0], \
+			Z_REMOVE);
+	b->remove_collect = true;
+	b->remove_collect_time[i] = mlx_get_time();
+}
+

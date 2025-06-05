@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 17:13:37 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/06/03 23:33:45 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/06/05 10:57:15 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ int	init_game_data(t_game_data *g, int argc, char *ber_path)
 		if (init_game_data_bonus(g))
 			return (g->error_code);
 	}
+	else
+		g->bonus = NULL;
 	g->tile.collect = ft_calloc((g->item.total_collect + 1), \
 		sizeof(mlx_image_t *));
 	if (!g->tile.collect)
@@ -92,10 +94,8 @@ void	exit_game_reached(t_game_data *g)
 	ft_putendl(GAME_OVER_MSG);
 	ft_putendl(AUTO_CLOSE_MSG);
 	if (g->is_bonus)
-	{
-		g->bonus.remove_exit = true;
-		return ;
-	}
-	g->tile.exit_open->enabled = false;
+		exit_game_reached_bonus(g);
+	else
+		g->tile.exit_open->enabled = false;
 }
 

@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 13:24:17 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/06/05 09:36:21 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/06/05 13:26:26 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,11 @@ int	init_game_data_bonus(t_game_data *g)
 {
 	(void)g;
 	return (0);
+}
+
+void	exit_game_reached_bonus(t_game_data *g)
+{
+	(void)g;
 }
 
 void	check_chars_bonus(t_game_data *g)
@@ -43,6 +48,11 @@ void	add_game_tile_bonus(t_game_data *g, int x, int y, char c)
 	(void)c;
 }
 
+void	z_position_tiles_bonus(t_game_data *g)
+{
+	(void)g;
+}
+
 void	game_loop_bonus(void *param)
 {
 	(void)param;
@@ -52,8 +62,19 @@ void	free_everything_bonus(t_game_data *g)
 {
 	(void)g;
 }
+
+void	bonus_tiles_cleanup(t_game_data *g)
+{
+	(void)g;
+}
+
 void	process_position_bonus(t_game_data *g)
 {
 	(void)g;
 }
 
+void	process_collect_bonus(t_game_data *g, size_t i)
+{
+	(void)g;
+	(void)i;
+}

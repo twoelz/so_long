@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 00:48:26 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/06/04 01:26:32 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/06/05 10:06:51 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,7 @@ void	process_collect(t_game_data *g)
 	g->item.collect--;
 	i = find_collect_instance(g);
 	if (g->is_bonus)
-	{
-		mlx_set_instance_depth(&g->tile.collect[i]->instances[0], \
-				Z_REMOVE);
-		g->bonus.remove_collect = true;
-		g->bonus.remove_collect_time[i] = mlx_get_time();
-	}
+		process_collect_bonus(g, i);
 	else
 		g->tile.collect[i]->instances[0].enabled = false;
 	g->collected = true;

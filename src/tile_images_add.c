@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 10:01:22 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/06/05 09:32:37 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/06/05 13:10:18 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ void	add_game_tiles(t_game_data *g)
 		next_point(&p, g->width);
 	}
 	z_position_tiles(g);
-	disable_invisible_tiles(g);
+	if (g->is_bonus)
+		z_position_tiles_bonus(g);
 }
 
 void	z_position_tiles(t_game_data *g)
@@ -48,6 +49,7 @@ void	z_position_tiles(t_game_data *g)
 	mlx_set_instance_depth(&g->tile.player_up_left->instances[0], Z_PLAYER);
 	mlx_set_instance_depth(&g->tile.player_down_right->instances[0], Z_PLAYER);
 	mlx_set_instance_depth(&g->tile.player_down_left->instances[0], Z_PLAYER);
+	disable_invisible_tiles(g);
 }
 
 void	disable_invisible_tiles(t_game_data *g)
@@ -67,7 +69,7 @@ void	add_game_tile(t_game_data *g, int x, int y)
 	c = g->ber[y][x];
 	if (g->player.x == x && g->player.y == y)
 		c = 'P';
-	if (found_in_str(c, "EC0PFV"))
+	if (found_in_str(c, NON_WALL_CHARS))
 		tile_win(g, g->tile.space, x * g->tilesiz, y * g->tilesiz);
 	if (c == '1')
 		tile_win(g, g->tile.wall, x * g->tilesiz, y * g->tilesiz);
