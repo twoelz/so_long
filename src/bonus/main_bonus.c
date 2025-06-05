@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 11:57:46 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/06/04 02:15:42 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/06/05 14:16:43 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,10 @@ runs the BONUS version of the so_long project (instead of MANDATORY version)
 	so_long is a simple game where you need to collect all collectible items
 	then reach the exit, with the minimal amount of moves.
 	the bonus version adds some features to mandatory:
-		- item/sprite animations (disappear by shrinking slowly)
+		- item/sprite animations
 		- movement count shown directly on game screen instead of terminal
-		TODO:
-		- "enemy patrol" or villains (placed using letter V in the ber file)
-		(player looses game if touched)
+		- "enemy patrols" (placed using letters V, M or F in the ber file)
+		(player looses game if enemy is touched)
 */
 int	main(int argc, char **argv)
 {

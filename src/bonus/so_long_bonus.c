@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 23:26:01 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/06/05 13:22:36 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/06/05 16:23:29 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,17 @@ int	init_game_data_bonus(t_game_data *g)
 	t_bonus	*b;
 
 	b = ft_calloc(1, sizeof(t_bonus));
+	if (!b)
+		return (set_error_code(g, E_ALLOC));
 	g->bonus = b;
 	b->remove_collect_time = ft_calloc(g->item.total_collect + 1,
 			sizeof(double));
 	if (!b->remove_collect_time)
 		return (set_error_code(g, E_ALLOC));
-	// b->remove_collect_time[g->item.total_collect] = -1;
 	b->collect_point = ft_calloc(g->item.total_collect + 1,
 			sizeof(t_point));
-	if (!b->remove_collect_time)
+	if (!b->collect_point)
 		return (set_error_code(g, E_ALLOC));
-	// b->collect_point[g->item.total_collect].x = -1;
-	// b->collect_point[g->item.total_collect].y = -1;
-	// b->remove_exit = false;
 	b->animate_space_time = mlx_get_time();
 	clear_buf_bonus(b);
 	return (E_SUCCESS);
@@ -48,7 +46,7 @@ void	load_game_images_bonus(t_game_data *g)
 	png_to_image(g, &b->space_1, TILE_SPACE_1);
 	png_to_image(g, &b->space_2, TILE_SPACE_2);
 	png_to_image(g, &b->space_3, TILE_SPACE_3);
-	png_to_image(g, &b->enemy, TILE_VILLAIN);
+	png_to_image(g, &b->enemy, TILE_ENEMY);
 }
 
 
@@ -100,9 +98,6 @@ void	check_chars_bonus(t_game_data *g)
 
 void	clear_buf_bonus(t_bonus *b)
 {
-	// t_bonus	*b;
-
-	// b = (t_bonus *)g->bonus;
 	ft_bzero(b->buf, BONUS_BUFFER_SIZE);
 	b->buf_end = 0;
 }
@@ -126,11 +121,9 @@ void	record_item_positions(t_game_data *g)
 
 void	add_to_buf_bonus(t_bonus *b, char *str)
 {
-	// t_bonus	*b;
 	size_t	len;
 	size_t	i;
 
-	// b = (t_bonus *)g->bonus;
 	len = ft_strlen(str);
 	if ((len + b->buf_end + 1) > BONUS_BUFFER_SIZE)
 		return (clear_buf_bonus(b));
@@ -162,4 +155,4 @@ void 	exit_game_reached_bonus(t_game_data *g)
 {
 	((t_bonus *)g->bonus)->remove_exit = true;
 }
-// test comment
+

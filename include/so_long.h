@@ -310,7 +310,7 @@ void	safe_free_char(char **ptr);
 void	safe_free_double(double **ptr);
 
 // utils/str_utils.c
-int		found_in_str(char c_to_find, char *str);
+bool	found_in_str(char c_to_find, char *str);
 size_t	ft_strlen_exclude_newline(const char *str);
 
 // mock_bonus/mock_bonus.c = empty functions / stubs

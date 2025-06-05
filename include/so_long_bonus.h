@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 11:33:11 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/06/05 13:59:59 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/06/05 16:23:05 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,21 @@
 # define SO_LONG_BONUS_H
 # include "so_long.h"
 
-/* valid map chars bonus*/
+/* valid map chars bonus (adds enemy patrol chars)*/
 # define VALID_MAP_CHARS_BONUS "01CEPVMF"
+# define ENEMY_PATROL_CHARS "VMF"
 
+/* bonus tiles paths */
 # define TILE_SPACE_1 "./media/space/ocean_1.png"
 # define TILE_SPACE_2 "./media/space/ocean_2.png"
 # define TILE_SPACE_3 "./media/space/ocean_3.png"
-# define TILE_VILLAIN "./media/villain/villain.png"
+# define TILE_ENEMY "./media/enemy/norminette.png"
 
 /* safe buffer size for string messages on screen (image_text) */
 # define BONUS_BUFFER_SIZE 4096
 
 /* changes space sprite every (float) seconds */
 # define SPACE_ANIMATION_SPEED 0.1
-
-
-# define ENEMY_PATROL_CHARS "VMF"
 
 /* bonus data */
 typedef struct s_bonus
@@ -75,7 +74,6 @@ void	print_buf_bonus(t_game_data *g, t_bonus *b);
 // bonus/free_everything_bonus.c
 void	free_everything_bonus(t_game_data *g);
 void	bonus_tiles_cleanup(t_game_data *g);
-
 
 // bonus/process_position_bonus.c
 void	process_position_bonus(t_game_data *g);

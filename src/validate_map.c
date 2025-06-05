@@ -58,7 +58,7 @@ int	load_ber(t_game_data *g, char ***ber)
 		(*ber)[y] = line;
 		y++;
 	}
-	ber[y] = NULL;
+	(*ber)[y] = NULL;
 	close(fd);
 	return (g->error_code);
 }

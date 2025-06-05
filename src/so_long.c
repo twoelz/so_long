@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 17:13:37 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/06/05 10:57:15 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/06/05 14:15:13 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,10 +82,6 @@ void	resize_window(t_game_data *g)
 						g->height * g->tilesiz);
 }
 
-
-/*
-TODO: exit on time?
-*/
 void	exit_game_reached(t_game_data *g)
 {
 	g->game_over_time = mlx_get_time();
