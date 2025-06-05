@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 21:39:05 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/29 15:10:16 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/06/05 06:30:13 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,9 +82,12 @@ int	check_chars(t_game_data *g)
 	t_point	p;
 
 	ft_bzero(&p, sizeof(p));
+	g->item.valid_chars = VALID_MAP_CHARS;
+	if (g->is_bonus)
+		check_chars_bonus(g);
 	while (p.y < g->height)
 	{
-		if (!found_in_str(g->ber[p.y][p.x], VALID_MAP_CHARS))
+		if (!found_in_str(g->ber[p.y][p.x], g->item.valid_chars))
 			return (set_error_code(g, E_INVALID_CHAR));
 		next_point(&p, g->width);
 	}

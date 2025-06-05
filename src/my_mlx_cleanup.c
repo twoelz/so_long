@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 19:23:47 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/06/04 00:17:40 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/06/05 05:02:58 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	my_tiles_cleanup(t_game_data *g)
 {
 	t_tiles	*tile;
 	size_t	i;
+
 	tile = &g->tile;
 	mlx_delete_image(g->mlx, tile->exit_closed);
 	mlx_delete_image(g->mlx, tile->exit_open);

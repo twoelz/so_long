@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 23:26:01 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/06/04 02:00:25 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/06/05 07:32:53 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,28 @@ int	init_game_data_bonus(t_game_data *g)
 	g->bonus.remove_exit = false;
 	clear_buf_bonus(g);
 	return (E_SUCCESS);
+}
+
+void	load_game_images_bonus(t_game_data *g)
+{
+	png_to_image(g, &g->bonus.space_1, TILE_SPACE_1);
+	png_to_image(g, &g->bonus.space_2, TILE_SPACE_2);
+	png_to_image(g, &g->bonus.space_3, TILE_SPACE_3);
+	png_to_image(g, &g->bonus.villain, TILE_VILLAIN);
+}
+
+
+void	add_game_tile_bonus(t_game_data *g, int x, int y, char c)
+{
+	if (found_in_str(c, "VMF"))
+		tile_win(g, g->bonus.villain, x * g->tilesiz, y * g->tilesiz);
+}
+
+
+
+void	check_chars_bonus(t_game_data *g)
+{
+	g->item.valid_chars = VALID_MAP_CHARS_BONUS;
 }
 
 void	clear_buf_bonus(t_game_data *g)

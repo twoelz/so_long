@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 10:01:22 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/06/02 01:36:24 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/06/05 09:32:37 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	add_game_tile(t_game_data *g, int x, int y)
 	c = g->ber[y][x];
 	if (g->player.x == x && g->player.y == y)
 		c = 'P';
-	if (found_in_str(c, "EC0P"))
+	if (found_in_str(c, "EC0PFV"))
 		tile_win(g, g->tile.space, x * g->tilesiz, y * g->tilesiz);
 	if (c == '1')
 		tile_win(g, g->tile.wall, x * g->tilesiz, y * g->tilesiz);
@@ -79,14 +79,19 @@ void	add_game_tile(t_game_data *g, int x, int y)
 		tile_win(g, g->tile.collect[g->tile.count_collect++], \
 			x * g->tilesiz, y * g->tilesiz);
 	if (c == 'P')
-	{
-		tile_win(g, g->tile.player_left, x * g->tilesiz, y * g->tilesiz);
-		tile_win(g, g->tile.player_right, x * g->tilesiz, y * g->tilesiz);
-		tile_win(g, g->tile.player_up_right, x * g->tilesiz, y * g->tilesiz);
-		tile_win(g, g->tile.player_up_left, x * g->tilesiz, y * g->tilesiz);
-		tile_win(g, g->tile.player_down_right, x * g->tilesiz, y * g->tilesiz);
-		tile_win(g, g->tile.player_down_left, x * g->tilesiz, y * g->tilesiz);
-	}
+		add_player_tile(g, x, y);
+	if (g->is_bonus)
+		add_game_tile_bonus(g, x, y, c);
+}
+
+void	add_player_tile(t_game_data *g, int x, int y)
+{
+	tile_win(g, g->tile.player_left, x * g->tilesiz, y * g->tilesiz);
+	tile_win(g, g->tile.player_right, x * g->tilesiz, y * g->tilesiz);
+	tile_win(g, g->tile.player_up_right, x * g->tilesiz, y * g->tilesiz);
+	tile_win(g, g->tile.player_up_left, x * g->tilesiz, y * g->tilesiz);
+	tile_win(g, g->tile.player_down_right, x * g->tilesiz, y * g->tilesiz);
+	tile_win(g, g->tile.player_down_left, x * g->tilesiz, y * g->tilesiz);
 }
 
 void	tile_win(t_game_data *g, mlx_image_t *image, int x, int y)

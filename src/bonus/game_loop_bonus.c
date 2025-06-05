@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 22:56:42 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/06/03 12:59:56 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/06/05 09:44:09 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	adjust_remove_exit(t_game_data *g)
 
 	elapsed = mlx_get_time() - g->game_over_time;
 	size = g->tilesiz;
-	if (elapsed >= 0.5)
+	if (elapsed >= 1.2)
 	{
 		g->bonus.remove_exit = false;
 		g->tile.exit_open->instances[0].enabled = false;
@@ -58,9 +58,9 @@ void	adjust_remove_exit(t_game_data *g)
 	}
 	else
 	{
-		size = (0.5 - elapsed) * size;
-		if (size < 9)
-			size = 9;
+		size = (1.3 - (elapsed * 1.5)) * size;
+		if (size < 3)
+			size = 3;
 	}
 	mlx_delete_image(g->mlx, g->tile.exit_open);
 	png_to_image(g, &g->tile.exit_open, TILE_EXIT_OPEN);
@@ -77,7 +77,7 @@ void	adjust_remove_collect(t_game_data *g, size_t i)
 
 	elapsed = mlx_get_time() - g->bonus.remove_collect_time[i];
 	size = g->tilesiz;
-	if (elapsed >= 0.5)
+	if (elapsed >= 0.66)
 	{
 		g->tile.collect[i]->instances[0].enabled = false;
 		mlx_set_instance_depth(&g->tile.collect[i]->instances[0], \
@@ -86,9 +86,9 @@ void	adjust_remove_collect(t_game_data *g, size_t i)
 	}
 	else
 	{
-		size = (0.5 - elapsed) * size;
-		if (size < 9)
-			size = 9;
+		size = (1.0 - (elapsed * 1.5)) * size;
+		if (size < 3)
+			size = 3;
 	}
 	mlx_delete_image(g->mlx, g->tile.collect[i]);
 	png_to_image(g, &g->tile.collect[i], TILE_COLLECTIBLE);

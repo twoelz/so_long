@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 13:24:17 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/06/04 01:27:56 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/06/05 09:36:21 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,33 @@
 
 /*empty bonus functions*/
 
+void	so_long_bonus(t_game_data *g)
+{
+	(void)g;
+}
+
 int	init_game_data_bonus(t_game_data *g)
 {
 	(void)g;
 	return (0);
 }
 
-void	so_long_bonus(t_game_data *g)
+void	check_chars_bonus(t_game_data *g)
 {
 	(void)g;
+}
+
+void	load_game_images_bonus(t_game_data *g)
+{
+	(void)g;
+}
+
+void	add_game_tile_bonus(t_game_data *g, int x, int y, char c)
+{
+	(void)g;
+	(void)x;
+	(void)y;
+	(void)c;
 }
 
 void	game_loop_bonus(void *param)
@@ -38,3 +56,4 @@ void	process_position_bonus(t_game_data *g)
 {
 	(void)g;
 }
+

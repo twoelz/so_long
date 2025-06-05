@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 11:21:11 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/06/04 17:54:21 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/06/05 09:38:49 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,14 @@
  	all images are replaceable/customizeable.
 	however all images must be 96x96 png files.
 */
+# define TILE_SPACE "./media/space/ocean_0.png"
 # define TILE_PLAYER_RIGHT "./media/player/vela_right.png"
 # define TILE_PLAYER_LEFT "./media/player/vela_left.png"
 # define TILE_PLAYER_UP_RIGHT "./media/player/vela_up_right.png"
 # define TILE_PLAYER_UP_LEFT "./media/player/vela_up_left.png"
 # define TILE_PLAYER_DOWN_RIGHT "./media/player/vela_down_right.png"
 # define TILE_PLAYER_DOWN_LEFT "./media/player/vela_down_left.png"
-# define TILE_WALL "./media/wall/Ground_18-96x96.png"
-# define TILE_SPACE "./media/space/ocean4.png"
+# define TILE_WALL "./media/wall/ground.png"
 # define TILE_COLLECTIBLE "./media/collectible/cetus.png"
 # define TILE_EXIT_CLOSED "./media/exit_closed/pyxis_closed.png"
 # define TILE_EXIT_OPEN "./media/exit_open/pyxis_open.png"
@@ -149,6 +149,7 @@ typedef struct s_map_items
 	size_t		players;
 	size_t		collect;
 	size_t		total_collect;
+	char		*valid_chars;
 }	t_map_items;
 
 /* t_tiles: all tile mlx_image used in game */
@@ -177,6 +178,10 @@ typedef struct s_bonus
 	double		*remove_collect_time;
 	t_point		exit_point;
 	t_point		*collect_point;
+	mlx_image_t	*space_1;
+	mlx_image_t	*space_2;
+	mlx_image_t	*space_3;
+	mlx_image_t	*villain;
 	mlx_image_t	*text_image;
 	char		buf[BONUS_BUFFER_SIZE];
 	size_t		buf_end;
@@ -242,6 +247,7 @@ void	game_over_loop(t_game_data *g);
 
 // input.c
 void	game_key_hook(mlx_key_data_t keydata, void *param);
+void	input_move_key(t_game_data *g, mlx_key_data_t *k);
 void	game_close_button_hook(void *param);
 
 // process_position.c
@@ -259,6 +265,7 @@ void	disable_player_images(t_game_data *g);
 // tile_images_add.c
 void	add_game_tiles(t_game_data *g);
 void	add_game_tile(t_game_data *g, int x, int y);
+void	add_player_tile(t_game_data *g, int x, int y);
 void	tile_win(t_game_data *g, mlx_image_t *image, int x, int y);
 void	z_position_tiles(t_game_data *g);
 void	disable_invisible_tiles(t_game_data *g);
@@ -318,8 +325,11 @@ size_t	ft_strlen_exclude_newline(const char *str);
 // mock_bonus/mock_bonus.c EMPTY FUNCTIONS
 void	so_long_bonus(t_game_data *g);
 void	free_everything_bonus(t_game_data *g);
+void	add_game_tile_bonus(t_game_data *g, int x, int y, char c);
 void	game_loop_bonus(void *param);
 int		init_game_data_bonus(t_game_data *g);
+void	load_game_images_bonus(t_game_data *g);
+void	check_chars_bonus(t_game_data *g);
 void	process_position_bonus(t_game_data *g);
 
 #endif

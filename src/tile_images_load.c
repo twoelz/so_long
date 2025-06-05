@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 18:08:22 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/06/02 00:45:45 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/06/05 07:06:40 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ void	load_game_images(t_game_data *g)
 		i++;
 	}
 	g->tile.collect[i] = NULL;
+	if (g->is_bonus)
+		load_game_images_bonus(g);
 }
 
 void	png_to_image(t_game_data *g, mlx_image_t **image, char *png_path)
