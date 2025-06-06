@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 01:24:51 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/06/05 12:33:33 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/06/06 14:41:58 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	process_position_bonus(t_game_data *g)
 	add_to_buf_bonus(b, ft_itoa(g->moves));
 	add_to_buf_bonus(b, " moves");
 	print_buf_bonus(g, b);
+	move_all_enemies(g);
 }
 
 void	process_collect_bonus(t_game_data *g, size_t i)

@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 23:26:01 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/06/05 16:23:29 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/06/06 18:17:10 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ int	init_game_data_bonus(t_game_data *g)
 	if (!b->collect_point)
 		return (set_error_code(g, E_ALLOC));
 	b->animate_space_time = mlx_get_time();
+	fill_move_permutations(b->move_perm);
+	fill_move_coordinates(b->move_coord);
 	clear_buf_bonus(b);
 	return (E_SUCCESS);
 }
@@ -46,9 +48,25 @@ void	load_game_images_bonus(t_game_data *g)
 	png_to_image(g, &b->space_1, TILE_SPACE_1);
 	png_to_image(g, &b->space_2, TILE_SPACE_2);
 	png_to_image(g, &b->space_3, TILE_SPACE_3);
-	png_to_image(g, &b->enemy, TILE_ENEMY);
+	png_to_image(g, &b->enemy_sprite, TILE_ENEMY);
 }
 
+void	add_enemy_to_coordinates(t_game_data *g, t_bonus *b, int x, int y)
+{
+	tile_win(g, b->enemy_sprite, x * g->tilesiz, y * g->tilesiz);
+	b->enemy[b->total_enemies].x = x;
+	b->enemy[b->total_enemies].y = y;
+	b->total_enemies++;
+	if (b->total_enemies >= 500)
+		return (warning_too_many_enemies());
+}
+
+void	add_space_to_coordinates(t_game_data *g, t_bonus *b, int x, int y)
+{
+	tile_win(g, b->space_1, x * g->tilesiz, y * g->tilesiz);
+	tile_win(g, b->space_2, x * g->tilesiz, y * g->tilesiz);
+	tile_win(g, b->space_3, x * g->tilesiz, y * g->tilesiz);
+}
 
 void	add_game_tile_bonus(t_game_data *g, int x, int y, char c)
 {
@@ -56,14 +74,13 @@ void	add_game_tile_bonus(t_game_data *g, int x, int y, char c)
 
 	b = (t_bonus *)g->bonus;
 	if (found_in_str(c, NON_WALL_CHARS))
+		add_space_to_coordinates(g, b, x, y);
+	if (found_in_str(c, ENEMY_CHARS))
 	{
-		tile_win(g, b->space_1, x * g->tilesiz, y * g->tilesiz);
-		tile_win(g, b->space_2, x * g->tilesiz, y * g->tilesiz);
-		tile_win(g, b->space_3, x * g->tilesiz, y * g->tilesiz);
+		add_enemy_to_coordinates(g, b, x, y);
+		g->ber[y][x] = '0';
 	}
-	if (found_in_str(c, ENEMY_PATROL_CHARS))
-		tile_win(g, ((t_bonus *)g->bonus)->enemy, \
-					x * g->tilesiz, y * g->tilesiz);
+
 }
 
 void	z_position_tiles_bonus(t_game_data *g)
@@ -82,8 +99,8 @@ void	z_position_tiles_bonus(t_game_data *g)
 	while (i < b->space_3->count)
 		mlx_set_instance_depth(&b->space_3->instances[i++], Z_SPACE);
 	i = 0;
-	while (i < b->enemy->count)
-		mlx_set_instance_depth(&b->enemy->instances[i++], Z_ENEMY);
+	while (i < b->enemy_sprite->count)
+		mlx_set_instance_depth(&b->enemy_sprite->instances[i++], Z_ENEMY);
 	if (b->text_image && b->text_image->count > 0)
 		mlx_set_instance_depth(&b->text_image->instances[0], Z_MESSAGES);
 	b->space_1->enabled = false;

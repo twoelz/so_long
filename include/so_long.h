@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 11:21:11 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/06/05 13:25:36 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/06/06 16:42:50 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -326,5 +326,6 @@ void	load_game_images_bonus(t_game_data *g);
 void	check_chars_bonus(t_game_data *g);
 void	process_position_bonus(t_game_data *g);
 void	process_collect_bonus(t_game_data *g, size_t i);
+void	game_key_hook_bonus(t_game_data *g, keys_t key);
 
 #endif

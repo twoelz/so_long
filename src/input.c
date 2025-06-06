@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 11:42:19 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/06/05 06:09:36 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/06/06 16:12:30 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ void	game_key_hook(mlx_key_data_t k, void *param)
 				k.key == MLX_KEY_LEFT || k.key == MLX_KEY_RIGHT || \
 				k.key == MLX_KEY_UP || k.key == MLX_KEY_DOWN)
 			input_move_key(g, &k);
+		else if (g->is_bonus)
+			game_key_hook_bonus(g, k.key);
 	}
 }
 

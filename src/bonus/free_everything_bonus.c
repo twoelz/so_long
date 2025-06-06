@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 19:26:30 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/06/05 14:24:00 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/06/06 02:14:51 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,5 @@ void	bonus_tiles_cleanup(t_game_data *g)
 	mlx_delete_image(g->mlx, b->space_1);
 	mlx_delete_image(g->mlx, b->space_2);
 	mlx_delete_image(g->mlx, b->space_3);
-	mlx_delete_image(g->mlx, b->enemy);
+	mlx_delete_image(g->mlx, b->enemy_sprite);
 }
