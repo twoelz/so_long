@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 20:26:26 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/06/06 18:27:22 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/06/07 05:17:28 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,11 @@ void	move_enemy_to_place(t_game_data *g, t_bonus *b,
 	b->enemy[enemy_i].y = place.y;
 	b->enemy_sprite->instances[enemy_i].x = place.x * g->tilesiz;
 	b->enemy_sprite->instances[enemy_i].y = place.y * g->tilesiz;
+	if (place.x == g->player.x && place.y == g->player.y)
+	{
+		b->you_loose->enabled = true;
+		g->game_over = true;
+	}
 }
 
 void	move_enemy(t_game_data *g, t_bonus *b, size_t enemy_i)

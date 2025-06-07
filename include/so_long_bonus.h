@@ -6,17 +6,15 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 11:33:11 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/06/06 17:43:31 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/06/07 05:23:56 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_BONUS_H
 # define SO_LONG_BONUS_H
 
+# include <math.h>
 # include "so_long.h"
-
-/* BONUS ERROR MESSAGES */
-# define E_TOO_MANY_ENEMIES_MSG "too many enemies in map file"
 
 /* valid map chars bonus (adds enemy chars)*/
 # define VALID_MAP_CHARS_BONUS "01CEPVMF"
@@ -27,6 +25,16 @@
 # define TILE_SPACE_2 "./media/space/ocean_2.png"
 # define TILE_SPACE_3 "./media/space/ocean_3.png"
 # define TILE_ENEMY "./media/enemy/norminette.png"
+
+/* bonus overlay paths */
+# define OVERLAY_WIN "./media/overlay/mermaid_win.png"
+# define OVERLAY_LOOSE "./media/overlay/rick_loose.png"
+
+/* bonus error messages */
+# define E_TOO_MANY_ENEMIES_MSG "too many enemies in map file"
+
+/* bonus messages */
+# define YOU_LOOSE_MSG "Norminette said: line too long!\nYou lost!"
 
 /* safe buffer size for string messages on screen (image_text) */
 # define BONUS_BUFFER_SIZE 4096
@@ -52,6 +60,8 @@ typedef struct s_bonus
 	mlx_image_t	*space_2;
 	mlx_image_t	*space_3;
 	mlx_image_t	*enemy_sprite;
+	mlx_image_t	*you_win;
+	mlx_image_t	*you_loose;
 	t_point		exit_point;
 	t_point		*collect_point;
 	t_point		enemy[500];

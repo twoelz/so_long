@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 23:26:01 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/06/06 18:17:10 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/06/07 02:49:20 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,33 @@ int	init_game_data_bonus(t_game_data *g)
 	return (E_SUCCESS);
 }
 
+void	add_resized_overlay(t_game_data *g, mlx_image_t *overlay,
+			int width, int height)
+{
+	double	proportion;
+
+	proportion = fmin((double)width / (double)overlay->width,
+			(double)height / (double)overlay->height);
+	mlx_resize_image(overlay,
+		overlay->width * proportion,
+		overlay->height * proportion);
+	tile_win(g, overlay, (width - overlay->width) / 2,
+		(height - overlay->height) / 2);
+	mlx_set_instance_depth(&overlay->instances[0], Z_OVERLAY);
+	overlay->enabled = false;
+}
+
+void	add_win_loose_overlays(t_game_data *g, t_bonus *b)
+{
+	int		width;
+	int		height;
+
+	width = g->width * g->tilesiz;
+	height = g->height * g->tilesiz;
+	add_resized_overlay(g, b->you_win, width, height);
+	add_resized_overlay(g, b->you_loose, width, height);
+}
+
 void	load_game_images_bonus(t_game_data *g)
 {
 	t_bonus	*b;
@@ -49,6 +76,9 @@ void	load_game_images_bonus(t_game_data *g)
 	png_to_image(g, &b->space_2, TILE_SPACE_2);
 	png_to_image(g, &b->space_3, TILE_SPACE_3);
 	png_to_image(g, &b->enemy_sprite, TILE_ENEMY);
+	png_to_image(g, &b->you_win, OVERLAY_WIN);
+	png_to_image(g, &b->you_loose, OVERLAY_LOOSE);
+	add_win_loose_overlays(g, b);
 }
 
 void	add_enemy_to_coordinates(t_game_data *g, t_bonus *b, int x, int y)

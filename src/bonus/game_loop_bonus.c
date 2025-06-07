@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 22:56:42 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/06/06 01:15:05 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/06/07 05:09:48 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ void	adjust_remove_exit(t_game_data *g, t_bonus *b)
 
 	elapsed = b->mlx_time - g->game_over_time;
 	size = g->tilesiz;
+	if (!b->you_win->enabled && elapsed > 0.4)
+		b->you_win->enabled = true;
 	if (elapsed >= 1.2)
 	{
 		b->remove_exit = false;
