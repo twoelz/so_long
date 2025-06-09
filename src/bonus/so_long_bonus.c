@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 23:26:01 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/06/09 14:52:19 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/06/09 15:09:10 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,4 +77,3 @@ void	so_long_bonus(t_game_data *g)
 	b->exit_point.x = g->tile.exit_open->instances[0].x;
 	b->exit_point.y = g->tile.exit_open->instances[0].y;
 }
-

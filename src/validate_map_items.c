@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 20:56:46 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/06/02 00:46:08 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/06/09 14:57:26 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ void	count_map_items(t_game_data *g, t_map_items *items, char ***ber)
 			items->collect++;
 			items->total_collect++;
 		}
-
 		next_point(&p, g->width);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 01:24:51 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/06/08 21:57:31 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/06/09 15:09:35 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	process_position_bonus(t_game_data *g)
 	t_bonus	*b;
 
 	b = (t_bonus *)g->bonus;
-
 	if (player_hit_enemy(g, b))
 		game_lost(g, b);
 	else
@@ -38,4 +37,3 @@ void	process_collect_bonus(t_game_data *g, size_t i)
 	b->remove_collect = true;
 	b->remove_collect_time[i] = mlx_get_time();
 }
-
