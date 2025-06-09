@@ -59,6 +59,7 @@ SRCS = main.c \
 SRCS += $(COMMON_SRCS)
 
 BONUS_SRCS = bonus/main_bonus.c \
+	bonus/buff_bonus.c \
 	bonus/enemy.c \
 	bonus/enemy_move.c \
 	bonus/enemy_place.c \
