@@ -61,6 +61,7 @@ SRCS += $(COMMON_SRCS)
 BONUS_SRCS = bonus/main_bonus.c \
 	bonus/enemy.c \
 	bonus/enemy_move.c \
+	bonus/enemy_place.c \
 	bonus/enemy_random.c \
 	bonus/error_bonus.c \
 	bonus/free_everything_bonus.c \
