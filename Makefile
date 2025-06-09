@@ -64,6 +64,7 @@ BONUS_SRCS = bonus/main_bonus.c \
 	bonus/enemy_place.c \
 	bonus/enemy_random.c \
 	bonus/error_bonus.c \
+	bonus/images_bonus.c \
 	bonus/free_everything_bonus.c \
 	bonus/game_loop_bonus.c \
 	bonus/game_loop_bonus_animations.c \
