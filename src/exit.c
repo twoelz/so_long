@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 02:46:19 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/06/04 02:11:59 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/06/09 15:28:21 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,3 @@ void	close_game(t_game_data *g)
 	ft_putendl(CLOSE_GAME_MSG);
 	exit_game(g);
 }
-
-
-
-
