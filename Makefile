@@ -70,6 +70,7 @@ BONUS_SRCS = bonus/main_bonus.c \
 	bonus/game_loop_bonus.c \
 	bonus/game_loop_bonus_animations.c \
 	bonus/input_bonus.c \
+	bonus/overlays_bonus.c \
 	bonus/process_position_bonus.c \
 	bonus/so_long_bonus.c
 BONUS_SRCS += $(COMMON_SRCS)
