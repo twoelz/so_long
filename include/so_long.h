@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 11:21:11 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/06/09 15:25:53 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/06/09 15:39:30 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -318,19 +318,19 @@ void	safe_free_double(double **ptr);
 bool	found_in_str(char c_to_find, char *str);
 size_t	ft_strlen_exclude_newline(const char *str);
 
-// mock_bonus/mock_bonus.c = empty functions / stubs
-void	so_long_bonus(t_game_data *g);
+// mock_bonus files = empty functions / stubs
+void	add_game_tile_bonus(t_game_data *g, int x, int y, char c);
+void	bonus_tiles_cleanup(t_game_data *g);
+void	check_chars_bonus(t_game_data *g);
 void	exit_game_reached_bonus(t_game_data *g);
 void	free_everything_bonus(t_game_data *g);
-void	bonus_tiles_cleanup(t_game_data *g);
-void	add_game_tile_bonus(t_game_data *g, int x, int y, char c);
-void	z_position_tiles_bonus(t_game_data *g);
+void	game_key_hook_bonus(t_game_data *g, keys_t key);
 void	game_loop_bonus(void *param);
 int		init_game_data_bonus(t_game_data *g);
 void	load_game_images_bonus(t_game_data *g);
-void	check_chars_bonus(t_game_data *g);
-void	process_position_bonus(t_game_data *g);
 void	process_collect_bonus(t_game_data *g, size_t i);
-void	game_key_hook_bonus(t_game_data *g, keys_t key);
+void	process_position_bonus(t_game_data *g);
+void	so_long_bonus(t_game_data *g);
+void	z_position_tiles_bonus(t_game_data *g);
 
 #endif
