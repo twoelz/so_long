@@ -1,43 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mock_bonus_1.c                                     :+:      :+:    :+:   */
+/*   mock_bonus_3.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/03 13:24:17 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/06/09 15:22:09 by tda-roch         ###   ########.fr       */
+/*   Created: 2025/06/09 15:21:57 by tda-roch          #+#    #+#             */
+/*   Updated: 2025/06/09 15:22:23 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-/*empty bonus functions*/
-
-void	add_game_tile_bonus(t_game_data *g, int x, int y, char c)
-{
-	(void)g;
-	(void)x;
-	(void)y;
-	(void)c;
-}
-
-void	bonus_tiles_cleanup(t_game_data *g)
+void	process_position_bonus(t_game_data *g)
 {
 	(void)g;
 }
 
-void	check_chars_bonus(t_game_data *g)
+void	so_long_bonus(t_game_data *g)
 {
 	(void)g;
 }
 
-void	exit_game_reached_bonus(t_game_data *g)
-{
-	(void)g;
-}
-
-void	free_everything_bonus(t_game_data *g)
+void	z_position_tiles_bonus(t_game_data *g)
 {
 	(void)g;
 }
