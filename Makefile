@@ -47,6 +47,7 @@ COMMON_SRCS = so_long.c \
 	process_position.c \
 	tile_image_change.c \
 	tile_images_add.c \
+	time_images_disable.c \
 	tile_images_load.c \
 	validate_map.c \
 	validate_map_file.c \

@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 11:21:11 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/06/09 15:07:37 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/06/09 15:25:53 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -253,6 +253,9 @@ void	move_player_image_up(t_game_data *g);
 void	move_player_image_down(t_game_data *g);
 void	move_player_image_left(t_game_data *g);
 void	move_player_image_right(t_game_data *g);
+
+// tile_image_disable.c
+void	disable_invisible_tiles(t_game_data *g);
 void	disable_player_images(t_game_data *g);
 
 // tile_images_add.c
@@ -261,7 +264,6 @@ void	add_game_tile(t_game_data *g, int x, int y);
 void	add_player_tile(t_game_data *g, int x, int y);
 void	tile_win(t_game_data *g, mlx_image_t *image, int x, int y);
 void	z_position_tiles(t_game_data *g);
-void	disable_invisible_tiles(t_game_data *g);
 
 // tile_images_load.c
 void	load_game_images(t_game_data *g);
