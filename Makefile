@@ -55,7 +55,8 @@ COMMON_SRCS = so_long.c \
 	utils/str_utils.c
 
 SRCS = main.c \
-	mock_bonus/mock_bonus.c
+	mock_bonus/mock_bonus_1.c \
+	mock_bonus/mock_bonus_2.c
 SRCS += $(COMMON_SRCS)
 
 BONUS_SRCS = bonus/main_bonus.c \
