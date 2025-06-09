@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 11:33:11 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/06/09 14:00:30 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/06/09 14:11:05 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,12 +106,15 @@ int		get_random_int(int max_value, int offset);
 // bonus/error_bonus.c
 void	warning_too_many_enemies(void);
 
+// bonus/game_loop_bonus_animations.c
+void	adjust_remove_collect(t_game_data *g, t_bonus *b, size_t i);
+void	adjust_remove_exit(t_game_data *g, t_bonus *b);
+void	animate_space(t_game_data *g, t_bonus *b);
+void	loop_remove_collect(t_game_data *g, t_bonus *b);
+
 // bonus/game_loop_bonus.c
 void	game_loop_bonus(void *param);
-void	loop_remove_collect(t_game_data *g, t_bonus *b);
-void	adjust_remove_exit(t_game_data *g, t_bonus *b);
-void	adjust_remove_collect(t_game_data *g, t_bonus *b, size_t i);
-void	animate_space(t_game_data *g, t_bonus *b);
+void	move_enemies_if_needed(t_game_data *g, t_bonus *b);
 
 // bonus/input_bonus.c
 void	game_key_hook_bonus(t_game_data *g, keys_t key);
