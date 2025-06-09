@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 14:05:43 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/06/09 14:08:22 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/06/09 14:15:10 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ void	adjust_remove_exit(t_game_data *g, t_bonus *b)
 		b->exit_point.x + (g->tilesiz - size) / 2, \
 		b->exit_point.y + (g->tilesiz - size) / 2);
 }
+
 void	animate_space(t_game_data *g, t_bonus *b)
 {
 	b->animate_space_time = b->mlx_time;

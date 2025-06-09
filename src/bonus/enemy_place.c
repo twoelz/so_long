@@ -6,11 +6,25 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 13:48:33 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/06/09 13:56:31 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/06/09 14:18:46 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long_bonus.h"
+
+void	add_enemy_to_coordinates(t_game_data *g, t_bonus *b, int x, int y)
+{
+	if (b->total_enemies + 1 >= 500)
+		return (warning_too_many_enemies());
+	if (b->enemy[b->total_enemies].x != PREVIOUSLY_PLACED_ENEMY)
+		tile_win(g, b->enemy_sprite, x * g->tilesiz, y * g->tilesiz);
+	b->enemy[b->total_enemies].x = x;
+	b->enemy[b->total_enemies].y = y;
+	b->enemy_sprite->instances[b->total_enemies].enabled = true;
+	mlx_set_instance_depth(&b->enemy_sprite->instances[b->total_enemies],
+		Z_ENEMY);
+	b->total_enemies++;
+}
 
 size_t	count_enemy_free_spots(t_game_data *g, t_bonus *b)
 {

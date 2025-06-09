@@ -6,15 +6,15 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 23:26:01 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/06/09 13:25:35 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/06/09 14:39:22 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long_bonus.h"
 
-void	so_long_bonus(t_game_data *g)
+void	check_chars_bonus(t_game_data *g)
 {
-	record_item_positions(g);
+	g->item.valid_chars = VALID_MAP_CHARS_BONUS;
 }
 
 int	init_game_data_bonus(t_game_data *g)
@@ -43,6 +43,12 @@ int	init_game_data_bonus(t_game_data *g)
 	return (E_SUCCESS);
 }
 
+void	exit_game_reached_bonus(t_game_data *g)
+{
+	ft_putendl(YOU_WIN_MSG);
+	((t_bonus *)g->bonus)->remove_exit = true;
+}
+
 void	game_lost(t_game_data *g, t_bonus *b)
 {
 	b->loose_overlay->enabled = true;
@@ -54,66 +60,22 @@ void	game_lost(t_game_data *g, t_bonus *b)
 	ft_putendl(AUTO_CLOSE_MSG);
 }
 
-void	add_resized_overlay(t_game_data *g, mlx_image_t *overlay,
-			int width, int height)
-{
-	double	proportion;
-
-	proportion = fmin((double)width / (double)overlay->width,
-			(double)height / (double)overlay->height);
-	mlx_resize_image(overlay,
-		overlay->width * proportion,
-		overlay->height * proportion);
-	tile_win(g, overlay, (width - overlay->width) / 2,
-		(height - overlay->height) / 2);
-	mlx_set_instance_depth(&overlay->instances[0], Z_OVERLAY);
-	overlay->enabled = false;
-}
-
-void	add_win_loose_overlays(t_game_data *g, t_bonus *b)
-{
-	int		width;
-	int		height;
-
-	width = g->width * g->tilesiz;
-	height = g->height * g->tilesiz;
-	add_resized_overlay(g, b->win_overlay, width, height);
-	add_resized_overlay(g, b->loose_overlay, width, height);
-}
-
-void	load_game_images_bonus(t_game_data *g)
+/* records item positions */
+void	so_long_bonus(t_game_data *g)
 {
 	t_bonus	*b;
+	size_t	i;
 
 	b = (t_bonus *)g->bonus;
-	png_to_tile(g, &b->space_1, TILE_SPACE_1);
-	png_to_tile(g, &b->space_2, TILE_SPACE_2);
-	png_to_tile(g, &b->space_3, TILE_SPACE_3);
-	png_to_tile(g, &b->enemy_sprite, TILE_ENEMY);
-	png_to_image(g, &b->win_overlay, OVERLAY_WIN);
-	png_to_image(g, &b->loose_overlay, OVERLAY_LOOSE);
-	add_win_loose_overlays(g, b);
-}
-
-void	add_enemy_to_coordinates(t_game_data *g, t_bonus *b, int x, int y)
-{
-	if (b->total_enemies + 1 >= 500)
-		return (warning_too_many_enemies());
-	if (b->enemy[b->total_enemies].x != PREVIOUSLY_PLACED_ENEMY)
-		tile_win(g, b->enemy_sprite, x * g->tilesiz, y * g->tilesiz);
-	b->enemy[b->total_enemies].x = x;
-	b->enemy[b->total_enemies].y = y;
-	b->enemy_sprite->instances[b->total_enemies].enabled = true;
-	mlx_set_instance_depth(&b->enemy_sprite->instances[b->total_enemies],
-		Z_ENEMY);
-	b->total_enemies++;
-}
-
-void	add_space_to_coordinates(t_game_data *g, t_bonus *b, int x, int y)
-{
-	tile_win(g, b->space_1, x * g->tilesiz, y * g->tilesiz);
-	tile_win(g, b->space_2, x * g->tilesiz, y * g->tilesiz);
-	tile_win(g, b->space_3, x * g->tilesiz, y * g->tilesiz);
+	i = 0;
+	while (i < g->item.total_collect)
+	{
+		b->collect_point[i].x = g->tile.collect[i]->instances[0].x;
+		b->collect_point[i].y = g->tile.collect[i]->instances[0].y;
+		i++;
+	}
+	b->exit_point.x = g->tile.exit_open->instances[0].x;
+	b->exit_point.y = g->tile.exit_open->instances[0].y;
 }
 
 void	add_game_tile_bonus(t_game_data *g, int x, int y, char c)
@@ -128,6 +90,27 @@ void	add_game_tile_bonus(t_game_data *g, int x, int y, char c)
 		add_enemy_to_coordinates(g, b, x, y);
 		g->ber[y][x] = '0';
 	}
+}
+
+void	add_space_to_coordinates(t_game_data *g, t_bonus *b, int x, int y)
+{
+	tile_win(g, b->space_1, x * g->tilesiz, y * g->tilesiz);
+	tile_win(g, b->space_2, x * g->tilesiz, y * g->tilesiz);
+	tile_win(g, b->space_3, x * g->tilesiz, y * g->tilesiz);
+}
+
+void	load_game_images_bonus(t_game_data *g)
+{
+	t_bonus	*b;
+
+	b = (t_bonus *)g->bonus;
+	png_to_tile(g, &b->space_1, TILE_SPACE_1);
+	png_to_tile(g, &b->space_2, TILE_SPACE_2);
+	png_to_tile(g, &b->space_3, TILE_SPACE_3);
+	png_to_tile(g, &b->enemy_sprite, TILE_ENEMY);
+	png_to_image(g, &b->win_overlay, OVERLAY_WIN);
+	png_to_image(g, &b->loose_overlay, OVERLAY_LOOSE);
+	add_win_loose_overlays(g, b);
 }
 
 void	z_position_tiles_bonus(t_game_data *g)
@@ -155,33 +138,7 @@ void	z_position_tiles_bonus(t_game_data *g)
 	b->space_3->enabled = false;
 }
 
-void	check_chars_bonus(t_game_data *g)
-{
-	g->item.valid_chars = VALID_MAP_CHARS_BONUS;
-}
 
-void	clear_buf_bonus(t_bonus *b)
-{
-	ft_bzero(b->buf, BONUS_BUFFER_SIZE);
-	b->buf_end = 0;
-}
-
-void	record_item_positions(t_game_data *g)
-{
-	t_bonus	*b;
-	size_t	i;
-
-	b = (t_bonus *)g->bonus;
-	i = 0;
-	while (i < g->item.total_collect)
-	{
-		b->collect_point[i].x = g->tile.collect[i]->instances[0].x;
-		b->collect_point[i].y = g->tile.collect[i]->instances[0].y;
-		i++;
-	}
-	b->exit_point.x = g->tile.exit_open->instances[0].x;
-	b->exit_point.y = g->tile.exit_open->instances[0].y;
-}
 
 void	add_to_buf_bonus(t_bonus *b, char *str)
 {
@@ -200,10 +157,10 @@ void	add_to_buf_bonus(t_bonus *b, char *str)
 	b->buf_end += len;
 }
 
-void	print_buf_bonus(t_game_data *g, t_bonus *b)
+void	clear_buf_bonus(t_bonus *b)
 {
-	put_str_bonus(g, b);
-	clear_buf_bonus(b);
+	ft_bzero(b->buf, BONUS_BUFFER_SIZE);
+	b->buf_end = 0;
 }
 
 void	put_str_bonus(t_game_data *g, t_bonus *b)
@@ -215,9 +172,39 @@ void	put_str_bonus(t_game_data *g, t_bonus *b)
 		exit_mlx_error(g, true);
 }
 
-void 	exit_game_reached_bonus(t_game_data *g)
+void	print_buf_bonus(t_game_data *g, t_bonus *b)
 {
-	ft_putendl(YOU_WIN_MSG);
-	((t_bonus *)g->bonus)->remove_exit = true;
+	put_str_bonus(g, b);
+	clear_buf_bonus(b);
 }
+
+void	add_win_loose_overlays(t_game_data *g, t_bonus *b)
+{
+	int		width;
+	int		height;
+
+	width = g->width * g->tilesiz;
+	height = g->height * g->tilesiz;
+	add_resized_overlay(g, b->win_overlay, width, height);
+	add_resized_overlay(g, b->loose_overlay, width, height);
+}
+
+void	add_resized_overlay(t_game_data *g, mlx_image_t *overlay,
+			int width, int height)
+{
+	double	proportion;
+
+	proportion = fmin((double)width / (double)overlay->width,
+			(double)height / (double)overlay->height);
+	mlx_resize_image(overlay,
+		overlay->width * proportion,
+		overlay->height * proportion);
+	tile_win(g, overlay, (width - overlay->width) / 2,
+		(height - overlay->height) / 2);
+	mlx_set_instance_depth(&overlay->instances[0], Z_OVERLAY);
+	overlay->enabled = false;
+}
+
+
+
 
