@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 11:33:11 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/06/07 05:23:56 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/06/09 11:39:20 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,14 @@
 # define E_TOO_MANY_ENEMIES_MSG "too many enemies in map file"
 
 /* bonus messages */
-# define YOU_LOOSE_MSG "Norminette said: line too long!\nYou lost!"
+# define YOU_LOOSE_MSG "Norminette said: line too long!\nYou loose!\n\n"
+# define YOU_WIN_MSG "Norminette said: OK!\n"
 
 /* safe buffer size for string messages on screen (image_text) */
 # define BONUS_BUFFER_SIZE 4096
+
+/* integer flag for previously placed enemy image instance */
+# define PREVIOUSLY_PLACED_ENEMY 66666666
 
 /*  knuth multiplicative hash constant */
 # define KNUTH 2654435761u
@@ -45,12 +49,10 @@
 /* changes space sprite every (float) seconds */
 # define SPACE_ANIMATION_SPEED 0.1
 
-/* ENEMY MOVEMENT */
+/* ENEMY MOVEMENT SPEED (1 move per SPEED second)*/
 # define MIN_ENEMY_SPEED 1.0
-
-# define MAX_ENEMY_SPEED 0.3
-
-# define ENEMY_SPEED_STEP 3.0
+# define MAX_ENEMY_SPEED 0.1
+# define TIME_TO_MAX_ENEMY_SPEED 20.0
 
 /* bonus data */
 typedef struct s_bonus
@@ -60,8 +62,8 @@ typedef struct s_bonus
 	mlx_image_t	*space_2;
 	mlx_image_t	*space_3;
 	mlx_image_t	*enemy_sprite;
-	mlx_image_t	*you_win;
-	mlx_image_t	*you_loose;
+	mlx_image_t	*win_overlay;
+	mlx_image_t	*loose_overlay;
 	t_point		exit_point;
 	t_point		*collect_point;
 	t_point		enemy[500];
@@ -70,6 +72,8 @@ typedef struct s_bonus
 	double		mlx_time;
 	double		*remove_collect_time;
 	double		animate_space_time;
+	double		current_enemy_speed;
+	double		enemy_move_time;
 	size_t		visible_space;
 	bool		remove_collect;
 	bool		remove_exit;
@@ -84,7 +88,10 @@ bool	enemy_in_point(t_bonus *b, t_point p);
 void	fill_move_permutations(int arr[24][4]);
 void	fill_move_coordinates(t_point arr[4]);
 void	move_all_enemies(t_game_data *g);
-
+void	game_lost(t_game_data *g, t_bonus *b);
+bool	player_hit_enemy(t_game_data *g, t_bonus *b);
+void	place_random_enemy(t_game_data *g);
+void	remove_enemy(t_game_data *g);
 // bonus/error_bonus.c
 void	warning_too_many_enemies(void);
 
@@ -112,7 +119,6 @@ void	record_item_positions(t_game_data *g);
 void	put_str_bonus(t_game_data *g, t_bonus *b);
 void	add_to_buf_bonus(t_bonus *b, char *string);
 void	print_buf_bonus(t_game_data *g, t_bonus *b);
-void	place_random_enemy(t_game_data *g);
 
 // bonus/free_everything_bonus.c
 void	free_everything_bonus(t_game_data *g);

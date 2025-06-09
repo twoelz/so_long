@@ -6,11 +6,29 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 22:56:42 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/06/07 05:09:48 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/06/09 00:37:50 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long_bonus.h"
+
+void	move_enemies_if_needed(t_game_data *g, t_bonus *b)
+{
+	double	now;
+
+	now = mlx_get_time();
+	if (now - b->enemy_move_time > b->current_enemy_speed)
+	{
+		b->enemy_move_time = now;
+		if (now >= TIME_TO_MAX_ENEMY_SPEED)
+			b->current_enemy_speed = MAX_ENEMY_SPEED;
+		if (b->current_enemy_speed != MAX_ENEMY_SPEED)
+			b->current_enemy_speed = MIN_ENEMY_SPEED - \
+				((MIN_ENEMY_SPEED - MAX_ENEMY_SPEED) * \
+				(now / TIME_TO_MAX_ENEMY_SPEED));
+		move_all_enemies(g);
+	}
+}
 
 void	game_loop_bonus(void *param)
 {
@@ -26,6 +44,10 @@ void	game_loop_bonus(void *param)
 		adjust_remove_exit(g, b);
 	if (b->mlx_time - b->animate_space_time > SPACE_ANIMATION_SPEED)
 		animate_space(g, b);
+	if (g->game_over)
+		return ;
+	if (b->total_enemies)
+		move_enemies_if_needed(g, b);
 }
 
 void	loop_remove_collect(t_game_data *g, t_bonus	*b)
@@ -55,8 +77,8 @@ void	adjust_remove_exit(t_game_data *g, t_bonus *b)
 
 	elapsed = b->mlx_time - g->game_over_time;
 	size = g->tilesiz;
-	if (!b->you_win->enabled && elapsed > 0.4)
-		b->you_win->enabled = true;
+	if (!b->win_overlay->enabled && elapsed > 0.4)
+		b->win_overlay->enabled = true;
 	if (elapsed >= 1.2)
 	{
 		b->remove_exit = false;
@@ -70,7 +92,7 @@ void	adjust_remove_exit(t_game_data *g, t_bonus *b)
 			size = 3;
 	}
 	mlx_delete_image(g->mlx, g->tile.exit_open);
-	png_to_image(g, &g->tile.exit_open, TILE_EXIT_OPEN);
+	png_to_tile(g, &g->tile.exit_open, TILE_EXIT_OPEN);
 	mlx_resize_image(g->tile.exit_open, size, size);
 	tile_win(g, g->tile.exit_open,
 		b->exit_point.x + (g->tilesiz - size) / 2, \
@@ -98,7 +120,7 @@ void	adjust_remove_collect(t_game_data *g, t_bonus *b, size_t i)
 			size = 3;
 	}
 	mlx_delete_image(g->mlx, g->tile.collect[i]);
-	png_to_image(g, &g->tile.collect[i], TILE_COLLECTIBLE);
+	png_to_tile(g, &g->tile.collect[i], TILE_COLLECTIBLE);
 	mlx_resize_image(g->tile.collect[i], size, size);
 	tile_win(g, g->tile.collect[i],
 		b->collect_point[i].x + (g->tilesiz - size) / 2, \

@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 23:26:01 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/06/07 02:49:20 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/06/09 12:08:21 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	init_game_data_bonus(t_game_data *g)
 	t_bonus	*b;
 
 	b = ft_calloc(1, sizeof(t_bonus));
+	ft_bzero(b->enemy, sizeof(b->enemy));
 	if (!b)
 		return (set_error_code(g, E_ALLOC));
 	g->bonus = b;
@@ -34,6 +35,8 @@ int	init_game_data_bonus(t_game_data *g)
 	if (!b->collect_point)
 		return (set_error_code(g, E_ALLOC));
 	b->animate_space_time = mlx_get_time();
+	b->enemy_move_time = b->animate_space_time;
+	b->current_enemy_speed = MIN_ENEMY_SPEED;
 	fill_move_permutations(b->move_perm);
 	fill_move_coordinates(b->move_coord);
 	clear_buf_bonus(b);
@@ -63,8 +66,8 @@ void	add_win_loose_overlays(t_game_data *g, t_bonus *b)
 
 	width = g->width * g->tilesiz;
 	height = g->height * g->tilesiz;
-	add_resized_overlay(g, b->you_win, width, height);
-	add_resized_overlay(g, b->you_loose, width, height);
+	add_resized_overlay(g, b->win_overlay, width, height);
+	add_resized_overlay(g, b->loose_overlay, width, height);
 }
 
 void	load_game_images_bonus(t_game_data *g)
@@ -72,23 +75,27 @@ void	load_game_images_bonus(t_game_data *g)
 	t_bonus	*b;
 
 	b = (t_bonus *)g->bonus;
-	png_to_image(g, &b->space_1, TILE_SPACE_1);
-	png_to_image(g, &b->space_2, TILE_SPACE_2);
-	png_to_image(g, &b->space_3, TILE_SPACE_3);
-	png_to_image(g, &b->enemy_sprite, TILE_ENEMY);
-	png_to_image(g, &b->you_win, OVERLAY_WIN);
-	png_to_image(g, &b->you_loose, OVERLAY_LOOSE);
+	png_to_tile(g, &b->space_1, TILE_SPACE_1);
+	png_to_tile(g, &b->space_2, TILE_SPACE_2);
+	png_to_tile(g, &b->space_3, TILE_SPACE_3);
+	png_to_tile(g, &b->enemy_sprite, TILE_ENEMY);
+	png_to_image(g, &b->win_overlay, OVERLAY_WIN);
+	png_to_image(g, &b->loose_overlay, OVERLAY_LOOSE);
 	add_win_loose_overlays(g, b);
 }
 
 void	add_enemy_to_coordinates(t_game_data *g, t_bonus *b, int x, int y)
 {
-	tile_win(g, b->enemy_sprite, x * g->tilesiz, y * g->tilesiz);
+	if (b->total_enemies + 1 >= 500)
+		return (warning_too_many_enemies());
+	if (b->enemy[b->total_enemies].x != PREVIOUSLY_PLACED_ENEMY)
+		tile_win(g, b->enemy_sprite, x * g->tilesiz, y * g->tilesiz);
 	b->enemy[b->total_enemies].x = x;
 	b->enemy[b->total_enemies].y = y;
+	b->enemy_sprite->instances[b->total_enemies].enabled = true;
+	mlx_set_instance_depth(&b->enemy_sprite->instances[b->total_enemies],
+		Z_ENEMY);
 	b->total_enemies++;
-	if (b->total_enemies >= 500)
-		return (warning_too_many_enemies());
 }
 
 void	add_space_to_coordinates(t_game_data *g, t_bonus *b, int x, int y)
@@ -110,7 +117,6 @@ void	add_game_tile_bonus(t_game_data *g, int x, int y, char c)
 		add_enemy_to_coordinates(g, b, x, y);
 		g->ber[y][x] = '0';
 	}
-
 }
 
 void	z_position_tiles_bonus(t_game_data *g)
@@ -200,6 +206,7 @@ void	put_str_bonus(t_game_data *g, t_bonus *b)
 
 void 	exit_game_reached_bonus(t_game_data *g)
 {
+	ft_putendl(YOU_WIN_MSG);
 	((t_bonus *)g->bonus)->remove_exit = true;
 }
 

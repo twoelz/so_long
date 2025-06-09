@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 17:13:37 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/06/05 14:15:13 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/06/09 00:37:04 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,16 +82,22 @@ void	resize_window(t_game_data *g)
 						g->height * g->tilesiz);
 }
 
-void	exit_game_reached(t_game_data *g)
+void	game_over(t_game_data *g)
 {
 	g->game_over_time = mlx_get_time();
 	g->game_over = true;
-	ft_putendl(EXIT_REACHED_MSG);
-	ft_putendl(GAME_OVER_MSG);
-	ft_putendl(AUTO_CLOSE_MSG);
+}
+
+void	exit_game_reached(t_game_data *g)
+{
+	game_over(g);
 	if (g->is_bonus)
 		exit_game_reached_bonus(g);
 	else
 		g->tile.exit_open->enabled = false;
+	ft_putendl(EXIT_REACHED_MSG);
+	ft_putendl(GAME_OVER_MSG);
+	ft_putendl(AUTO_CLOSE_MSG);
+
 }
 

@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 11:21:11 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/06/06 16:42:50 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/06/09 11:34:20 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,21 +54,22 @@
 # define NON_WALL_CHARS "0CEPVMF"
 
 /* Z position of tiles */
-enum
+enum e_z_positions
 {
+	Z_HIDDEN,
 	Z_SPACE,
 	Z_REMOVE,
 	Z_COLLECTIBLE,
 	Z_EXIT,
-	Z_ENEMY,
 	Z_PLAYER,
+	Z_ENEMY,
 	Z_WALL,
 	Z_MESSAGES,
 	Z_OVERLAY,
 };
 
 /* error codes. each have a corresponding error message */
-typedef enum e_error_codes
+enum e_error_codes
 {
 	E_SUCCESS,
 	E_ALLOC,
@@ -88,7 +89,7 @@ typedef enum e_error_codes
 	E_MULTI_EXIT,
 	E_NO_REACH_COLLECT,
 	E_NO_REACH_EXIT,
-}	t_error_codes;
+}	;
 
 /* ERROR MESSAGES */
 # define E_ERROR_MSG "Error"
@@ -210,6 +211,7 @@ int		so_long(int argc, char **argv, bool is_bonus);
 void	exit_game_reached(t_game_data *g);
 int		init_game_data(t_game_data *g, int argc, char *ber_path);
 void	resize_window(t_game_data *g);
+void	game_over(t_game_data *g);
 
 // coordinates.c
 void	next_point(t_point *p, int width);
@@ -264,6 +266,7 @@ void	disable_invisible_tiles(t_game_data *g);
 // tile_images_load.c
 void	load_game_images(t_game_data *g);
 void	png_to_image(t_game_data *g, mlx_image_t **image, char *png_path);
+void	png_to_tile(t_game_data *g, mlx_image_t **image, char *png_path);
 
 // moves.c
 void	move_left(t_game_data *g);
