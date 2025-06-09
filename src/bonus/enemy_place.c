@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 13:48:33 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/06/09 13:53:42 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/06/09 13:56:31 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,20 @@ size_t	count_enemy_free_spots(t_game_data *g, t_bonus *b)
 		next_point(&p, g->width);
 	}
 	return (enemy_spots);
+}
+
+bool	enemy_in_point(t_bonus *b, t_point p)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < b->total_enemies)
+	{
+		if (p.x == b->enemy[i].x && p.y == b->enemy[i].y)
+			return (true);
+		i++;
+	}
+	return (false);
 }
 
 void	place_enemy_to_free_spot(t_game_data *g, t_bonus *b, size_t	spot)

@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 11:33:11 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/06/09 13:52:46 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/06/09 14:00:30 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,10 @@ typedef struct s_bonus
 	t_point		move_coord[4];
 }	t_bonus;
 
+// bonus/enemy.c
+bool	player_hit_enemy(t_game_data *g, t_bonus *b);
+void	remove_enemy(t_game_data *g);
+
 // bonus/enemy_move.c
 void	move_all_enemies(t_game_data *g);
 void	move_enemy(t_game_data *g, t_bonus *b, size_t enemy_i);
@@ -90,6 +94,7 @@ void	move_enemy_to_place(t_game_data *g, t_bonus *b, \
 
 // bonus/enemy_place.c
 size_t	count_enemy_free_spots(t_game_data *g, t_bonus *b);
+bool	enemy_in_point(t_bonus *b, t_point p);
 void	place_enemy_to_free_spot(t_game_data *g, t_bonus *b, size_t	spot);
 void	place_random_enemy(t_game_data *g);
 
@@ -98,14 +103,6 @@ void	fill_move_coordinates(t_point arr[4]);
 void	fill_move_permutations(int arr[24][4]);
 int		get_random_int(int max_value, int offset);
 
-// bonus/enemy.c
-
-bool	enemy_in_point(t_bonus *b, t_point p);
-void	fill_move_permutations(int arr[24][4]);
-void	fill_move_coordinates(t_point arr[4]);
-bool	player_hit_enemy(t_game_data *g, t_bonus *b);
-void	remove_enemy(t_game_data *g);
-void	move_all_enemies(t_game_data *g);
 // bonus/error_bonus.c
 void	warning_too_many_enemies(void);
 
