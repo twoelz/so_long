@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 23:26:01 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/06/09 12:08:21 by tda-roch         ###   ########.fr       */
+/*   Updated: 2025/06/09 13:25:35 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,17 @@ int	init_game_data_bonus(t_game_data *g)
 	fill_move_coordinates(b->move_coord);
 	clear_buf_bonus(b);
 	return (E_SUCCESS);
+}
+
+void	game_lost(t_game_data *g, t_bonus *b)
+{
+	b->loose_overlay->enabled = true;
+	game_over(g);
+	ft_putstr(CLEAR_TERMINAL_SEQUENCE);
+	ft_putstr(CLEAR_TERMINAL_SEQUENCE);
+	ft_putendl(YOU_LOOSE_MSG);
+	ft_putendl(GAME_OVER_MSG);
+	ft_putendl(AUTO_CLOSE_MSG);
 }
 
 void	add_resized_overlay(t_game_data *g, mlx_image_t *overlay,
