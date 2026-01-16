@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 11:33:11 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/06/09 15:39:32 by tda-roch         ###   ########.fr       */
+/*   Updated: 2026/01/16 18:48:39 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,8 @@ void	remove_enemy(t_game_data *g);
 // bonus/enemy_move.c
 void	move_all_enemies(t_game_data *g);
 void	move_enemy(t_game_data *g, t_bonus *b, size_t enemy_i);
-void	move_enemy_to_place(t_game_data *g, t_bonus *b, \
-	size_t enemy_i, t_point place);
+void	move_enemy_to_place(t_game_data *g, t_bonus *b,
+			size_t enemy_i, t_point place);
 
 // bonus/enemy_place.c
 void	add_enemy_to_coordinates(t_game_data *g, t_bonus *b, int x, int y);

@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 18:38:05 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/05/27 20:11:42 by tda-roch         ###   ########.fr       */
+/*   Updated: 2026/01/16 18:49:50 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ int	check_extension(char *ber_path, int *error_code)
 	size_t	len;
 
 	len = ft_strlen(ber_path);
-	if (len < 4 || \
-			ber_path[len - 4] != '.' || \
-			ber_path[len - 3] != 'b' || \
-			ber_path[len - 2] != 'e' || \
-			ber_path[len - 1] != 'r')
+	if (len < 4
+		|| ber_path[len - 4] != '.'
+		|| ber_path[len - 3] != 'b'
+		|| ber_path[len - 2] != 'e'
+		|| ber_path[len - 1] != 'r')
 		*error_code = E_INVALID_EXT;
 	return (*error_code);
 }

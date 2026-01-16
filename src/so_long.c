@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 17:13:37 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/06/09 14:57:45 by tda-roch         ###   ########.fr       */
+/*   Updated: 2026/01/16 18:51:46 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ int	init_game_data(t_game_data *g, int argc, char *ber_path)
 	}
 	else
 		g->bonus = NULL;
-	g->tile.collect = ft_calloc((g->item.total_collect + 1), \
-		sizeof(mlx_image_t *));
+	g->tile.collect = ft_calloc((g->item.total_collect + 1),
+			sizeof(mlx_image_t *));
 	if (!g->tile.collect)
 		return (E_ALLOC);
 	return (g->error_code);
@@ -70,16 +70,16 @@ void	resize_window(t_game_data *g)
 	divide = 1;
 	g->tilesiz = TILESIZ;
 	mlx_get_monitor_size(0, &width, &height);
-	while (g->width * (TILESIZ / divide) > width || \
-			g->height * (TILESIZ / divide) > height)
+	while (g->width * (TILESIZ / divide) > width
+		|| g->height * (TILESIZ / divide) > height)
 	{
 		if (TILESIZ / divide <= 3)
 			break ;
 		divide *= 2;
 	}
 	g->tilesiz = TILESIZ / divide;
-	mlx_set_window_size(g->mlx, g->width * g->tilesiz, \
-						g->height * g->tilesiz);
+	mlx_set_window_size(g->mlx, g->width * g->tilesiz,
+		g->height * g->tilesiz);
 }
 
 void	game_over(t_game_data *g)

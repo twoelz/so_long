@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 00:48:26 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/06/05 10:06:51 by tda-roch         ###   ########.fr       */
+/*   Updated: 2026/01/16 18:53:40 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ size_t	find_collect_instance(t_game_data *g)
 	size_t	i;
 
 	i = 0;
-	while (g->tile.collect[i]->instances[0].x != g->player.x * g->tilesiz \
+	while (g->tile.collect[i]->instances[0].x != g->player.x * g->tilesiz
 		|| g->tile.collect[i]->instances[0].y != g->player.y * g->tilesiz)
 		i++;
 	return (i);

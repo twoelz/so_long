@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 11:42:19 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/06/06 16:12:30 by tda-roch         ###   ########.fr       */
+/*   Updated: 2026/01/16 18:56:04 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ void	game_key_hook(mlx_key_data_t k, void *param)
 			return ;
 		if (k.key == MLX_KEY_P)
 			g->print_ber = !g->print_ber;
-		else if (k.key == MLX_KEY_A || k.key == MLX_KEY_D || \
-				k.key == MLX_KEY_W || k.key == MLX_KEY_S || \
-				k.key == MLX_KEY_LEFT || k.key == MLX_KEY_RIGHT || \
-				k.key == MLX_KEY_UP || k.key == MLX_KEY_DOWN)
+		else if (k.key == MLX_KEY_A || k.key == MLX_KEY_D
+			|| k.key == MLX_KEY_W || k.key == MLX_KEY_S
+			|| k.key == MLX_KEY_LEFT || k.key == MLX_KEY_RIGHT
+			|| k.key == MLX_KEY_UP || k.key == MLX_KEY_DOWN)
 			input_move_key(g, &k);
 		else if (g->is_bonus)
 			game_key_hook_bonus(g, k.key);

@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 11:21:11 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/06/09 15:39:30 by tda-roch         ###   ########.fr       */
+/*   Updated: 2026/01/16 18:24:42 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -221,8 +221,7 @@ void	fill_reachable(t_game_data *g, char **ber, int x, int y);
 // error.c
 void	init_error_messages(t_game_data *g);
 int		set_error_code(t_game_data *g, int error_code);
-void	set_error_message(char **error_message, \
-			int error_code, char *message);
+void	set_error_message(char **error_message, int error_code, char *message);
 int		return_error(t_game_data *g);
 
 // exit.c

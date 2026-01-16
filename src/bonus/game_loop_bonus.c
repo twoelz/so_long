@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 22:56:42 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/06/09 14:09:06 by tda-roch         ###   ########.fr       */
+/*   Updated: 2026/01/16 18:45:33 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ void	move_enemies_if_needed(t_game_data *g, t_bonus *b)
 		if (now >= TIME_TO_MAX_ENEMY_SPEED)
 			b->current_enemy_speed = MAX_ENEMY_SPEED;
 		if (b->current_enemy_speed != MAX_ENEMY_SPEED)
-			b->current_enemy_speed = MIN_ENEMY_SPEED - \
-				((MIN_ENEMY_SPEED - MAX_ENEMY_SPEED) * \
-				(now / TIME_TO_MAX_ENEMY_SPEED));
+			b->current_enemy_speed = MIN_ENEMY_SPEED
+				- ((MIN_ENEMY_SPEED - MAX_ENEMY_SPEED)
+					* (now / TIME_TO_MAX_ENEMY_SPEED));
 		move_all_enemies(g);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 21:39:05 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/06/05 06:30:13 by tda-roch         ###   ########.fr       */
+/*   Updated: 2026/01/16 18:52:45 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,8 @@ int	check_walled(t_game_data *g)
 	ft_bzero(&p, sizeof(p));
 	while (p.y < g->height)
 	{
-		if (((p.x == 0 || p.x == g->width - 1 \
-				|| p.y == 0 || p.y == g->height - 1) \
+		if (((p.x == 0 || p.x == g->width - 1
+					|| p.y == 0 || p.y == g->height - 1)
 				&& g->ber[p.y][p.x] != '1'))
 			return (set_error_code(g, E_NO_WALLED));
 		next_point(&p, g->width);

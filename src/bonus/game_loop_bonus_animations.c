@@ -6,7 +6,7 @@
 /*   By: tda-roch <tda-roch@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 14:05:43 by tda-roch          #+#    #+#             */
-/*   Updated: 2025/06/09 14:15:10 by tda-roch         ###   ########.fr       */
+/*   Updated: 2026/01/16 18:39:57 by tda-roch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	adjust_remove_collect(t_game_data *g, t_bonus *b, size_t i)
 	if (elapsed >= 0.66)
 	{
 		g->tile.collect[i]->instances[0].enabled = false;
-		mlx_set_instance_depth(&g->tile.collect[i]->instances[0], \
+		mlx_set_instance_depth(&g->tile.collect[i]->instances[0],
 			Z_COLLECTIBLE);
 		return ;
 	}
@@ -36,7 +36,7 @@ void	adjust_remove_collect(t_game_data *g, t_bonus *b, size_t i)
 	png_to_tile(g, &g->tile.collect[i], TILE_COLLECTIBLE);
 	mlx_resize_image(g->tile.collect[i], size, size);
 	tile_win(g, g->tile.collect[i],
-		b->collect_point[i].x + (g->tilesiz - size) / 2, \
+		b->collect_point[i].x + (g->tilesiz - size) / 2,
 		b->collect_point[i].y + (g->tilesiz - size) / 2);
 	mlx_set_instance_depth(&g->tile.collect[i]->instances[0], Z_REMOVE);
 }
@@ -66,7 +66,7 @@ void	adjust_remove_exit(t_game_data *g, t_bonus *b)
 	png_to_tile(g, &g->tile.exit_open, TILE_EXIT_OPEN);
 	mlx_resize_image(g->tile.exit_open, size, size);
 	tile_win(g, g->tile.exit_open,
-		b->exit_point.x + (g->tilesiz - size) / 2, \
+		b->exit_point.x + (g->tilesiz - size) / 2,
 		b->exit_point.y + (g->tilesiz - size) / 2);
 }
 
