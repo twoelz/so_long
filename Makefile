@@ -3,7 +3,7 @@ BONUS = so_long_bonus
 
 # compiler settings
 CC = cc
-CFLAGS = -Wall -Werror -Wextra -lm -Wunreachable-code -Ofast
+CFLAGS = -Wall -Werror -Wextra -Wunreachable-code -Ofast
 
 # LIBFT settings
 DIR_LIBFT = libft
